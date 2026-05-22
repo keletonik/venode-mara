@@ -1,10 +1,31 @@
 import type { Metadata } from "next";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { siteConfig } from "@/site.config";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -18,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#070a0f",
+  themeColor: "#05070a",
 };
 
 export default function RootLayout({
@@ -29,8 +50,11 @@ export default function RootLayout({
   const { enabled, adsenseClient } = siteConfig.ads;
 
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col">
+    <html
+      lang="en"
+      className={`${inter.variable} ${serif.variable} ${mono.variable}`}
+    >
+      <body className="flex min-h-screen flex-col font-sans">
         <JsonLd
           data={{
             "@context": "https://schema.org",

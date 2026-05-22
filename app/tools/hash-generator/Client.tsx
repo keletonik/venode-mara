@@ -57,7 +57,7 @@ export default function HashGeneratorClient() {
         rows={4}
         spellCheck={false}
         placeholder="Type or paste any text…"
-        className="mt-2 w-full resize-y rounded-lg border border-ink-600 bg-ink-900 px-4 py-3 font-mono text-sm text-white placeholder:text-slate-600 focus:border-accent"
+        className="mt-2 w-full resize-y rounded-sm border border-ink-700 bg-ink-900 px-4 py-3 font-mono text-sm text-white placeholder:text-slate-600 focus:border-accent"
       />
 
       <p className="mt-2 flex items-start gap-1.5 text-xs text-slate-500">
@@ -67,14 +67,14 @@ export default function HashGeneratorClient() {
 
       <div className="mt-5 space-y-3">
         {hashes.length === 0 && (
-          <p className="rounded-lg border border-ink-700 bg-ink-900 p-4 text-sm text-slate-500">
+          <p className="rounded-sm border border-ink-700 bg-ink-900 p-4 text-sm text-slate-500">
             Hashes will appear here once you enter some text.
           </p>
         )}
         {hashes.map((h) => (
           <div
             key={h.key}
-            className="rounded-lg border border-ink-700 bg-ink-900 p-3"
+            className="rounded-sm border border-ink-700 bg-ink-900 p-3"
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-accent">

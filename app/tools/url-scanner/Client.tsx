@@ -51,13 +51,13 @@ export default function UrlScannerClient() {
           }}
           onKeyDown={(e) => e.key === "Enter" && scan()}
           placeholder="example.com/login or https://…"
-          className="w-full flex-1 rounded-lg border border-ink-600 bg-ink-900 px-4 py-3 font-mono text-white placeholder:text-slate-600 focus:border-accent"
+          className="w-full flex-1 rounded-sm border border-ink-700 bg-ink-900 px-4 py-3 font-mono text-white placeholder:text-slate-600 focus:border-accent"
         />
         <button
           type="button"
           onClick={scan}
           disabled={!url}
-          className="rounded-lg bg-accent px-6 py-3 font-semibold text-ink-950 transition hover:bg-accent-soft disabled:opacity-40"
+          className="rounded-sm bg-accent px-6 py-3 font-semibold text-ink-950 transition hover:bg-accent-soft disabled:opacity-40"
         >
           Scan link
         </button>
@@ -71,7 +71,7 @@ export default function UrlScannerClient() {
       </p>
 
       {error && (
-        <div className="mt-5 rounded-lg border border-signal-warn/40 bg-signal-warn/10 p-4 text-sm text-signal-warn">
+        <div className="mt-5 rounded-sm border border-signal-warn/40 bg-signal-warn/10 p-4 text-sm text-signal-warn">
           {error}
         </div>
       )}
@@ -79,7 +79,7 @@ export default function UrlScannerClient() {
       {report && (
         <div className="mt-5 animate-rise">
           <div
-            className={`flex items-center justify-between rounded-lg border p-4 ${verdictStyle[report.verdict]}`}
+            className={`flex items-center justify-between rounded-sm border p-4 ${verdictStyle[report.verdict]}`}
           >
             <div className="flex items-center gap-2">
               <Icon
@@ -105,7 +105,7 @@ export default function UrlScannerClient() {
             {report.checks.map((c, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 rounded-lg border border-ink-700 bg-ink-900 p-3"
+                className="flex items-start gap-3 rounded-sm border border-ink-700 bg-ink-900 p-3"
               >
                 <Icon
                   name={statusIcon[c.status]}
@@ -122,7 +122,7 @@ export default function UrlScannerClient() {
           </ul>
 
           {report.verdict !== "Looks safe" && (
-            <p className="mt-4 rounded-lg border border-ink-700 bg-ink-900 p-3 text-sm text-slate-300">
+            <p className="mt-4 rounded-sm border border-ink-700 bg-ink-900 p-3 text-sm text-slate-300">
               When in doubt, do not click. Instead, open the company&apos;s
               website yourself by typing its address directly into your
               browser.

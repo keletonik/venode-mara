@@ -29,9 +29,9 @@ export default function CopyButton({
     <button
       type="button"
       onClick={copy}
-      className={`inline-flex items-center gap-1.5 rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-accent/50 hover:text-white ${className}`}
+      className={`inline-flex items-center gap-1.5 border border-ink-600 bg-ink-900 px-3 py-2 font-mono text-xs uppercase tracking-widewide text-ash transition hover:border-accent/60 hover:text-cream ${className}`}
     >
-      <Icon name={copied ? "check" : "copy"} className="h-4 w-4" />
+      <Icon name={copied ? "check" : "copy"} className="h-3.5 w-3.5" />
       {copied ? "Copied" : label}
     </button>
   );

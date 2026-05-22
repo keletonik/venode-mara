@@ -81,7 +81,7 @@ export default function PasswordCheckerClient() {
             }}
             onKeyDown={(e) => e.key === "Enter" && check()}
             placeholder="Type or paste a password"
-            className="w-full rounded-lg border border-ink-600 bg-ink-900 px-4 py-3 pr-12 font-mono text-white placeholder:text-slate-600 focus:border-accent"
+            className="w-full rounded-sm border border-ink-700 bg-ink-900 px-4 py-3 pr-12 font-mono text-white placeholder:text-slate-600 focus:border-accent"
           />
           <button
             type="button"
@@ -96,7 +96,7 @@ export default function PasswordCheckerClient() {
           type="button"
           onClick={check}
           disabled={loading || !password}
-          className="rounded-lg bg-accent px-6 py-3 font-semibold text-ink-950 transition hover:bg-accent-soft disabled:opacity-40"
+          className="rounded-sm bg-accent px-6 py-3 font-semibold text-ink-950 transition hover:bg-accent-soft disabled:opacity-40"
         >
           {loading ? "Checking…" : "Check"}
         </button>
@@ -110,13 +110,13 @@ export default function PasswordCheckerClient() {
       </p>
 
       {error && (
-        <div className="mt-5 rounded-lg border border-signal-warn/40 bg-signal-warn/10 p-4 text-sm text-signal-warn">
+        <div className="mt-5 rounded-sm border border-signal-warn/40 bg-signal-warn/10 p-4 text-sm text-signal-warn">
           {error}
         </div>
       )}
 
       {result?.state === "pwned" && (
-        <div className="mt-5 animate-rise rounded-lg border border-signal-bad/40 bg-signal-bad/10 p-5">
+        <div className="mt-5 animate-rise rounded-sm border border-signal-bad/40 bg-signal-bad/10 p-5">
           <div className="flex items-center gap-2 text-signal-bad">
             <Icon name="alert" className="h-6 w-6" />
             <h3 className="text-lg font-bold">This password has been breached</h3>
@@ -136,7 +136,7 @@ export default function PasswordCheckerClient() {
           </ul>
           <Link
             href="/tools/password-generator"
-            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink-950 hover:bg-accent-soft"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-sm bg-accent px-4 py-2 text-sm font-semibold text-ink-950 hover:bg-accent-soft"
           >
             Generate a safe replacement
             <Icon name="arrow" className="h-4 w-4" />
@@ -145,7 +145,7 @@ export default function PasswordCheckerClient() {
       )}
 
       {result?.state === "safe" && (
-        <div className="mt-5 animate-rise rounded-lg border border-signal-good/40 bg-signal-good/10 p-5">
+        <div className="mt-5 animate-rise rounded-sm border border-signal-good/40 bg-signal-good/10 p-5">
           <div className="flex items-center gap-2 text-signal-good">
             <Icon name="check" className="h-6 w-6" />
             <h3 className="text-lg font-bold">

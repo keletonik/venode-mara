@@ -40,14 +40,14 @@ const paths: Record<string, ReactNode> = {
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
   copy: (
     <>
-      <rect x="9" y="9" width="11" height="11" rx="2" />
+      <rect x="9" y="9" width="11" height="11" rx="1" />
       <path d="M5 15V5a2 2 0 0 1 2-2h8" />
     </>
   ),
   bolt: <path d="M13 3 4 14h6l-1 7 9-11h-6z" />,
   lock: (
     <>
-      <rect x="4" y="10" width="16" height="11" rx="2" />
+      <rect x="4" y="10" width="16" height="11" rx="1" />
       <path d="M8 10V7a4 4 0 0 1 8 0v3" />
     </>
   ),
@@ -63,6 +63,8 @@ const paths: Record<string, ReactNode> = {
       <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" />
     </>
   ),
+  menu: <path d="M4 7h16M4 12h16M4 17h16" />,
+  corner: <path d="M4 4h6M4 4v6M20 20h-6M20 20v-6" />,
 };
 
 export function Icon({
@@ -77,7 +79,7 @@ export function Icon({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.7}
+      strokeWidth={1.6}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
@@ -88,21 +90,28 @@ export function Icon({
   );
 }
 
-export function Logo({ className = "h-8 w-8" }: { className?: string }) {
+/**
+ * Wordmark: small angular shield in lime + monospace uppercase text.
+ * Used in the header and footer.
+ */
+export function Logo({
+  className = "h-7 w-7",
+}: {
+  className?: string;
+}) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
       <path
-        d="M16 3l11 4v8c0 7-4.6 12.3-11 14C9.6 27.3 5 22 5 15V7z"
-        fill="#22d3ee"
-        fillOpacity="0.14"
-        stroke="#22d3ee"
+        d="M16 3l11 4v8c0 7-4.6 12.3-11 14C9.6 28.3 5 23 5 16V7z"
+        fill="none"
+        stroke="#bef264"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
       <path
-        d="M10.5 16.2l3.6 3.6 7.4-8"
+        d="M10.8 16.3l3.4 3.4 7.1-7.8"
         fill="none"
-        stroke="#22d3ee"
+        stroke="#bef264"
         strokeWidth="2.4"
         strokeLinecap="round"
         strokeLinejoin="round"

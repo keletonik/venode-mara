@@ -37,16 +37,18 @@ function ToolCallout({ slug }: { slug: string }) {
   return (
     <Link
       href={`/tools/${tool.slug}`}
-      className="group my-6 flex items-center gap-4 rounded-xl border border-accent/30 bg-accent/[0.06] p-4 transition hover:border-accent/60"
+      className="group my-8 flex items-center gap-5 border border-ink-700 bg-ink-850 p-5 transition hover:border-accent/60"
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
-        <Icon name={tool.icon} className="h-6 w-6" />
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-ink-600 bg-ink-900 text-accent">
+        <Icon name={tool.icon} className="h-5 w-5" />
       </span>
       <span className="flex-1">
-        <span className="block font-semibold text-white">
-          Try it: {tool.name}
+        <span className="block font-mono text-[11px] uppercase tracking-widewide text-accent">
+          // Try it
         </span>
-        <span className="block text-sm text-slate-400">{tool.tagline}</span>
+        <span className="mt-1 block font-display text-xl leading-tight tracking-tightest text-cream group-hover:text-accent">
+          {tool.name}
+        </span>
       </span>
       <Icon
         name="arrow"
@@ -60,13 +62,16 @@ function renderBlock(block: Block, i: number) {
   switch (block.type) {
     case "h2":
       return (
-        <h2 key={i} className="mt-10 text-xl font-bold text-white sm:text-2xl">
+        <h2
+          key={i}
+          className="mt-12 font-display text-2xl leading-tight tracking-tightest text-cream sm:text-3xl"
+        >
           {block.text}
         </h2>
       );
     case "p":
       return (
-        <p key={i} className="mt-4 leading-relaxed text-slate-300">
+        <p key={i} className="mt-5 leading-relaxed text-slate-300">
           {block.text}
         </p>
       );
@@ -74,19 +79,22 @@ function renderBlock(block: Block, i: number) {
       return (
         <div
           key={i}
-          className="my-6 rounded-xl border-l-2 border-accent bg-accent/[0.07] p-4 text-slate-200"
+          className="my-8 border-l-2 border-accent bg-ink-850 px-5 py-4"
         >
-          {block.text}
+          <span className="font-mono text-[11px] uppercase tracking-widewide text-accent">
+            // Note
+          </span>
+          <p className="mt-1 leading-relaxed text-cream/95">{block.text}</p>
         </div>
       );
     case "ul":
       return (
-        <ul key={i} className="mt-4 space-y-2">
+        <ul key={i} className="mt-5 space-y-2.5">
           {block.items.map((it, j) => (
-            <li key={j} className="flex gap-2.5 text-slate-300">
-              <Icon
-                name="check"
-                className="mt-1 h-4 w-4 shrink-0 text-accent"
+            <li key={j} className="flex gap-3 text-slate-300">
+              <span
+                className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-accent"
+                aria-hidden="true"
               />
               <span>{it}</span>
             </li>
@@ -95,20 +103,20 @@ function renderBlock(block: Block, i: number) {
       );
     case "ol":
       return (
-        <ol key={i} className="mt-4 space-y-2.5">
+        <ol key={i} className="mt-5 space-y-3">
           {block.items.map((it, j) => (
-            <li key={j} className="flex gap-3 text-slate-300">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/15 text-sm font-semibold text-accent">
-                {j + 1}
+            <li key={j} className="flex gap-4 text-slate-300">
+              <span className="shrink-0 font-mono text-xs text-accent">
+                {String(j + 1).padStart(2, "0")}
               </span>
-              <span className="pt-0.5">{it}</span>
+              <span>{it}</span>
             </li>
           ))}
         </ol>
       );
     case "affiliate":
       return (
-        <div key={i} className="my-6">
+        <div key={i} className="my-8">
           <AffiliateCard affiliate={block.key} />
         </div>
       );
@@ -151,39 +159,45 @@ export default async function GuidePage({
         }}
       />
 
-      <article className="container-wide py-10">
-        <nav className="flex items-center gap-1.5 text-sm text-slate-500">
-          <Link href="/" className="hover:text-accent">
+      <article className="container-wide py-12">
+        <nav className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widewide text-ash">
+          <Link href="/" className="hover:text-cream">
             Home
           </Link>
-          <span>/</span>
-          <Link href="/guides" className="hover:text-accent">
+          <span className="text-ash/40">/</span>
+          <Link href="/guides" className="hover:text-cream">
             Guides
           </Link>
         </nav>
 
-        <header className="mt-6 max-w-2xl">
-          <p className="text-sm font-medium uppercase tracking-wider text-accent">
-            Guide · {guide.readingMinutes} min read · {formattedDate}
-          </p>
-          <h1 className="mt-2 text-3xl font-bold leading-tight text-white sm:text-4xl">
+        <header className="mt-8 border-b border-ink-700 pb-10">
+          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-widewide text-ash">
+            <span className="text-accent">// Guide</span>
+            <span>·</span>
+            <span>{guide.readingMinutes} min read</span>
+            <span>·</span>
+            <span>{formattedDate}</span>
+          </div>
+          <h1 className="mt-5 max-w-3xl font-display text-4xl leading-[1.05] tracking-tightest text-cream sm:text-6xl">
             {guide.title}
           </h1>
-          <p className="mt-3 text-lg text-slate-300">{guide.description}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
+            {guide.description}
+          </p>
         </header>
 
-        <div className="mt-8 max-w-2xl">
+        <div className="mt-10 max-w-2xl text-[15px]">
           {guide.body.map(renderBlock)}
         </div>
 
-        <div className="mt-10 max-w-2xl">
+        <div className="mt-12 max-w-2xl">
           <AdSlot />
         </div>
 
-        <p className="mt-10 max-w-2xl text-xs text-slate-500">
-          This guide is general educational information, not personalised
-          security advice. Some links are affiliate links — see our{" "}
-          <Link href="/disclosure" className="underline hover:text-accent">
+        <p className="mt-12 max-w-2xl font-mono text-[11px] uppercase tracking-widewide text-ash/70">
+          General educational information, not personalised security advice.
+          Some links are affiliate links —{" "}
+          <Link href="/disclosure" className="text-accent hover:underline">
             disclosure
           </Link>
           .
@@ -192,11 +206,20 @@ export default async function GuidePage({
 
       {more.length > 0 && (
         <section className="container-wide pb-6">
-          <h2 className="text-xl font-bold text-white">Keep reading</h2>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {more.map((g) => (
-              <GuideCard key={g.slug} guide={g} />
-            ))}
+          <div className="border-t border-ink-700 pt-10">
+            <div className="flex items-baseline gap-3">
+              <span className="font-mono text-xs text-ash/60">// More</span>
+              <h2 className="font-display text-2xl tracking-tightest text-cream">
+                Keep reading
+              </h2>
+            </div>
+            <div className="mt-6 grid gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-3">
+              {more.map((g) => (
+                <div key={g.slug} className="bg-ink-950">
+                  <GuideCard guide={g} />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       )}

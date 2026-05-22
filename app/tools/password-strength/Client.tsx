@@ -39,7 +39,7 @@ export default function PasswordStrengthClient() {
           spellCheck={false}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Type or paste a password"
-          className="w-full rounded-lg border border-ink-600 bg-ink-900 px-4 py-3 pr-12 font-mono text-white placeholder:text-slate-600 focus:border-accent"
+          className="w-full rounded-sm border border-ink-700 bg-ink-900 px-4 py-3 pr-12 font-mono text-white placeholder:text-slate-600 focus:border-accent"
         />
         <button
           type="button"
@@ -96,14 +96,14 @@ export default function PasswordStrengthClient() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/tools/password-checker"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink-600 bg-ink-800 px-4 py-2 text-sm font-medium text-slate-200 hover:border-accent/50 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-sm border border-ink-700 bg-ink-800 px-4 py-2 text-sm font-medium text-slate-200 hover:border-accent/50 hover:text-white"
             >
               Check if it has been breached
               <Icon name="arrow" className="h-4 w-4" />
             </Link>
             <Link
               href="/tools/password-generator"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink-950 hover:bg-accent-soft"
+              className="inline-flex items-center gap-1.5 rounded-sm bg-accent px-4 py-2 text-sm font-semibold text-ink-950 hover:bg-accent-soft"
             >
               Generate a stronger one
               <Icon name="arrow" className="h-4 w-4" />
@@ -123,7 +123,7 @@ function Stat({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-ink-700 bg-ink-900 px-3 py-2">
+    <div className="rounded-sm border border-ink-700 bg-ink-900 px-3 py-2">
       <div className="text-[11px] uppercase tracking-wider text-slate-500">
         {label}
       </div>

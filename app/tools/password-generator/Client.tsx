@@ -86,7 +86,7 @@ export default function PasswordGeneratorClient() {
   return (
     <div>
       {/* Output */}
-      <div className="rounded-xl border border-ink-600 bg-ink-900 p-4">
+      <div className="rounded-sm border border-ink-700 bg-ink-900 p-4">
         <div className="flex items-center gap-3">
           <code className="flex-1 break-all font-mono text-lg text-white">
             {password || "Select at least one character type"}
@@ -94,7 +94,7 @@ export default function PasswordGeneratorClient() {
           <button
             type="button"
             onClick={generate}
-            className="shrink-0 rounded-lg border border-ink-600 bg-ink-800 p-2.5 text-slate-200 transition hover:border-accent/50 hover:text-white"
+            className="shrink-0 rounded-sm border border-ink-700 bg-ink-800 p-2.5 text-slate-200 transition hover:border-accent/50 hover:text-white"
             aria-label="Regenerate"
           >
             <Icon name="bolt" className="h-5 w-5" />
@@ -153,7 +153,7 @@ export default function PasswordGeneratorClient() {
         ).map(([key, label]) => (
           <label
             key={key}
-            className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-ink-700 bg-ink-900 px-3 py-2.5 text-sm text-slate-200"
+            className="flex cursor-pointer items-center gap-2.5 rounded-sm border border-ink-700 bg-ink-900 px-3 py-2.5 text-sm text-slate-200"
           >
             <input
               type="checkbox"

@@ -44,10 +44,10 @@ export default function UuidGeneratorClient() {
             key={m}
             type="button"
             onClick={() => setMode(m)}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
+            className={`rounded-sm px-4 py-2 text-sm font-semibold transition ${
               mode === m
                 ? "bg-accent text-ink-950"
-                : "border border-ink-600 bg-ink-800 text-slate-300 hover:text-white"
+                : "border border-ink-700 bg-ink-800 text-slate-300 hover:text-white"
             }`}
           >
             {label}
@@ -101,7 +101,7 @@ export default function UuidGeneratorClient() {
         <button
           type="button"
           onClick={generate}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-ink-950 transition hover:bg-accent-soft"
+          className="inline-flex items-center gap-1.5 rounded-sm bg-accent px-5 py-2.5 text-sm font-semibold text-ink-950 transition hover:bg-accent-soft"
         >
           <Icon name="bolt" className="h-4 w-4" />
           Generate
@@ -114,7 +114,7 @@ export default function UuidGeneratorClient() {
         {values.map((v, i) => (
           <div
             key={i}
-            className="flex items-center justify-between gap-3 rounded-lg border border-ink-700 bg-ink-900 px-3 py-2.5"
+            className="flex items-center justify-between gap-3 rounded-sm border border-ink-700 bg-ink-900 px-3 py-2.5"
           >
             <code className="break-all font-mono text-sm text-slate-200">
               {v}

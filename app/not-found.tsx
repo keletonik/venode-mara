@@ -3,19 +3,25 @@ import { Icon } from "@/components/Icons";
 
 export default function NotFound() {
   return (
-    <section className="container-wide flex flex-col items-center py-28 text-center">
-      <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 text-accent">
-        <Icon name="alert" className="h-7 w-7" />
+    <section className="container-wide flex flex-col items-start py-32">
+      <span className="font-mono text-xs uppercase tracking-widewide text-accent">
+        // 404 · Signal lost
       </span>
-      <h1 className="mt-6 text-3xl font-bold text-white">Page not found</h1>
-      <p className="mt-2 max-w-md text-slate-400">
+      <h1 className="mt-4 font-display text-6xl leading-none tracking-tightest text-cream sm:text-7xl">
+        Page not found.
+      </h1>
+      <p className="mt-5 max-w-md text-base text-ash">
         That page does not exist. Head back and pick a security tool instead.
       </p>
       <Link
         href="/"
-        className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 font-semibold text-ink-950 transition hover:bg-accent-soft"
+        className="group mt-8 inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-xs uppercase tracking-widewide text-ink-950 transition hover:bg-accent-soft"
       >
         Back to home
+        <Icon
+          name="arrow"
+          className="h-4 w-4 transition group-hover:translate-x-0.5"
+        />
       </Link>
     </section>
   );

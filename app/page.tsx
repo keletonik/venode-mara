@@ -20,153 +20,238 @@ export const metadata = pageMetadata({
 
 const trust = [
   {
-    icon: "lock",
-    title: "100% private",
-    text: "Every tool runs in your browser. Your passwords and links never reach a server.",
+    n: "01",
+    title: "Browser-only",
+    text: "Every tool runs locally. Passwords and links never reach a server.",
   },
   {
-    icon: "bolt",
+    n: "02",
     title: "No signup, no cost",
     text: "No accounts, no email, no paywall. Open a tool and use it instantly.",
   },
   {
-    icon: "shield",
-    title: "Built on real data",
-    text: "Breach checks use the industry-standard k-anonymity model — accurate and anonymous.",
+    n: "03",
+    title: "Real breach data",
+    text: "Checks query the industry-standard k-anonymity model — accurate and anonymous.",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink-700/70">
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-ink-700">
+        {/* glow */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-60"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(60% 50% at 50% 0%, rgba(34,211,238,0.12), transparent 70%)",
+              "radial-gradient(55% 50% at 25% 0%, rgba(190,242,100,0.10), transparent 70%)",
           }}
         />
-        <div className="container-wide relative py-20 sm:py-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-              <Icon name="bolt" className="h-3.5 w-3.5" />
-              Free security tools that run entirely in your browser
+        <div className="container-wide relative pb-24 pt-16 sm:pt-24">
+          {/* status bar */}
+          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-widewide text-ash">
+            <span className="live-dot" />
+            <span className="text-cream">
+              Threat intelligence · live
             </span>
-            <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              Find out if you&apos;ve been{" "}
-              <span className="text-accent">exposed</span>.
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
-              Check whether your password leaked in a data breach, scan a
-              suspicious link for phishing, generate uncrackable passwords —
-              all free, all private, no account required.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/tools/password-checker"
-                className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-semibold text-ink-950 transition hover:bg-accent-soft"
-              >
-                <Icon name="shield" className="h-5 w-5" />
-                Check my password
-              </Link>
-              <Link
-                href="/tools"
-                className="inline-flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-850 px-6 py-3 font-semibold text-white transition hover:border-accent/50"
-              >
-                Browse all tools
-              </Link>
+            <span className="h-px flex-1 bg-ink-700" />
+            <span>v1.0</span>
+          </div>
+
+          <div className="mt-12 grid items-end gap-10 md:grid-cols-12">
+            <div className="md:col-span-8">
+              <h1 className="font-display text-[clamp(2.75rem,7vw,5.5rem)] leading-[1.02] tracking-tightest text-cream">
+                Find out if you&apos;ve been{" "}
+                <em className="text-accent">exposed</em>.
+              </h1>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300">
+                A free toolkit for the everyday threats that actually catch
+                people out — reused passwords, phishing links, weak secrets.
+                Everything runs in your browser. We never see what you type.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/tools/password-checker"
+                  className="group inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-xs uppercase tracking-widewide text-ink-950 transition hover:bg-accent-soft"
+                >
+                  Check my password
+                  <Icon
+                    name="arrow"
+                    className="h-4 w-4 transition group-hover:translate-x-0.5"
+                  />
+                </Link>
+                <Link
+                  href="/tools"
+                  className="inline-flex items-center gap-2 border border-ink-600 px-5 py-3 font-mono text-xs uppercase tracking-widewide text-cream transition hover:border-accent/60 hover:text-accent"
+                >
+                  All tools
+                </Link>
+              </div>
+            </div>
+
+            {/* terminal-style stats panel */}
+            <div className="md:col-span-4">
+              <div className="border border-ink-700 bg-ink-900/70 p-5">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] uppercase tracking-widewide text-ash">
+                    // Stat
+                  </span>
+                  <span className="font-mono text-[11px] text-ash/70">
+                    breach-db
+                  </span>
+                </div>
+                <p className="mt-4 font-display text-5xl leading-none tracking-tightest text-cream">
+                  14B+
+                </p>
+                <p className="mt-2 text-sm text-ash">
+                  Leaked passwords this toolkit can check yours against —
+                  privately, in your browser, in under a second.
+                </p>
+                <div className="mt-4 border-t border-ink-700 pt-4">
+                  <span className="font-mono text-[11px] uppercase tracking-widewide text-ash/70">
+                    Average exposure
+                  </span>
+                  <p className="mt-1 font-mono text-sm text-cream">
+                    81% of people reuse at least one password.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust */}
-      <section className="container-wide py-14">
-        <div className="grid gap-5 sm:grid-cols-3">
+      {/* TRUST STRIP */}
+      <section className="border-b border-ink-700">
+        <div className="container-wide grid gap-px bg-ink-700 sm:grid-cols-3">
           {trust.map((t) => (
-            <div
-              key={t.title}
-              className="rounded-xl border border-ink-700 bg-ink-850 p-5"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                <Icon name={t.icon} className="h-5 w-5" />
-              </span>
-              <h2 className="mt-3 text-base font-semibold text-white">
-                {t.title}
-              </h2>
-              <p className="mt-1 text-sm text-slate-400">{t.text}</p>
+            <div key={t.n} className="bg-ink-950 p-7">
+              <div className="flex items-baseline gap-2">
+                <span className="font-mono text-xs text-accent">// {t.n}</span>
+                <span className="font-mono text-xs uppercase tracking-widewide text-cream">
+                  {t.title}
+                </span>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-ash">{t.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Tools */}
-      <section className="container-wide py-6">
-        <div className="flex items-end justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-white">Security tools</h2>
-            <p className="mt-1 text-slate-400">
-              Six focused tools. Each does one thing well.
-            </p>
-          </div>
-          <Link
-            href="/tools"
-            className="hidden text-sm font-medium text-accent hover:underline sm:block"
-          >
-            View all
-          </Link>
-        </div>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* TOOLS */}
+      <section className="container-wide py-20">
+        <SectionHeader
+          eyebrow="§ 01 — The toolkit"
+          title="Six focused tools."
+          tail={
+            <Link
+              href="/tools"
+              className="font-mono text-xs uppercase tracking-widewide text-accent hover:underline"
+            >
+              View all →
+            </Link>
+          }
+        />
+        <div className="mt-10 grid gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} />
+            <div key={tool.slug} className="bg-ink-950">
+              <ToolCard tool={tool} />
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Guides */}
-      <section className="container-wide py-16">
-        <div className="flex items-end justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-white">Latest guides</h2>
-            <p className="mt-1 text-slate-400">
-              Plain-English advice on staying safe online.
-            </p>
-          </div>
-          <Link
-            href="/guides"
-            className="hidden text-sm font-medium text-accent hover:underline sm:block"
-          >
-            All guides
-          </Link>
-        </div>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* GUIDES */}
+      <section className="container-wide pb-20">
+        <SectionHeader
+          eyebrow="§ 02 — Field notes"
+          title={
+            <>
+              Plain-English guides,{" "}
+              <em className="text-ash">written carefully.</em>
+            </>
+          }
+          tail={
+            <Link
+              href="/guides"
+              className="font-mono text-xs uppercase tracking-widewide text-accent hover:underline"
+            >
+              All guides →
+            </Link>
+          }
+        />
+        <div className="mt-10 grid gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-3">
           {guides.slice(0, 3).map((guide) => (
-            <GuideCard key={guide.slug} guide={guide} />
+            <div key={guide.slug} className="bg-ink-950">
+              <GuideCard guide={guide} />
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="container-wide pb-10">
-        <div className="rounded-2xl border border-accent/25 bg-accent/[0.06] p-8 text-center sm:p-12">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
-            Takes 10 seconds. Could save your accounts.
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-slate-300">
-            The most common way people get hacked is a reused password that
-            already leaked. Check yours now — privately, in your browser.
-          </p>
-          <Link
-            href="/tools/password-checker"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-semibold text-ink-950 transition hover:bg-accent-soft"
-          >
-            <Icon name="shield" className="h-5 w-5" />
-            Run the breach check
-          </Link>
+      {/* CLOSING CTA */}
+      <section className="container-wide pb-20">
+        <div className="relative border border-ink-700 bg-ink-900 p-10 sm:p-16">
+          <span
+            aria-hidden="true"
+            className="absolute -left-px -top-px h-4 w-4 border-l border-t border-accent"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute -bottom-px -right-px h-4 w-4 border-b border-r border-accent"
+          />
+          <div className="max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-widewide text-accent">
+              // 10 seconds
+            </span>
+            <h2 className="mt-3 font-display text-4xl leading-tight tracking-tightest text-cream sm:text-5xl">
+              The most common way people get hacked is{" "}
+              <em>a password that already leaked</em>.
+            </h2>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-ash">
+              Find out if yours has, privately, in your browser. Then fix it
+              once and never have to think about it again.
+            </p>
+            <Link
+              href="/tools/password-checker"
+              className="group mt-8 inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-xs uppercase tracking-widewide text-ink-950 transition hover:bg-accent-soft"
+            >
+              Run the breach check
+              <Icon
+                name="arrow"
+                className="h-4 w-4 transition group-hover:translate-x-0.5"
+              />
+            </Link>
+          </div>
         </div>
       </section>
     </>
+  );
+}
+
+function SectionHeader({
+  eyebrow,
+  title,
+  tail,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  tail?: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-5 border-b border-ink-700 pb-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        <span className="font-mono text-xs uppercase tracking-widewide text-ash">
+          {eyebrow}
+        </span>
+        <h2 className="mt-3 font-display text-4xl leading-tight tracking-tightest text-cream sm:text-5xl">
+          {title}
+        </h2>
+      </div>
+      {tail && <div>{tail}</div>}
+    </div>
   );
 }
