@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Tokens — dark / mysterious. Black-bg with cream foreground, oxblood
-   accent retained for the wordmark and key hover states.
+   mara · design tokens
+   Dark, mysterious, defender-side. Cream on near-black with a brighter
+   oxblood accent. No serif, no italics, anywhere.
    ───────────────────────────────────────────────────────────────────── */
 :root {
   --bg: #08070a;
@@ -15,9 +16,11 @@
   --ink-3: #6F665B;
   --accent: #C8334B;
   --accent-deep: #8E2436;
+  --accent-ember: #5C1A24;
   --hairline: rgba(244, 241, 234, 0.08);
   --hair-2: rgba(244, 241, 234, 0.16);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quint: cubic-bezier(0.83, 0, 0.17, 1);
 }
 
 @layer base {
@@ -29,22 +32,22 @@
     font-size: 17px;
     line-height: 1.6;
     text-rendering: optimizeLegibility;
-    /* subtle radial vignette from above for the "mysterious" feel */
     background-image:
-      radial-gradient(60% 50% at 50% 0%, rgba(200, 51, 75, 0.06), transparent 70%),
-      radial-gradient(50% 40% at 50% 100%, rgba(200, 51, 75, 0.03), transparent 70%);
+      radial-gradient(60% 50% at 50% 0%, rgba(200,51,75,0.07), transparent 65%),
+      radial-gradient(50% 40% at 50% 100%, rgba(200,51,75,0.04), transparent 70%);
     background-attachment: fixed;
+    overflow-x: hidden;
   }
-  /* very fine grain — adds mystery without being noisy */
+  /* Fine grain overlay — adds depth without noise */
   body::before {
     content: "";
     position: fixed; inset: 0;
     pointer-events: none;
     z-index: 0;
-    background-image: radial-gradient(rgba(244,241,234,0.018) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(244,241,234,0.022) 1px, transparent 1px);
     background-size: 3px 3px;
     mix-blend-mode: overlay;
-    opacity: 0.6;
+    opacity: 0.7;
   }
   ::selection { background: var(--accent); color: var(--ink); }
   h1, h2, h3, h4 {
@@ -52,14 +55,14 @@
     letter-spacing: -0.045em;
     font-style: normal;
   }
+  /* No italics. Anywhere. Ever. */
+  em, i, cite, address { font-style: normal; }
   :focus-visible {
     outline: 1px solid var(--accent);
     outline-offset: 3px;
   }
   a { color: inherit; text-decoration: none; }
   img, svg { display: block; max-width: 100%; }
-  /* Absolutely no italics anywhere. */
-  em, i { font-style: normal; }
 }
 
 @layer components {
@@ -70,25 +73,24 @@
     position: relative;
     z-index: 1;
   }
-  @media (max-width: 768px) {
-    .container-page { padding: 0 20px; }
-  }
+  @media (max-width: 768px) { .container-page { padding: 0 20px; } }
 
-  /* venode_ marque — large Inter at weight 900, o painted accent,
-     animated underscore cursor at the end. */
+  /* ── Brand marks ───────────────────────────────────────────────────── */
+
+  /* mara_ — header wordmark. The second 'a' is accent, plus blinking cursor. */
   .wordmark {
     @apply inline-flex items-baseline font-display leading-none text-ink;
     font-weight: 900;
     letter-spacing: -0.045em;
   }
-  .wordmark .o { color: var(--accent); font-weight: 700; }
+  .wordmark .a { color: var(--accent); font-weight: 800; }
   .wordmark .cursor {
     display: inline-block;
     width: 0.42em;
     height: 0.10em;
     background: var(--accent);
     margin-left: 0.10em;
-    margin-bottom: 0.16em;
+    margin-bottom: 0.18em;
     align-self: flex-end;
     animation: cursor-blink 1.05s steps(2) infinite;
   }
@@ -96,18 +98,16 @@
     0%, 100% { opacity: 1; }
     50%      { opacity: 0; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .wordmark .cursor { animation: none; }
-  }
 
-  /* vo. monogram — used larger in the footer slab. */
-  .vo-mark {
-    @apply inline-flex items-baseline font-display leading-none text-cream;
+  /* venode wordmark (parent brand). */
+  .venode-mark {
+    @apply inline-flex items-baseline font-display leading-none text-ink;
     font-weight: 900;
     letter-spacing: -0.045em;
   }
-  .vo-mark .o { color: var(--accent); font-weight: 700; }
-  .vo-mark .dot { color: var(--accent); }
+  .venode-mark .o { color: var(--accent); font-weight: 800; }
+
+  /* ── Type ──────────────────────────────────────────────────────────── */
 
   .eyebrow {
     @apply font-mono uppercase text-ink-2;
@@ -115,30 +115,40 @@
     font-size: 11px;
     letter-spacing: 0.22em;
   }
-
   .display {
     @apply font-display text-ink;
     font-weight: 900;
     letter-spacing: -0.045em;
-    font-style: normal;
   }
-  /* Secondary tone for headline second-clauses (replaces the old <em> italic). */
   .display .quiet {
     color: var(--ink-2);
     font-weight: 500;
   }
 
-  /* Primary CTA: cream slab with black text — inverted for dark theme. */
+  /* ── Buttons ───────────────────────────────────────────────────────── */
+
   .btn-primary {
     @apply inline-flex items-center gap-2 font-mono uppercase transition;
     background: var(--ink);
     color: var(--bg);
-    padding: 12px 20px;
+    padding: 13px 22px;
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.10em;
+    position: relative;
+    overflow: hidden;
   }
-  .btn-primary:hover { background: var(--accent); color: var(--ink); }
+  .btn-primary::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform 320ms var(--ease);
+    z-index: 0;
+  }
+  .btn-primary > * { position: relative; z-index: 1; }
+  .btn-primary:hover { color: var(--ink); }
+  .btn-primary:hover::after { transform: translateY(0); }
 
   .btn-ghost {
     @apply inline-flex items-center gap-2 font-mono uppercase transition text-ink-2;
@@ -146,7 +156,7 @@
     font-size: 12px;
     letter-spacing: 0.10em;
     border-bottom: 1px solid var(--hairline);
-    padding-bottom: 4px;
+    padding-bottom: 5px;
   }
   .btn-ghost:hover {
     color: var(--ink);
@@ -154,23 +164,106 @@
   }
 }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(6px); }
+/* ──────────────────────────────────────────────────────────────────────
+   Motion
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Hero entry — each letter rises in. */
+@keyframes letter-rise {
+  0%   { opacity: 0; transform: translateY(36px); filter: blur(6px); }
+  60%  { opacity: 1; transform: translateY(0);    filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(36px);
+  animation: letter-rise 900ms var(--ease-quint) forwards;
+  will-change: transform, opacity, filter;
+}
+
+/* Cascading fade-up for any node — used in hero rest + reveals. */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-rise { animation: rise 0.45s ease-out both; }
-
-/* HeroIntro animation: each slide crossfades with a subtle vertical
-   translate. Pure CSS opacity + transform transitions toggled by a
-   data attribute set in the client component. */
-.slide {
+.fade-up {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
-  pointer-events: none;
+  animation: fade-up 700ms var(--ease) forwards;
+  will-change: transform, opacity;
 }
-.slide[data-active="true"] {
+
+/* Scroll-triggered reveal. Element starts hidden; observer adds .in. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+  will-change: transform, opacity;
+}
+.reveal.in {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto;
+}
+/* Stagger via inline --d index var on children */
+.stagger > .reveal { transition-delay: calc(var(--d, 0) * 90ms); }
+
+/* Infinite horizontal marquee (doubled content for seamless loop). */
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: scroll-x 48s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Live pulse dot. */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(2.4); opacity: 0;   }
+}
+.pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 8px; height: 8px;
+}
+.pulse-dot::before,
+.pulse-dot::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 9999px;
+  background: var(--accent);
+}
+.pulse-dot::after {
+  animation: pulse-ring 1.8s var(--ease) infinite;
+}
+
+/* Vertical-bar accent that "draws in" on card hover. */
+.card-tick {
+  position: relative;
+  isolation: isolate;
+  transition: background 250ms var(--ease), border-color 250ms var(--ease);
+}
+.card-tick::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 420ms var(--ease);
+}
+.card-tick:hover { background: rgba(244,241,234,0.025); }
+.card-tick:hover::before { transform: scaleY(1); }
+
+/* Animation honour reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .letter, .fade-up { animation: none; opacity: 1; transform: none; filter: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .wordmark .cursor, .pulse-dot::after { animation: none; }
 }

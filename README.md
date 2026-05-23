@@ -1,68 +1,81 @@
-# Hugo — a venode product
+# mara · a venode product
 
-Marketing site for **Hugo**, a cybersecurity intelligence language model
-from **venode**. Built as a sibling property to `venode.ai`, sharing the
-parent lab's design system: warm-cream paper, oxblood accent, Inter
-Display + Lora + Geist Mono typography, the `venode_` wordmark and the
-`vo.` footer monogram.
+A single-page premium product site for **Mara**, venode's cybersecurity
+threat-intelligence language model.
 
-Hugo's positioning draws on the established framework for cyber-defense
-AI (defenders, dual-use honesty, calibrated confidence, refusal-first
-safety) and applies it to a venode-grown model.
+## Master prompt (the spec)
 
-## Identity
+```
+GOAL: A single-page premium product site for Mara, venode's
+cybersecurity threat-intelligence language model. Anthropic-grade
+restraint, venode-grade brand discipline, cinematic dark execution.
 
-Colour tokens are mirrored from `venode.ai`:
+PRINCIPLES
+- One page. No nav, no sub-routes (legal pages aside).
+- Dark / mysterious. No italics, no serif, no cursive — ever.
+- Motion as substance, not decoration. Every animation must read.
+- Static-render where possible, CSS-driven where possible. JS only
+  for: typewriter, intersection-triggered reveal, marquee pause-on-
+  hover, cycling tagline, parallax glow.
+- Zero dependencies beyond next + react + tailwind + next/font.
 
-| Token | Value |
+SECTIONS (top → bottom, single scroll)
+01  HERO        — letter-rise reveal of "mara", cycling tagline,
+                  parallax glow, CTAs, marquee band.
+02  POSITION    — Anthropic dual-use framing for defenders.
+03  DEMO        — auto-typing chat transcript triggered on scroll.
+04  CAPABILITY  — 4 capability blocks with hover micro-interactions.
+05  TIERS       — One Mara: Free / Pro / Custom.
+06  SAFETY      — Mara will not / Mara will help with.
+07  CLOSING     — Big CTA + venode wordmark for parent context.
+
+BRAND
+- mara wordmark: m + a (accent) + r + a (accent) + blinking cursor.
+- Palette: bg #08070a · ink #F4F1EA · accent #C8334B (oxblood-lift).
+- Type: Inter (400–900), Geist Mono for labels & code.
+```
+
+## The motion craft (what the page actually does)
+
+| Section | Motion |
 |---|---|
-| `--bg` (page) | `#FAF9F5` |
-| `--surface` (warm band) | `#F1EDE2` |
-| `--ink` (text) | `#141412` |
-| `--ink-2` (subdued) | `#5A5854` |
-| `--accent` (oxblood) | `#8E2436` |
-| `--oxblood` (Hugo wordmark) | `#5C1A24` |
-| `--cream-warm` (footer text) | `#F4F1EA` |
+| Hero entry | Each letter of `mara` rises in with a 110ms stagger and a blur-to-clear, then a cursor blinks at the end |
+| Hero tagline | Three positioning lines cycle in place with a 700ms crossfade + translate every 4.2s |
+| Hero glow | A radial accent gradient tracks the cursor with parallax |
+| Marquee | Doubled-content seamless infinite scroll, pauses on hover |
+| Demo transcript | Typewriter at ~16ms/char, "thinking…" dots between turns, IntersectionObserver triggers it once on first scroll into view, replay button when finished |
+| Section reveals | Every block fades up 14px on scroll-in via a shared `<Reveal>` IntersectionObserver wrapper |
+| Capability cards | Accent vertical bar scales in on hover; background tints; corner ticks |
+| Buttons | Cream-slab CTAs transition to an oxblood wipe-up on hover |
+| Live indicator | Pulsing oxblood dot in the hero status line |
 
-Typography:
+All animations respect `prefers-reduced-motion`.
 
-- `Inter` at heavy weights stands in for Inter Display on the marque
-- `Lora` (serif) for body copy
-- `Geist Mono` for labels, eyebrows and CTAs
+## Stack
 
-Marks:
+- **Next.js 15** App Router · React 19 · TypeScript · static export
+- **Tailwind CSS** with hand-tuned token variables in `globals.css`
+- **`next/font/google`** — Inter (heavy weights 700–900) + Geist Mono
+- No external state, no DB, no env vars, no extra dependencies
 
-- `<VenodeWordmark/>` — `venode_` with the o in accent + blinking cursor
-- `<VoMark/>` — `vo.` monogram for the black footer slab
-- `<HugoWordmark/>` — geometric stroke wordmark, the o in deep oxblood
+## Files
 
-## Pages
-
-- `/` — Hero, `P-01` Hugo feature with the wordmark + `One Hugo. Tiered by plan.`, `Venode Labs.` with research areas, `L-01` custom builds warm band, `Built in the open` final CTA.
-- `/hugo` — Product detail. Capabilities, three illustrative transcripts, Pro tier + connectors, custom-build CTA.
-- `/research` + `/research/[slug]` — Research notes (R-01 … R-04).
-- `/safety` — Dual-use boundaries, refusal behaviour, responsible disclosure.
-- `/about` — Venode lab statement.
-- `/contact` — Channels.
-- `/privacy` — Short, plain.
-
-## Edit
-
-Everything brand- and product-level lives in `site.config.ts`. Notes
-live in `lib/research.ts`. To add a note, push a new entry to the
-`notes` array — it appears automatically in the research index,
-sitemap, and footer "News" column.
+- `app/page.tsx` — single-page composition
+- `app/privacy/page.tsx` — legal companion
+- `components/Hero.tsx` — letter-rise hero
+- `components/Marquee.tsx` — infinite scroll band
+- `components/DemoTranscript.tsx` — typewriter chat
+- `components/Capabilities.tsx` · `Tiers.tsx` · `Safety.tsx` — body sections
+- `components/Reveal.tsx` — scroll-triggered fade-up wrapper
+- `components/Icons.tsx` — `MaraWordmark`, `VenodeMark`, arrows
+- `site.config.ts` — all brand, URL and pricing in one place
 
 ## Deploy
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build
+npm run build    # static production build
 ```
 
-Stack: Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 3
-· `next/font/google` for Inter / Lora / Geist Mono.
-
-Deployable to Vercel free tier. No database, no environment variables
-required.
+Import on Vercel → Deploy. Set `site.config.ts → url` to your domain.

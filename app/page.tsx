@@ -1,249 +1,215 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * mara · single-page product site for venode's cybersecurity model.
+ *
+ * MASTER PROMPT (the spec this page is built against)
+ *
+ *   GOAL: A single-page premium product site for Mara, venode's
+ *   cybersecurity threat-intelligence language model. Anthropic-grade
+ *   restraint, venode-grade brand discipline, cinematic dark execution.
+ *
+ *   PRINCIPLES
+ *   - One page. No nav, no sub-routes (legal pages aside).
+ *   - Dark / mysterious. No italics, no serif, no cursive — ever.
+ *   - Motion as substance, not decoration. Every animation must read.
+ *   - Static-render where possible, CSS-driven where possible. JS only
+ *     for: typewriter, intersection-triggered reveal, marquee pause-on-
+ *     hover, cycling tagline, parallax glow.
+ *   - Zero dependencies beyond next + react + tailwind + next/font.
+ *
+ *   SECTIONS (top → bottom, single scroll)
+ *   01  HERO        — letter-rise reveal of "mara", cycling tagline,
+ *                     parallax glow, CTAs, marquee band.
+ *   02  POSITION    — Anthropic dual-use framing for defenders.
+ *   03  DEMO        — auto-typing chat transcript triggered on scroll.
+ *   04  CAPABILITY  — 4 capability blocks with hover micro-interactions.
+ *   05  TIERS       — One Mara: Free / Pro / Custom.
+ *   06  SAFETY      — Mara will not / Mara will help with.
+ *   07  CLOSING     — Big CTA + venode wordmark for parent context.
+ *
+ *   BRAND
+ *   - mara wordmark: m + a (accent) + r + a (accent) + blinking cursor.
+ *   - Palette: bg #08070a · ink #F4F1EA · accent #C8334B (oxblood-lift).
+ *   - Type: Inter (400–900), Geist Mono for labels & code.
+ * ─────────────────────────────────────────────────────────────────── */
+
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight, HugoWordmark } from "@/components/Icons";
-import HeroIntro from "@/components/HeroIntro";
+import { ArrowRight, MaraWordmark, VenodeMark } from "@/components/Icons";
+import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
+import DemoTranscript from "@/components/DemoTranscript";
+import Capabilities from "@/components/Capabilities";
+import Tiers from "@/components/Tiers";
+import Safety from "@/components/Safety";
+import Reveal from "@/components/Reveal";
 
 export const metadata = pageMetadata({
   title: siteConfig.displayName,
   description: siteConfig.description,
   path: "/",
   keywords: [
-    "venode hugo",
+    "mara",
+    "venode mara",
     "cybersecurity language model",
     "ai for cyber defenders",
     "threat intelligence llm",
   ],
 });
 
-const researchAreas = [
-  {
-    n: "01",
-    title: "Post-training and variant fine-tuning.",
-    text: "Hugo is post-trained on threat reports, IR write-ups, malware analyses and detection logic — and evaluated on what defenders actually do, not on benchmark trivia.",
-  },
-  {
-    n: "02",
-    title: "Long-context inference.",
-    text: "200K context as the default, not a tier upgrade. A whole IR ticket, sandbox report and packet capture in one prompt. Document-first reasoning, retrieval kept thin.",
-  },
-  {
-    n: "03",
-    title: "Editorial alignment.",
-    text: "Teaching the model to hold back. Calibrated confidence. Refusal of operational offensive work. No padded answers, no enthusiasm on someone else's behalf.",
-  },
-  {
-    n: "04",
-    title: "Inference economics.",
-    text: "Latency, batching, caching, cost per million tokens. What it takes to run a serious cyber model at a price a small team can defend.",
-  },
+const marqueeItems = [
+  "Cybersecurity intelligence",
+  "Threat triage",
+  "Malware analysis",
+  "Incident response",
+  "Adversary reasoning",
+  "Calibrated confidence",
+  "Refusal-first safety",
+  "On the defender's side",
+  "Built by venode",
 ];
 
-const customBuilds = [
-  {
-    title: "Designed and trained to spec.",
-    text: "On your detection logic, your historical IR, your runbooks, your sources. Hugo learns how your team thinks rather than how the public internet does.",
-  },
-  {
-    title: "On-site, hosted, or both.",
-    text: "Run it on your hardware behind your firewall, or on ours, or split the difference. The choice stays yours — we sign whatever you need us to sign.",
-  },
-  {
-    title: "Your data does not train anything else.",
-    text: "We do not pool customer data into a shared training set. Your corpus trains your model and only your model.",
-  },
-  {
-    title: "No advertisers. No resale.",
-    text: "We do not sell data, sell access to data, or hand it to a third party. Not for revenue, not for partnerships, not at all.",
-  },
-];
-
-export default function HomePage() {
+export default function Page() {
   return (
     <>
-      {/* HERO — animated intro slider */}
-      <HeroIntro />
+      {/* 01 — Hero */}
+      <Hero />
 
-      {/* P-01 · HUGO FEATURE */}
-      <section id="hugo" className="border-b border-hairline">
-        <div className="container-page py-28 sm:py-36">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">P-01 · Cyber language model</span>
+      {/* Marquee band, sits flush under the hero */}
+      <div className="border-b border-hairline bg-[#0a090c] py-5">
+        <Marquee items={marqueeItems} />
+      </div>
 
-            <div className="mt-10 flex justify-center">
-              <HugoWordmark
-                className="h-20 w-auto text-ink sm:h-28"
-                accent="#C8334B"
-              />
-            </div>
-
-            <p className="mt-12 font-display text-[clamp(1.75rem,3.25vw,2.5rem)] font-extrabold leading-tight tracking-display text-ink">
-              One Hugo. <span className="quiet font-normal">Tiered by plan.</span>
-            </p>
-
-            <p className="mx-auto mt-7 max-w-xl text-[17px] leading-[1.65] text-ink-2">
-              Hugo is venode&apos;s model for the work of cyber defense —
-              triage, malware analysis, threat intelligence, incident
-              response. One Hugo, served from the cloud and exposed through
-              one API. The free tier runs the fast model; paid plans route to
-              the thinking model with the full tool surface — sandbox, SIEM,
-              sources — wired in.
-            </p>
-
-            <div className="mx-auto mt-14 grid max-w-2xl gap-px bg-hairline sm:grid-cols-2">
-              <Tier
-                name={siteConfig.tiers.free.name}
-                text={siteConfig.tiers.free.blurb}
-              />
-              <Tier
-                name={siteConfig.tiers.pro.name}
-                text={siteConfig.tiers.pro.blurb}
-              />
-            </div>
-
-            <a href={siteConfig.appUrl} className="btn-primary mt-14">
-              Open Hugo <ArrowRight className="h-3 w-3" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* VENODE LABS */}
+      {/* 02 — Position */}
       <section className="border-b border-hairline">
         <div className="container-page py-28 sm:py-36">
-          <header className="max-w-3xl">
-            <h2 className="display text-[clamp(2.25rem,5vw,4rem)] leading-[1.04]">
-              Venode Labs.
-            </h2>
-            <p className="mt-6 max-w-xl text-[18px] leading-[1.55] text-ink-2">
-              Two halves of the lab: the research upstream of Hugo, and the
-              models we build to spec for teams who need their own.
-            </p>
-          </header>
-
-          <h3 className="eyebrow mt-16">Research areas</h3>
-
-          <ol className="mt-8 divide-y divide-hairline border-y border-hairline">
-            {researchAreas.map((a) => (
-              <li
-                key={a.n}
-                className="grid items-baseline gap-6 py-8 md:grid-cols-[3rem_1fr]"
-              >
-                <span
-                  className="font-mono text-[12px] uppercase text-accent"
-                  style={{ letterSpacing: "0.22em" }}
-                >
-                  {a.n}
-                </span>
-                <div>
-                  <h4 className="font-display text-[clamp(1.25rem,2vw,1.625rem)] font-extrabold tracking-display text-ink">
-                    {a.title}
-                  </h4>
-                  <p className="mt-3 max-w-2xl text-[16.5px] leading-[1.65] text-ink-2">
-                    {a.text}
-                  </p>
+          <div className="grid gap-14 md:grid-cols-12 md:gap-12">
+            <div className="md:col-span-5">
+              <Reveal>
+                <span className="eyebrow">01 · Position</span>
+              </Reveal>
+              <Reveal delay={120}>
+                <h2 className="display mt-7 text-[clamp(2.25rem,5vw,4rem)] leading-[1.05]">
+                  Don&apos;t cede the cyber advantage.
+                </h2>
+              </Reveal>
+            </div>
+            <div className="md:col-span-7 md:mt-2">
+              <Reveal>
+                <p className="text-[19px] leading-[1.6] text-ink">
+                  AI is now genuinely useful for cybersecurity — for both
+                  sides. The honest position is to put it firmly in the
+                  hands of the people defending things.
+                </p>
+              </Reveal>
+              <Reveal delay={120}>
+                <p className="mt-5 max-w-xl text-[17px] leading-[1.65] text-ink-2">
+                  Mara is venode&apos;s contribution. A model that reads like
+                  a senior analyst, refuses operational offensive work,
+                  knows what it does not know, and produces the artefact at
+                  the end of the shift.
+                </p>
+              </Reveal>
+              <Reveal delay={240}>
+                <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+                  <Link href="#demo" className="btn-primary">
+                    See Mara think <ArrowRight className="h-3 w-3" />
+                  </Link>
+                  <Link href="#safety" className="btn-ghost">
+                    Read the refusal policy
+                  </Link>
                 </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* CUSTOM BUILDS — raised dark surface band */}
-      <section
-        className="border-b border-hairline"
-        style={{ background: "#11100f" }}
-      >
-        <div className="container-page grid gap-12 py-28 sm:py-36 md:grid-cols-12 md:gap-10">
-          <div className="md:col-span-5">
-            <span className="eyebrow">L-01 · Custom builds</span>
-            <h3 className="display mt-7 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08]">
-              Custom builds.{" "}
-              <span className="quiet font-normal">
-                Built for you, not trained on you.
-              </span>
-            </h3>
-            <p className="mt-7 max-w-md text-[17px] leading-[1.6] text-ink-2">
-              If you don&apos;t want a shared product, we build one for you.
-              On-site, hosted, or hybrid. We design and train on your corpus,
-              ship the result to your stack, and stay out of your data. No
-              telemetry into a shared pool. No advertisers. No resale, ever.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a
-                href={`mailto:${siteConfig.contactEmail}`}
-                className="btn-primary"
-              >
-                Talk to us <ArrowRight className="h-3 w-3" />
-              </a>
-              <Link href="/about" className="btn-ghost">
-                How we work
-              </Link>
+              </Reveal>
             </div>
           </div>
-
-          <ol className="md:col-span-7 md:mt-2">
-            {customBuilds.map((b, i) => (
-              <li
-                key={b.title}
-                className={`grid items-baseline gap-6 py-7 md:grid-cols-[3rem_1fr] ${
-                  i > 0 ? "border-t border-hairline" : ""
-                }`}
-              >
-                <span
-                  className="font-mono text-[12px] uppercase text-ink-2"
-                  style={{ letterSpacing: "0.22em" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h4 className="font-display text-[19px] font-extrabold tracking-display text-ink">
-                    {b.title}
-                  </h4>
-                  <p className="mt-2 max-w-xl text-[16px] leading-[1.6] text-ink-2">
-                    {b.text}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
-      {/* BUILT IN THE OPEN — final CTA */}
-      <section>
-        <div className="container-page py-28 sm:py-40">
-          <h2 className="display max-w-3xl text-[clamp(2.5rem,6vw,5rem)] leading-[1.02]">
-            Built in the open.
-          </h2>
-          <p className="mt-7 max-w-xl text-[18px] leading-[1.55] text-ink-2">
-            The research is open. Read it to see what we are building, what we
-            are sketching, and what we have decided Hugo will never do.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <Link href="/research" className="btn-primary">
-              Read research <ArrowRight className="h-3 w-3" />
-            </Link>
-            <a
-              href={`mailto:${siteConfig.contactEmail}`}
-              className="btn-ghost"
-            >
-              Say hello
-            </a>
+      {/* 03 — Demo */}
+      <section id="demo" className="border-b border-hairline">
+        <div className="container-page py-28 sm:py-36">
+          <Reveal>
+            <span className="eyebrow">02 · Mara, in conversation</span>
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05]">
+              The transcript writes itself.
+            </h2>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-6 max-w-xl text-[16.5px] leading-[1.6] text-ink-2">
+              An illustrative SOC session. The real product behaves the same
+              way; this is condensed for reading.
+            </p>
+          </Reveal>
+
+          <Reveal delay={280} className="mt-12">
+            <DemoTranscript />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 04 — Capabilities */}
+      <Capabilities />
+
+      {/* 05 — Tiers */}
+      <Tiers />
+
+      {/* 06 — Safety */}
+      <Safety />
+
+      {/* 07 — Closing */}
+      <section className="border-b border-hairline">
+        <div className="container-page relative py-36 sm:py-48">
+          {/* Sub backdrop */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(40% 60% at 50% 50%, rgba(200,51,75,0.08), transparent 70%)",
+            }}
+          />
+          <div className="relative">
+            <Reveal>
+              <div className="flex justify-center">
+                <MaraWordmark className="text-[clamp(5rem,16vw,16rem)]" />
+              </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <p className="mx-auto mt-10 max-w-xl text-center text-[18px] leading-[1.55] text-ink-2">
+                Free for the curious. Twenty dollars a month for the work.
+                Custom for the teams who need their own.
+              </p>
+            </Reveal>
+            <Reveal delay={320}>
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+                <a href={siteConfig.appUrl} className="btn-primary">
+                  Open Mara <ArrowRight className="h-3 w-3" />
+                </a>
+                <a
+                  href={`mailto:${siteConfig.contactEmail}`}
+                  className="btn-ghost"
+                >
+                  Talk to us
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal delay={440}>
+              <div className="mt-20 flex items-center justify-center gap-3">
+                <VenodeMark className="text-[15px]" />
+                <span
+                  className="font-mono text-[11px] uppercase text-ink-3"
+                  style={{ letterSpacing: "0.22em" }}
+                >
+                  · A research lab building tools for defenders
+                </span>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
     </>
-  );
-}
-
-function Tier({ name, text }: { name: string; text: string }) {
-  return (
-    <div className="bg-bg p-7 text-left">
-      <span className="font-display text-[18px] font-extrabold tracking-display text-ink">
-        {name}
-      </span>
-      <p className="mt-2 text-[15px] leading-[1.55] text-ink-2">{text}</p>
-    </div>
   );
 }

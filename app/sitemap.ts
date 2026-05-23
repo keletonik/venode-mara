@@ -1,31 +1,20 @@
 import type { MetadataRoute } from "next";
 import { canonical } from "@/lib/seo";
-import { notes } from "@/lib/research";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticPaths = [
-    "/",
-    "/hugo",
-    "/research",
-    "/safety",
-    "/about",
-    "/contact",
-    "/privacy",
-  ];
-
   return [
-    ...staticPaths.map((p) => ({
-      url: canonical(p),
+    {
+      url: canonical("/"),
       lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: p === "/" ? 1 : 0.7,
-    })),
-    ...notes.map((n) => ({
-      url: canonical(`/research/${n.slug}`),
-      lastModified: new Date(n.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: canonical("/privacy"),
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }

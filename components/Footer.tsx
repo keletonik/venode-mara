@@ -1,124 +1,109 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { VoMark } from "./Icons";
-import { notes } from "@/lib/research";
-
-const columns = [
-  {
-    title: "Products",
-    links: [
-      { href: "/hugo", label: "Hugo" },
-      { href: siteConfig.appUrl, label: "Hugo Cloud" },
-      { href: "/hugo#pricing", label: "Pricing" },
-    ],
-  },
-  {
-    title: "Research",
-    links: [
-      { href: "/research", label: "Post-training" },
-      { href: "/research", label: "Long context" },
-      { href: "/research", label: "Editorial alignment" },
-      { href: "/research", label: "Inference economics" },
-    ],
-  },
-  {
-    title: "Lab",
-    links: [
-      { href: "/lab", label: "Lab" },
-      { href: "/about", label: "About" },
-      { href: "/safety", label: "Safety" },
-    ],
-  },
-  {
-    title: "Connect",
-    links: [
-      { href: `mailto:${siteConfig.contactEmail}`, label: siteConfig.contactEmail },
-      { href: "/contact", label: "Contact" },
-      ...(siteConfig.github
-        ? [{ href: siteConfig.github, label: "GitHub" }]
-        : []),
-    ],
-  },
-];
+import { VenodeMark, MaraWordmark } from "./Icons";
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const recent = [...notes]
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 4);
-
   return (
-    <footer className="mt-32 bg-black text-cream-warm">
+    <footer className="mt-20 border-t border-hairline bg-black">
       <div className="container-page py-20">
-        <div className="grid items-start gap-12 md:grid-cols-[auto_1fr]">
-          <Link href="/" aria-label="venode home" className="self-start">
-            <VoMark className="text-[64px]" />
-          </Link>
+        <div className="grid items-end gap-12 md:grid-cols-2">
+          <div>
+            <MaraWordmark className="text-[64px] sm:text-[88px]" />
+            <p className="mt-6 max-w-md text-[15.5px] leading-[1.6] text-ink-2">
+              A cybersecurity intelligence model by venode. Built for the
+              people defending things.
+            </p>
+          </div>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
-            {columns.map((c) => (
-              <div key={c.title}>
-                <h4 className="font-mono text-[11px] font-bold uppercase text-cream-warm/70" style={{ letterSpacing: "0.22em" }}>
-                  {c.title}
-                </h4>
-                <ul className="mt-4 space-y-2.5">
-                  {c.links.map((l) => (
-                    <li key={l.label}>
-                      {l.href.startsWith("http") || l.href.startsWith("mailto:") ? (
-                        <a
-                          href={l.href}
-                          target={l.href.startsWith("http") ? "_blank" : undefined}
-                          rel={l.href.startsWith("http") ? "noopener" : undefined}
-                          className="text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
-                        >
-                          {l.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={l.href}
-                          className="text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
-                        >
-                          {l.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-            <div>
-              <h4 className="font-mono text-[11px] font-bold uppercase text-cream-warm/70" style={{ letterSpacing: "0.22em" }}>
-                News
-              </h4>
-              <ul className="mt-4 space-y-4">
-                {recent.map((n) => (
-                  <li key={n.slug}>
-                    <Link
-                      href={`/research/${n.slug}`}
-                      className="block text-[14px] leading-snug text-cream-warm/80 transition hover:text-cream-warm"
-                    >
-                      {n.title}
-                    </Link>
-                    <span className="mt-1 block font-mono text-[10px] uppercase text-cream-warm/40" style={{ letterSpacing: "0.18em" }}>
-                      {new Date(n.date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="grid grid-cols-2 gap-10 md:justify-self-end">
+            <FooterCol title="Mara">
+              <FooterLink href={siteConfig.appUrl} external>Open Mara</FooterLink>
+              <FooterLink href="#capabilities">Capabilities</FooterLink>
+              <FooterLink href="#pricing">Pricing</FooterLink>
+              <FooterLink href="#safety">Safety</FooterLink>
+            </FooterCol>
+            <FooterCol title="Venode">
+              <FooterLink href={siteConfig.labUrl} external>venode.ai</FooterLink>
+              <FooterLink href={`mailto:${siteConfig.contactEmail}`}>Contact</FooterLink>
+              <FooterLink href="/privacy">Privacy</FooterLink>
+            </FooterCol>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-cream-warm/15 pt-6 font-mono text-[12px] text-cream-warm/55" style={{ letterSpacing: "0.06em" }}>
-          <span>© {year} venode</span>
-          <span>{siteConfig.url.replace(/^https?:\/\//, "")}</span>
+        <div className="mt-16 flex flex-wrap items-end justify-between gap-3 border-t border-hairline pt-6">
+          <div className="flex items-center gap-3">
+            <VenodeMark className="text-[16px]" />
+            <span
+              className="font-mono text-[11px] uppercase text-ink-3"
+              style={{ letterSpacing: "0.22em" }}
+            >
+              · A research lab
+            </span>
+          </div>
+          <span
+            className="font-mono text-[11px] uppercase text-ink-3"
+            style={{ letterSpacing: "0.10em" }}
+          >
+            © {year} venode · all rights reserved
+          </span>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterCol({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h4
+        className="font-mono text-[11px] uppercase text-ink-3"
+        style={{ letterSpacing: "0.22em" }}
+      >
+        {title}
+      </h4>
+      <ul className="mt-4 space-y-2.5">{children}</ul>
+    </div>
+  );
+}
+
+function FooterLink({
+  href,
+  external = false,
+  children,
+}: {
+  href: string;
+  external?: boolean;
+  children: React.ReactNode;
+}) {
+  if (external) {
+    return (
+      <li>
+        <a
+          href={href}
+          target={href.startsWith("http") ? "_blank" : undefined}
+          rel={href.startsWith("http") ? "noopener" : undefined}
+          className="text-[14.5px] text-ink-2 transition hover:text-ink"
+        >
+          {children}
+        </a>
+      </li>
+    );
+  }
+  return (
+    <li>
+      <Link
+        href={href}
+        className="text-[14.5px] text-ink-2 transition hover:text-ink"
+      >
+        {children}
+      </Link>
+    </li>
   );
 }
