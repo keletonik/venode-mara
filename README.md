@@ -3,72 +3,103 @@
 A single-page premium product site for **Mara**, venode's cybersecurity
 threat-intelligence language model.
 
-## Master prompt (the spec)
+## Master prompt (the spec this iteration was built against)
 
 ```
-GOAL: A single-page premium product site for Mara, venode's
-cybersecurity threat-intelligence language model. Anthropic-grade
-restraint, venode-grade brand discipline, cinematic dark execution.
+ROLE: You are simultaneously
+  • a senior brand designer (Linear / Apple sensibility)
+  • a motion designer (Anthropic / Stripe sensibility)
+  • a Vignelli-restraint typographer
+  • a senior Next.js / Tailwind engineer
+  • a cybersecurity product marketer with real SOC experience
 
-PRINCIPLES
-- One page. No nav, no sub-routes (legal pages aside).
-- Dark / mysterious. No italics, no serif, no cursive — ever.
-- Motion as substance, not decoration. Every animation must read.
-- Static-render where possible, CSS-driven where possible. JS only
-  for: typewriter, intersection-triggered reveal, marquee pause-on-
-  hover, cycling tagline, parallax glow.
-- Zero dependencies beyond next + react + tailwind + next/font.
+TASTE BAR
+  linear.app, anthropic.com, mistral.ai, stripe.com — earned
+  restraint, premium motion, considered density. Not a generic
+  dark-mode template.
 
-SECTIONS (top → bottom, single scroll)
-01  HERO        — letter-rise reveal of "mara", cycling tagline,
-                  parallax glow, CTAs, marquee band.
-02  POSITION    — Anthropic dual-use framing for defenders.
-03  DEMO        — auto-typing chat transcript triggered on scroll.
-04  CAPABILITY  — 4 capability blocks with hover micro-interactions.
-05  TIERS       — One Mara: Free / Pro / Custom.
-06  SAFETY      — Mara will not / Mara will help with.
-07  CLOSING     — Big CTA + venode wordmark for parent context.
+NON-NEGOTIABLES
+- Dark. Cream. Oxblood. No italics. No serif. No rounded corners.
+- Static-render. Zero deps beyond next / react / tailwind / next-font.
+- Respects reduced-motion. WCAG-acceptable contrast.
+- Every line of copy passes a senior analyst's smell test.
 
-BRAND
-- mara wordmark: m + a (accent) + r + a (accent) + blinking cursor.
-- Palette: bg #08070a · ink #F4F1EA · accent #C8334B (oxblood-lift).
-- Type: Inter (400–900), Geist Mono for labels & code.
+THIS PASS
+1. A real Mara mark — a constellation glyph. Three nodes (two cream,
+   one accent), thin connecting strokes, animatable. Used at favicon,
+   header, hero panel, and as the closing-section background motif.
+2. Hero v2 — split composition. Wordmark + tagline + CTAs on the
+   left; a framed "intelligence panel" with the live constellation
+   and a row of telemetry readouts on the right. Parallax glow
+   tracks the cursor.
+3. New section: MODEL CARD — a dense, mono-styled spec sheet with
+   identity, capacity, training corpus, eval scores, refusal rates,
+   build metadata.
+4. Subtle CRT scanline overlay across the whole page for depth.
+5. Sharper section rhythm, tighter copy throughout.
 ```
 
-## The motion craft (what the page actually does)
+## The Mara mark
+
+A constellation glyph drawn at three scales:
+
+- `MaraGlyph` — 24×24 viewBox, used at favicon and inline with the
+  wordmark. Three filled circles forming an irregular triangle,
+  connected by thin half-opacity strokes, the bottom-right circle
+  rendered in the accent oxblood (the "anomaly").
+- The mark also appears as a faint background motif behind the
+  closing wordmark.
+- `MaraConstellation` — 200×200 viewBox, nine nodes and nine edges,
+  used in the hero "intelligence panel" and the closing section.
+  Lines draw themselves in via stroke-dashoffset; nodes pop in with
+  stagger; the accent node has a pulsing ring.
+
+The glyph is the same construction at every size — designed once,
+reused everywhere.
+
+## The motion craft
 
 | Section | Motion |
 |---|---|
-| Hero entry | Each letter of `mara` rises in with a 110ms stagger and a blur-to-clear, then a cursor blinks at the end |
-| Hero tagline | Three positioning lines cycle in place with a 700ms crossfade + translate every 4.2s |
-| Hero glow | A radial accent gradient tracks the cursor with parallax |
+| Hero entry | Letters of `mara` rise in with 110ms stagger and a blur-to-clear |
+| Hero tagline | Three lines crossfade in place every 4.2s |
+| Hero glow | Radial accent gradient tracks the cursor |
+| Hero panel | Constellation lines draw in (stroke-dashoffset), nodes pop with stagger, accent node pulses, telemetry readouts drift on a 2.2s tick |
 | Marquee | Doubled-content seamless infinite scroll, pauses on hover |
-| Demo transcript | Typewriter at ~16ms/char, "thinking…" dots between turns, IntersectionObserver triggers it once on first scroll into view, replay button when finished |
-| Section reveals | Every block fades up 14px on scroll-in via a shared `<Reveal>` IntersectionObserver wrapper |
-| Capability cards | Accent vertical bar scales in on hover; background tints; corner ticks |
-| Buttons | Cream-slab CTAs transition to an oxblood wipe-up on hover |
-| Live indicator | Pulsing oxblood dot in the hero status line |
+| Demo | Typewriter at 16ms/char, "thinking…" dots between turns, IntersectionObserver triggers on first scroll into view |
+| Section reveals | Every block fades up 14px on scroll-in via `<Reveal>` |
+| Cards | Vertical accent bar scales in on hover, subtle background tint |
+| Buttons | Cream-slab CTAs wipe to oxblood on hover via ::after |
+| Background | CRT scanlines + grain overlay across the whole page |
+| Closing | Constellation glyph at 70vw behind the wordmark, mark lines redraw |
 
-All animations respect `prefers-reduced-motion`.
+All motion respects `prefers-reduced-motion`.
 
 ## Stack
 
-- **Next.js 15** App Router · React 19 · TypeScript · static export
-- **Tailwind CSS** with hand-tuned token variables in `globals.css`
-- **`next/font/google`** — Inter (heavy weights 700–900) + Geist Mono
+- **Next.js 15** App Router · React 19 · TypeScript
+- **Tailwind CSS** with tokens lifted into `globals.css` as `:root`
+- **next/font/google** — Inter (400–900) + Geist Mono
 - No external state, no DB, no env vars, no extra dependencies
 
-## Files
+## File map
 
-- `app/page.tsx` — single-page composition
-- `app/privacy/page.tsx` — legal companion
-- `components/Hero.tsx` — letter-rise hero
-- `components/Marquee.tsx` — infinite scroll band
-- `components/DemoTranscript.tsx` — typewriter chat
-- `components/Capabilities.tsx` · `Tiers.tsx` · `Safety.tsx` — body sections
-- `components/Reveal.tsx` — scroll-triggered fade-up wrapper
-- `components/Icons.tsx` — `MaraWordmark`, `VenodeMark`, arrows
-- `site.config.ts` — all brand, URL and pricing in one place
+| File | What it does |
+|---|---|
+| `app/page.tsx` | Section composition (master prompt at top) |
+| `app/icon.svg` | Favicon — constellation glyph |
+| `app/globals.css` | Tokens, marks, motion keyframes |
+| `components/Hero.tsx` | Split-composition hero v2 |
+| `components/Icons.tsx` | `MaraGlyph`, `MaraConstellation`, `MaraWordmark`, `VenodeMark`, arrows |
+| `components/Marquee.tsx` | Infinite scroll band |
+| `components/DemoTranscript.tsx` | Typewriter chat session |
+| `components/Capabilities.tsx` | 4 cards with hover micro-interactions |
+| `components/Tiers.tsx` | Free / Pro / Custom |
+| `components/ModelCard.tsx` | Spec-sheet panel |
+| `components/Safety.tsx` | Refusal-first dual-use page |
+| `components/Reveal.tsx` | Scroll-triggered fade-up wrapper |
+| `components/Footer.tsx` | Black slab + venode mark |
+| `site.config.ts` | All brand, URL and contact config |
 
 ## Deploy
 

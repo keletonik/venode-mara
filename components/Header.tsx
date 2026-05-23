@@ -22,8 +22,13 @@ export default function Header() {
       }`}
     >
       <div className="container-page flex h-[68px] items-center">
-        <Link href="/" aria-label="mara home" className="fade-up" style={{ animationDelay: "100ms" }}>
-          <MaraWordmark className="text-[22px] sm:text-[26px]" />
+        <Link
+          href="/"
+          aria-label="mara home"
+          className="fade-up"
+          style={{ animationDelay: "100ms" }}
+        >
+          <MaraWordmark className="text-[20px] sm:text-[24px]" />
         </Link>
 
         <nav className="ml-auto flex items-center gap-6">
@@ -31,7 +36,7 @@ export default function Header() {
             className="hidden font-mono text-[11px] uppercase text-ink-3 sm:inline"
             style={{ letterSpacing: "0.22em" }}
           >
-            by venode
+            a venode product
           </span>
           <a
             href={siteConfig.appUrl}

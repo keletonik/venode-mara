@@ -3,17 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { ArrowRight, ArrowDown } from "./Icons";
+import { ArrowRight, ArrowDown, MaraConstellation } from "./Icons";
 
 /**
- * The Mara entrance.
+ * Hero v2 — split composition.
  *
- * Each letter rises in with a staggered blur-to-clear. After the wordmark
- * settles the cursor blinks, the tagline cycles through three positioning
- * lines, the CTAs surface, and the marquee starts moving below.
- *
- * Everything below the hero (capabilities, tiers, safety) reveals on
- * scroll — see <Reveal>.
+ * Left:  eyebrow status row · large "mara" with letter-rise · cycling
+ *        tagline · paragraph · CTAs · scroll hint.
+ * Right: a framed "intelligence panel" containing the constellation
+ *        mark drawing itself in, surrounded by telemetry-style
+ *        readouts that update on a slow tick.
+ * Bg:    radial accent glow tracking the cursor.
  */
 
 const LETTERS = ["m", "a", "r", "a"];
@@ -24,20 +24,23 @@ const TAGLINES = [
   "Built for defenders.",
   "Calibrated. Restrained. Useful.",
 ];
-
 const TAGLINE_INTERVAL = 4200;
 
 export default function Hero() {
-  // Track mouse position for parallax glow on the hero only.
   const ref = useRef<HTMLDivElement>(null);
   const [tag, setTag] = useState(0);
+  const [tick, setTick] = useState(0);
 
   useEffect(() => {
-    const id = window.setInterval(
+    const id1 = window.setInterval(
       () => setTag((t) => (t + 1) % TAGLINES.length),
       TAGLINE_INTERVAL,
     );
-    return () => window.clearInterval(id);
+    const id2 = window.setInterval(() => setTick((t) => t + 1), 2200);
+    return () => {
+      window.clearInterval(id1);
+      window.clearInterval(id2);
+    };
   }, []);
 
   useEffect(() => {
@@ -54,6 +57,9 @@ export default function Hero() {
     return () => el.removeEventListener("mousemove", onMove);
   }, []);
 
+  // Faux telemetry that drifts a little on the tick
+  const t = telemetry(tick);
+
   return (
     <section
       ref={ref}
@@ -61,13 +67,12 @@ export default function Hero() {
       className="relative isolate overflow-hidden border-b border-hairline"
       style={
         {
-          // CSS custom props consumed by the parallax glow below.
           ["--mx" as string]: "50%",
           ["--my" as string]: "30%",
         } as React.CSSProperties
       }
     >
-      {/* Parallax glow follows the cursor on desktop. */}
+      {/* Parallax glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 transition-[background] duration-300"
@@ -77,31 +82,35 @@ export default function Hero() {
         }}
       />
 
-      {/* Top-left and top-right crosshair-ish ticks */}
       <CornerTicks />
 
-      <div className="container-page relative flex min-h-[88svh] flex-col justify-between pb-12 pt-24 sm:pt-32">
-        {/* Eyebrow + status */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 fade-up" style={{ animationDelay: "120ms" }}>
-          <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase text-ink-2" style={{ letterSpacing: "0.22em" }}>
-            <span className="pulse-dot" />
-            Venode · cyber language model · 01
-          </span>
-          <span className="hidden h-px flex-1 bg-hairline sm:block" />
-          <span
-            className="hidden font-mono text-[11px] uppercase text-ink-3 sm:inline"
-            style={{ letterSpacing: "0.22em" }}
+      <div className="container-page relative grid min-h-[88svh] gap-12 pb-16 pt-24 sm:pt-28 md:grid-cols-12 md:gap-10">
+        {/* ── LEFT: status / wordmark / tagline / CTAs ────────────────── */}
+        <div className="md:col-span-7 md:self-center">
+          <div
+            className="flex flex-wrap items-center gap-x-5 gap-y-3 fade-up"
+            style={{ animationDelay: "120ms" }}
           >
-            research preview · v0.1
-          </span>
-        </div>
+            <span
+              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase text-ink-2"
+              style={{ letterSpacing: "0.22em" }}
+            >
+              <span className="pulse-dot" />
+              Venode · cyber language model · 01
+            </span>
+            <span className="hidden h-px flex-1 bg-hairline sm:block" />
+            <span
+              className="hidden font-mono text-[11px] uppercase text-ink-3 sm:inline"
+              style={{ letterSpacing: "0.22em" }}
+            >
+              v0.1 · research preview
+            </span>
+          </div>
 
-        {/* The wordmark — letter-by-letter reveal */}
-        <div className="my-auto py-12">
           <h1
             aria-label="mara"
-            className="display flex select-none items-baseline leading-[0.88]"
-            style={{ fontSize: "clamp(6rem, 22vw, 22rem)" }}
+            className="display mt-10 flex select-none items-baseline leading-[0.88]"
+            style={{ fontSize: "clamp(5.5rem, 17vw, 17rem)" }}
           >
             {LETTERS.map((ch, i) => (
               <span
@@ -117,9 +126,7 @@ export default function Hero() {
             ))}
             <span
               className="letter"
-              style={{
-                animationDelay: `${280 + LETTERS.length * 110}ms`,
-              }}
+              style={{ animationDelay: `${280 + LETTERS.length * 110}ms` }}
             >
               <span
                 className="ml-3 inline-block align-baseline"
@@ -136,23 +143,22 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Cycling tagline below the mark */}
           <div
-            className="relative mt-10 h-[44px] sm:h-[56px] fade-up"
+            className="relative mt-8 h-[40px] sm:h-[52px] fade-up"
             style={{ animationDelay: "950ms" }}
           >
-            {TAGLINES.map((t, i) => (
+            {TAGLINES.map((tag_, i) => (
               <p
-                key={t}
+                key={tag_}
                 aria-hidden={i !== tag}
-                className="absolute inset-x-0 top-0 font-display text-[clamp(1.5rem,3vw,2.25rem)] font-extrabold tracking-tight text-ink transition-all duration-700"
+                className="absolute inset-x-0 top-0 font-display text-[clamp(1.35rem,2.6vw,2rem)] font-extrabold tracking-tight text-ink transition-all duration-700"
                 style={{
                   letterSpacing: "-0.025em",
                   opacity: i === tag ? 1 : 0,
                   transform: i === tag ? "translateY(0)" : "translateY(10px)",
                 }}
               >
-                {t}
+                {tag_}
               </p>
             ))}
           </div>
@@ -178,47 +184,121 @@ export default function Hero() {
               See it think
             </Link>
           </div>
+
+          <div
+            className="mt-14 flex items-center gap-3 fade-up"
+            style={{ animationDelay: "1900ms" }}
+          >
+            <span
+              className="font-mono text-[10px] uppercase text-ink-3"
+              style={{ letterSpacing: "0.22em" }}
+            >
+              Scroll
+            </span>
+            <span className="h-px w-12 bg-hairline" />
+            <ArrowDown className="h-3 w-3 text-ink-3" />
+          </div>
         </div>
 
-        {/* Scroll hint */}
-        <div
-          className="mt-12 flex items-center gap-3 fade-up"
-          style={{ animationDelay: "1900ms" }}
-        >
-          <span
-            className="font-mono text-[10px] uppercase text-ink-3"
-            style={{ letterSpacing: "0.22em" }}
+        {/* ── RIGHT: intelligence panel with constellation + telemetry ─ */}
+        <div className="md:col-span-5 md:self-center">
+          <div
+            className="relative aspect-square w-full max-w-[480px] border border-hairline bg-[#0c0b0e] fade-up"
+            style={{
+              animationDelay: "600ms",
+              boxShadow:
+                "inset 0 1px 0 rgba(244,241,234,0.04), 0 30px 80px -40px rgba(200,51,75,0.18)",
+            }}
           >
-            Scroll
-          </span>
-          <span className="h-px w-12 bg-hairline" />
-          <ArrowDown className="h-3 w-3 text-ink-3" />
+            {/* panel header */}
+            <div className="absolute left-0 right-0 top-0 flex items-center justify-between border-b border-hairline px-4 py-2.5">
+              <span
+                className="font-mono text-[10px] uppercase text-ink-2"
+                style={{ letterSpacing: "0.22em" }}
+              >
+                live · cluster-08 · soc/3
+              </span>
+              <span className="pulse-dot" />
+            </div>
+
+            {/* corner ticks */}
+            <span aria-hidden className="pointer-events-none absolute -left-px -top-px h-3 w-3 border-l border-t border-accent" />
+            <span aria-hidden className="pointer-events-none absolute -right-px -top-px h-3 w-3 border-r border-t border-accent" />
+            <span aria-hidden className="pointer-events-none absolute -bottom-px -left-px h-3 w-3 border-b border-l border-accent" />
+            <span aria-hidden className="pointer-events-none absolute -bottom-px -right-px h-3 w-3 border-b border-r border-accent" />
+
+            {/* constellation */}
+            <div className="absolute inset-0 grid place-items-center px-8 pt-10">
+              <div className="aspect-square w-full max-w-[300px]">
+                <MaraConstellation />
+              </div>
+            </div>
+
+            {/* telemetry footer */}
+            <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 border-t border-hairline">
+              <Stat label="nodes" value={t.nodes} />
+              <Stat label="anomaly" value={t.anomaly} accent />
+              <Stat label="σ" value={t.sigma} divider={false} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+function Stat({
+  label,
+  value,
+  accent,
+  divider = true,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+  divider?: boolean;
+}) {
+  return (
+    <div
+      className={`px-3 py-3 ${divider ? "border-r border-hairline" : ""}`}
+    >
+      <p
+        className="font-mono text-[9.5px] uppercase text-ink-3"
+        style={{ letterSpacing: "0.22em" }}
+      >
+        {label}
+      </p>
+      <p
+        className={`mt-1 font-mono text-[12px] ${
+          accent ? "text-accent" : "text-ink"
+        }`}
+        style={{ letterSpacing: "0.08em" }}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
 function CornerTicks() {
   return (
     <>
-      {/* top-left */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute left-4 top-4 h-3 w-3 border-l border-t border-ink-3 sm:left-8 sm:top-8"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-4 top-4 h-3 w-3 border-r border-t border-ink-3 sm:right-8 sm:top-8"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-4 left-4 h-3 w-3 border-b border-l border-ink-3 sm:bottom-8 sm:left-8"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-4 right-4 h-3 w-3 border-b border-r border-ink-3 sm:bottom-8 sm:right-8"
-      />
+      <span aria-hidden className="pointer-events-none absolute left-4 top-4 h-3 w-3 border-l border-t border-ink-3 sm:left-8 sm:top-8" />
+      <span aria-hidden className="pointer-events-none absolute right-4 top-4 h-3 w-3 border-r border-t border-ink-3 sm:right-8 sm:top-8" />
+      <span aria-hidden className="pointer-events-none absolute bottom-4 left-4 h-3 w-3 border-b border-l border-ink-3 sm:bottom-8 sm:left-8" />
+      <span aria-hidden className="pointer-events-none absolute bottom-4 right-4 h-3 w-3 border-b border-r border-ink-3 sm:bottom-8 sm:right-8" />
     </>
   );
+}
+
+/* Slowly drifting fake telemetry — same values on first render across
+   server/client, so no hydration mismatch. */
+function telemetry(tick: number) {
+  const sigma = (2.0 + (tick * 0.07) % 0.9).toFixed(2);
+  const anomaly = tick % 4 === 0 ? "isolated" : "tracking";
+  return {
+    nodes: "09",
+    anomaly,
+    sigma: `+${sigma}`,
+  };
 }

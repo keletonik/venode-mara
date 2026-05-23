@@ -28,7 +28,7 @@ export default function Capabilities() {
     <section id="capabilities" className="border-b border-hairline">
       <div className="container-page py-28 sm:py-36">
         <Reveal>
-          <span className="eyebrow">02 · Capabilities</span>
+          <span className="eyebrow">03 · Capabilities</span>
         </Reveal>
         <Reveal delay={120}>
           <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05]">

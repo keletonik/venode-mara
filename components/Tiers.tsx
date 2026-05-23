@@ -52,7 +52,7 @@ export default function Tiers() {
     <section id="pricing" className="border-b border-hairline">
       <div className="container-page py-28 sm:py-36">
         <Reveal>
-          <span className="eyebrow">03 · Pricing</span>
+          <span className="eyebrow">04 · Pricing</span>
         </Reveal>
         <Reveal delay={120}>
           <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05]">

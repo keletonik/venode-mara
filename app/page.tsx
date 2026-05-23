@@ -1,47 +1,53 @@
 /* ─────────────────────────────────────────────────────────────────────
  * mara · single-page product site for venode's cybersecurity model.
  *
- * MASTER PROMPT (the spec this page is built against)
+ * MASTER PROMPT (this iteration)
  *
- *   GOAL: A single-page premium product site for Mara, venode's
- *   cybersecurity threat-intelligence language model. Anthropic-grade
- *   restraint, venode-grade brand discipline, cinematic dark execution.
+ *   ROLE: simultaneously a senior brand designer (Linear/Apple), a
+ *   motion designer (Anthropic/Stripe), a Vignelli-restraint
+ *   typographer, a senior Next.js engineer, and a cybersecurity
+ *   product marketer with real SOC experience.
  *
- *   PRINCIPLES
- *   - One page. No nav, no sub-routes (legal pages aside).
- *   - Dark / mysterious. No italics, no serif, no cursive — ever.
- *   - Motion as substance, not decoration. Every animation must read.
- *   - Static-render where possible, CSS-driven where possible. JS only
- *     for: typewriter, intersection-triggered reveal, marquee pause-on-
- *     hover, cycling tagline, parallax glow.
- *   - Zero dependencies beyond next + react + tailwind + next/font.
+ *   TASTE BAR: linear.app, anthropic.com, mistral.ai, stripe.com.
+ *   Earned restraint, premium motion, considered density. Not
+ *   generic dark-mode template.
  *
- *   SECTIONS (top → bottom, single scroll)
- *   01  HERO        — letter-rise reveal of "mara", cycling tagline,
- *                     parallax glow, CTAs, marquee band.
- *   02  POSITION    — Anthropic dual-use framing for defenders.
- *   03  DEMO        — auto-typing chat transcript triggered on scroll.
- *   04  CAPABILITY  — 4 capability blocks with hover micro-interactions.
- *   05  TIERS       — One Mara: Free / Pro / Custom.
- *   06  SAFETY      — Mara will not / Mara will help with.
- *   07  CLOSING     — Big CTA + venode wordmark for parent context.
+ *   NON-NEGOTIABLES
+ *   - Dark. Cream. Oxblood. No italics. No serif. No rounded corners.
+ *   - Static-render. Zero deps beyond next/react/tailwind/next-font.
+ *   - Respects reduced-motion. WCAG-acceptable contrast.
+ *   - Every line of copy passes a senior analyst's smell test.
  *
- *   BRAND
- *   - mara wordmark: m + a (accent) + r + a (accent) + blinking cursor.
- *   - Palette: bg #08070a · ink #F4F1EA · accent #C8334B (oxblood-lift).
- *   - Type: Inter (400–900), Geist Mono for labels & code.
+ *   THIS PASS
+ *   1. A real Mara mark — a constellation glyph (three nodes, one
+ *      accent, thin connecting strokes). Used at favicon, header,
+ *      hero panel, and as the recurring motif. Lines draw in.
+ *   2. Hero v2 — split composition. Wordmark on the left, an
+ *      "intelligence panel" containing the live constellation +
+ *      telemetry readouts on the right. Parallax glow tracks cursor.
+ *   3. New section: MODEL CARD — concrete spec sheet in mono with
+ *      version, context, training corpus, eval scores, refusal
+ *      rates, build date.
+ *   4. Subtle CRT scanline overlay over the whole page for depth.
+ *   5. Sharper section rhythm, tighter copy throughout.
  * ─────────────────────────────────────────────────────────────────── */
 
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight, MaraWordmark, VenodeMark } from "@/components/Icons";
+import {
+  ArrowRight,
+  MaraConstellation,
+  MaraWordmark,
+  VenodeMark,
+} from "@/components/Icons";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import DemoTranscript from "@/components/DemoTranscript";
 import Capabilities from "@/components/Capabilities";
 import Tiers from "@/components/Tiers";
 import Safety from "@/components/Safety";
+import ModelCard from "@/components/ModelCard";
 import Reveal from "@/components/Reveal";
 
 export const metadata = pageMetadata({
@@ -72,15 +78,15 @@ const marqueeItems = [
 export default function Page() {
   return (
     <>
-      {/* 01 — Hero */}
+      {/* ─── HERO ───────────────────────────────────────────────────── */}
       <Hero />
 
-      {/* Marquee band, sits flush under the hero */}
+      {/* ─── MARQUEE BAND ───────────────────────────────────────────── */}
       <div className="border-b border-hairline bg-[#0a090c] py-5">
         <Marquee items={marqueeItems} />
       </div>
 
-      {/* 02 — Position */}
+      {/* ─── 01 · POSITION ──────────────────────────────────────────── */}
       <section className="border-b border-hairline">
         <div className="container-page py-28 sm:py-36">
           <div className="grid gap-14 md:grid-cols-12 md:gap-12">
@@ -104,10 +110,10 @@ export default function Page() {
               </Reveal>
               <Reveal delay={120}>
                 <p className="mt-5 max-w-xl text-[17px] leading-[1.65] text-ink-2">
-                  Mara is venode&apos;s contribution. A model that reads like
-                  a senior analyst, refuses operational offensive work,
-                  knows what it does not know, and produces the artefact at
-                  the end of the shift.
+                  Mara is venode&apos;s contribution. A model that reads
+                  like a senior analyst, refuses operational offensive
+                  work, knows what it does not know, and produces the
+                  artefact at the end of the shift.
                 </p>
               </Reveal>
               <Reveal delay={240}>
@@ -125,7 +131,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 03 — Demo */}
+      {/* ─── 02 · DEMO ──────────────────────────────────────────────── */}
       <section id="demo" className="border-b border-hairline">
         <div className="container-page py-28 sm:py-36">
           <Reveal>
@@ -138,8 +144,8 @@ export default function Page() {
           </Reveal>
           <Reveal delay={200}>
             <p className="mt-6 max-w-xl text-[16.5px] leading-[1.6] text-ink-2">
-              An illustrative SOC session. The real product behaves the same
-              way; this is condensed for reading.
+              An illustrative SOC session. The real product behaves the
+              same way; this is condensed for reading.
             </p>
           </Reveal>
 
@@ -149,65 +155,77 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 04 — Capabilities */}
+      {/* ─── 03 · CAPABILITIES ──────────────────────────────────────── */}
       <Capabilities />
 
-      {/* 05 — Tiers */}
+      {/* ─── 04 · TIERS ─────────────────────────────────────────────── */}
       <Tiers />
 
-      {/* 06 — Safety */}
+      {/* ─── 05 · MODEL CARD ────────────────────────────────────────── */}
+      <ModelCard />
+
+      {/* ─── 06 · SAFETY ────────────────────────────────────────────── */}
       <Safety />
 
-      {/* 07 — Closing */}
-      <section className="border-b border-hairline">
-        <div className="container-page relative py-36 sm:py-48">
-          {/* Sub backdrop */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(40% 60% at 50% 50%, rgba(200,51,75,0.08), transparent 70%)",
-            }}
-          />
-          <div className="relative">
-            <Reveal>
-              <div className="flex justify-center">
-                <MaraWordmark className="text-[clamp(5rem,16vw,16rem)]" />
-              </div>
-            </Reveal>
-            <Reveal delay={200}>
-              <p className="mx-auto mt-10 max-w-xl text-center text-[18px] leading-[1.55] text-ink-2">
-                Free for the curious. Twenty dollars a month for the work.
-                Custom for the teams who need their own.
-              </p>
-            </Reveal>
-            <Reveal delay={320}>
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
-                <a href={siteConfig.appUrl} className="btn-primary">
-                  Open Mara <ArrowRight className="h-3 w-3" />
-                </a>
-                <a
-                  href={`mailto:${siteConfig.contactEmail}`}
-                  className="btn-ghost"
-                >
-                  Talk to us
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal delay={440}>
-              <div className="mt-20 flex items-center justify-center gap-3">
-                <VenodeMark className="text-[15px]" />
-                <span
-                  className="font-mono text-[11px] uppercase text-ink-3"
-                  style={{ letterSpacing: "0.22em" }}
-                >
-                  · A research lab building tools for defenders
-                </span>
-              </div>
-            </Reveal>
+      {/* ─── 07 · CLOSING ───────────────────────────────────────────── */}
+      <section className="relative border-b border-hairline">
+        {/* Constellation as background glyph behind the wordmark */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 grid place-items-center opacity-40"
+        >
+          <div className="aspect-square w-[min(70vw,720px)]">
+            <MaraConstellation />
           </div>
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(40% 60% at 50% 50%, rgba(200,51,75,0.10), transparent 70%)",
+          }}
+        />
+        <div className="container-page relative py-36 sm:py-48">
+          <Reveal>
+            <div className="flex justify-center">
+              <MaraWordmark
+                showGlyph={false}
+                className="text-[clamp(5rem,16vw,16rem)]"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mx-auto mt-10 max-w-xl text-center text-[18px] leading-[1.55] text-ink-2">
+              Free for the curious. Twenty dollars a month for the work.
+              Custom for the teams who need their own.
+            </p>
+          </Reveal>
+          <Reveal delay={320}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+              <a href={siteConfig.appUrl} className="btn-primary">
+                Open Mara <ArrowRight className="h-3 w-3" />
+              </a>
+              <a
+                href={`mailto:${siteConfig.contactEmail}`}
+                className="btn-ghost"
+              >
+                Talk to us
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={440}>
+            <div className="mt-20 flex items-center justify-center gap-3">
+              <VenodeMark className="text-[15px]" />
+              <span
+                className="font-mono text-[11px] uppercase text-ink-3"
+                style={{ letterSpacing: "0.22em" }}
+              >
+                · a research lab building tools for defenders
+              </span>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>
