@@ -7,9 +7,9 @@ const columns = [
   {
     title: "Products",
     links: [
-      { href: "/hugo", label: "Hugo" },
-      { href: siteConfig.appUrl, label: "Hugo Cloud" },
-      { href: "/hugo#pricing", label: "Pricing" },
+      { href: "/mara", label: "Mara" },
+      { href: siteConfig.appUrl, label: "Mara Cloud" },
+      { href: "/mara#pricing", label: "Pricing" },
     ],
   },
   {

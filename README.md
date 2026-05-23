@@ -1,14 +1,18 @@
-# Hugo — a venode product
+# Mara — a venode product
 
-Marketing site for **Hugo**, a cybersecurity intelligence language model
-from **venode**. Built as a sibling property to `venode.ai`, sharing the
-parent lab's design system: warm-cream paper, oxblood accent, Inter
-Display + Lora + Geist Mono typography, the `venode_` wordmark and the
-`vo.` footer monogram.
+Marketing site for **Mara**, venode's cyber defence and threat
+intelligence language model. Built as a sibling property to
+`venode.ai`, sharing the parent lab's design system: warm-cream paper,
+oxblood accent, Inter Display + Lora + Geist Mono typography, the
+`venode_` wordmark and the `vo.` footer monogram.
 
-Hugo's positioning draws on the established framework for cyber-defense
-AI (defenders, dual-use honesty, calibrated confidence, refusal-first
-safety) and applies it to a venode-grown model.
+Mara is the venode model for the work of cyber defence: triage,
+malware analysis, threat intelligence, incident response. This site
+is Mara's home.
+
+Mara is positioned around the values venode applies to all of its
+cyber work: defenders first, dual-use honesty, calibrated confidence,
+refusal-first safety.
 
 ## Identity
 
@@ -21,7 +25,7 @@ Colour tokens are mirrored from `venode.ai`:
 | `--ink` (text) | `#141412` |
 | `--ink-2` (subdued) | `#5A5854` |
 | `--accent` (oxblood) | `#8E2436` |
-| `--oxblood` (Hugo wordmark) | `#5C1A24` |
+| `--oxblood` (Mara wordmark) | `#5C1A24` |
 | `--cream-warm` (footer text) | `#F4F1EA` |
 
 Typography:
@@ -34,12 +38,12 @@ Marks:
 
 - `<VenodeWordmark/>` — `venode_` with the o in accent + blinking cursor
 - `<VoMark/>` — `vo.` monogram for the black footer slab
-- `<HugoWordmark/>` — geometric stroke wordmark, the o in deep oxblood
+- `<MaraWordmark/>` — Mara product wordmark, the o in deep oxblood
 
 ## Pages
 
-- `/` — Hero, `P-01` Hugo feature with the wordmark + `One Hugo. Tiered by plan.`, `Venode Labs.` with research areas, `L-01` custom builds warm band, `Built in the open` final CTA.
-- `/hugo` — Product detail. Capabilities, three illustrative transcripts, Pro tier + connectors, custom-build CTA.
+- `/` — Hero, `P-01` Mara feature with the wordmark + `One Mara. Tiered by plan.`, `Venode Labs.` with research areas, `L-01` custom builds warm band, `Built in the open` final CTA.
+- `/mara` — Product detail. Capabilities, three illustrative transcripts, Pro tier + connectors, custom-build CTA.
 - `/research` + `/research/[slug]` — Research notes (R-01 … R-04).
 - `/safety` — Dual-use boundaries, refusal behaviour, responsible disclosure.
 - `/about` — Venode lab statement.
@@ -50,7 +54,7 @@ Marks:
 
 Everything brand- and product-level lives in `site.config.ts`. Notes
 live in `lib/research.ts`. To add a note, push a new entry to the
-`notes` array — it appears automatically in the research index,
+`notes` array. It appears automatically in the research index,
 sitemap, and footer "News" column.
 
 ## Deploy

@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight, HugoWordmark } from "@/components/Icons";
+import { ArrowRight, MaraWordmark } from "@/components/Icons";
 
 export const metadata = pageMetadata({
   title: siteConfig.displayName,
   description: siteConfig.description,
   path: "/",
   keywords: [
-    "venode hugo",
-    "cybersecurity language model",
+    "venode mara",
+    "cyber defence language model",
     "ai for cyber defenders",
     "threat intelligence llm",
   ],
@@ -19,7 +19,7 @@ const researchAreas = [
   {
     n: "01",
     title: "Post-training and variant fine-tuning.",
-    text: "Hugo is post-trained on threat reports, IR write-ups, malware analyses and detection logic — and evaluated on what defenders actually do, not on benchmark trivia.",
+    text: "Mara is post-trained on threat reports, IR write-ups, malware analyses and detection logic, and evaluated on what defenders actually do, not on benchmark trivia.",
   },
   {
     n: "02",
@@ -41,11 +41,11 @@ const researchAreas = [
 const customBuilds = [
   {
     title: "Designed and trained to spec.",
-    text: "On your detection logic, your historical IR, your runbooks, your sources. Hugo learns how your team thinks rather than how the public internet does.",
+    text: "On your detection logic, your historical IR, your runbooks, your sources. Mara learns how your team thinks rather than how the public internet does.",
   },
   {
     title: "On-site, hosted, or both.",
-    text: "Run it on your hardware behind your firewall, or on ours, or split the difference. The choice stays yours — we sign whatever you need us to sign.",
+    text: "Run it on your hardware behind your firewall, or on ours, or split the difference. The choice stays yours; we sign whatever you need us to sign.",
   },
   {
     title: "Your data does not train anything else.",
@@ -81,15 +81,15 @@ export default function HomePage() {
 
           <div className="md:col-span-5 md:mt-2">
             <p className="lede max-w-md text-[18px] leading-[1.55] text-ink-2">
-              Venode is an AI research lab. Hugo is our language model for
-              cyber defense — built to triage at speed, reason under
+              Venode is an AI research lab. Mara is our language model for
+              cyber defence, built to triage at speed, reason under
               uncertainty, and stay out of the attacker&apos;s way.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Link href="/hugo" className="btn-primary">
-                See Hugo <ArrowRight className="h-3 w-3" />
+              <Link href="/mara" className="btn-primary">
+                See Mara <ArrowRight className="h-3 w-3" />
               </Link>
-              <Link href="#hugo" className="btn-ghost">
+              <Link href="#mara" className="btn-ghost">
                 See products
               </Link>
             </div>
@@ -97,34 +97,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* P-01 · HUGO FEATURE */}
+      {/* P-01 · MARA FEATURE */}
       <section
-        id="hugo"
-        aria-labelledby="hugo-h"
+        id="mara"
+        aria-labelledby="mara-h"
         className="border-b border-hairline"
       >
         <div className="container-page py-28 sm:py-36">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">P-01 · Cyber language model</span>
+            <span className="eyebrow">P-01 · Cyber defence model</span>
 
             <div className="mt-8 flex justify-center">
-              <HugoWordmark className="h-20 w-auto sm:h-24 text-ink" />
+              <MaraWordmark className="h-20 w-auto sm:h-24 text-ink" />
             </div>
 
             <p className="mt-10 font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-tight tracking-display text-ink">
-              One Hugo.{" "}
+              One Mara.{" "}
               <span className="font-serif italic font-normal text-ink-2">
                 Tiered by plan.
               </span>
             </p>
 
             <p className="mx-auto mt-7 max-w-xl text-[17px] leading-[1.65] text-ink-2">
-              Hugo is venode&apos;s model for the work of cyber defense —
+              Mara is venode&apos;s model for the work of cyber defence:
               triage, malware analysis, threat intelligence, incident
-              response. One Hugo, served from the cloud and exposed through
+              response. One Mara, served from the cloud and exposed through
               one API. The free tier runs the fast model; paid plans route to
-              the thinking model with the full tool surface — sandbox, SIEM,
-              sources — wired in.
+              the thinking model with the full tool surface, sandbox, SIEM,
+              sources, wired in.
             </p>
 
             <div className="mx-auto mt-14 grid max-w-2xl gap-px bg-hairline sm:grid-cols-2">
@@ -132,8 +132,8 @@ export default function HomePage() {
               <Tier name={siteConfig.tiers.pro.name} text={siteConfig.tiers.pro.blurb} />
             </div>
 
-            <Link href="/hugo" className="btn-primary mt-14">
-              Open Hugo <ArrowRight className="h-3 w-3" />
+            <Link href="/mara" className="btn-primary mt-14">
+              Open Mara <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
         </div>
@@ -150,7 +150,7 @@ export default function HomePage() {
               Venode Labs.
             </h2>
             <p className="mt-6 max-w-xl text-[18px] leading-[1.55] text-ink-2">
-              Two halves of the lab: the research upstream of Hugo, and the
+              Two halves of the lab: the research upstream of Mara, and the
               models we build to spec for teams who need their own.
             </p>
           </header>
@@ -251,7 +251,7 @@ export default function HomePage() {
           </h2>
           <p className="mt-7 max-w-xl text-[18px] leading-[1.55] text-ink-2">
             The research is open. Read it to see what we are building, what we
-            are sketching, and what we have decided Hugo will never do.
+            are sketching, and what we have decided Mara will never do.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
             <Link href="/research" className="btn-primary">

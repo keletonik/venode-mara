@@ -5,9 +5,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Research",
   description:
-    "Research notes from venode on Hugo, threat intelligence, model evaluation and what we will and will not ship.",
+    "Research notes from venode on Mara, threat intelligence, model evaluation and what we will and will not ship.",
   path: "/research",
-  keywords: ["cybersecurity ai research", "hugo notes", "venode labs"],
+  keywords: ["cyber defence ai research", "mara notes", "venode labs"],
 });
 
 export default function ResearchIndexPage() {
@@ -20,7 +20,7 @@ export default function ResearchIndexPage() {
         From the lab. <em>Written carefully.</em>
       </h1>
       <p className="mt-8 max-w-xl text-[18px] leading-[1.55] text-ink-2">
-        Short essays on how Hugo works, how we measure it, and the choices we
+        Short essays on how Mara works, how we measure it, and the choices we
         make about what to publish and what to keep closed.
       </p>
 

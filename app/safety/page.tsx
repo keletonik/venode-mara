@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Safety",
   description:
-    "How Hugo is built, what it refuses, how we evaluate it, and how to disclose problems responsibly.",
+    "How Mara is built, what it refuses, how we evaluate it, and how to disclose problems responsibly.",
   path: "/safety",
 });
 
@@ -17,7 +17,7 @@ export default function SafetyPage() {
         Safety is the work, <em>not the disclaimer.</em>
       </h1>
       <p className="mt-8 max-w-xl text-[18px] leading-[1.55] text-ink-2">
-        Hugo is a dual-use tool by definition. Almost everything that helps a
+        Mara is a dual-use tool by definition. Almost everything that helps a
         defender investigate an attack would help an attacker plan one. We
         take that seriously, draw the lines explicitly, and write them down.
       </p>
@@ -25,7 +25,7 @@ export default function SafetyPage() {
       <div className="mt-16 max-w-prose space-y-14">
         <section>
           <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
-            What Hugo will not do.
+            What Mara will not do.
           </h2>
           <ul className="mt-5 space-y-3">
             {[
@@ -53,7 +53,7 @@ export default function SafetyPage() {
 
         <section>
           <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
-            What Hugo will help with.
+            What Mara will help with.
           </h2>
           <ul className="mt-5 space-y-3">
             {[
@@ -78,7 +78,7 @@ export default function SafetyPage() {
             How we evaluate.
           </h2>
           <p className="mt-5 text-[17px] leading-[1.75] text-ink">
-            We test Hugo on the work, not on trivia. Our evaluation panel
+            We test Mara on the work, not on trivia. Our evaluation panel
             includes practising SOC analysts, IR consultants, threat-intel
             leads and an external red team. They run live cases, score
             calibration and refusals, and challenge the model in the
@@ -92,7 +92,7 @@ export default function SafetyPage() {
             Responsible disclosure.
           </h2>
           <p className="mt-5 text-[17px] leading-[1.75] text-ink">
-            If you find a way to make Hugo do something it should not, or a
+            If you find a way to make Mara do something it should not, or a
             failure of judgement that matters, please tell us before telling
             anyone else. We respond inside one business day and credit
             researchers who would like to be credited.
@@ -116,7 +116,7 @@ export default function SafetyPage() {
           <p className="mt-5 text-[17px] leading-[1.75] text-ink">
             Where the line between defensive and offensive sits is a judgement
             call, and not always ours alone. We write up specific cases in our
-            research notes — including the ones where we changed our minds.
+            research notes, including the ones where we changed our minds.
             Read{" "}
             <Link
               href="/research/working-in-the-open"

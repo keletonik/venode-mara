@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "About venode — a small AI research lab building Hugo, a cybersecurity intelligence model.",
+    "About venode, a small AI research lab building Mara, a cyber defence and threat intelligence model.",
   path: "/about",
 });
 
@@ -20,17 +20,17 @@ export default function AboutPage() {
 
       <div className="mt-14 max-w-prose space-y-12">
         <p className="text-[17px] leading-[1.75] text-ink">
-          We work on cybersecurity intelligence — the slow, careful analysis
-          that turns a queue of alerts into a story, a sample into a
+          We work on cyber defence and threat intelligence: the slow, careful
+          analysis that turns a queue of alerts into a story, a sample into a
           hypothesis, an incident into something a team can actually learn
           from.
         </p>
 
         <p className="text-[17px] leading-[1.75] text-ink">
-          Hugo is our first public product. It is a language model trained
-          for that work, and it is shipped as a research preview because that
-          is what it is — a thing we are still learning to build well, in the
-          open, with the people who do this work for a living.
+          Mara is our public model for that work. It is a language model
+          trained for cyber defence, and it is shipped as a research preview
+          because that is what it is, a thing we are still learning to build
+          well, in the open, with the people who do this work for a living.
         </p>
 
         <section>
@@ -60,8 +60,8 @@ export default function AboutPage() {
             How to reach us.
           </h2>
           <p className="mt-5 text-[17px] leading-[1.75] text-ink">
-            For Hugo, custom builds, partnerships, journalism, or anything
-            else —{" "}
+            For Mara, custom builds, partnerships, journalism, or anything
+            else,{" "}
             <a
               href={`mailto:${siteConfig.contactEmail}`}
               className="text-ink underline-offset-4 hover:underline"

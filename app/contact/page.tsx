@@ -5,15 +5,15 @@ import { ArrowRight } from "@/components/Icons";
 export const metadata = pageMetadata({
   title: "Contact",
   description:
-    "Talk to venode about Hugo, custom builds, partnerships, safety, or anything else.",
+    "Talk to venode about Mara, custom builds, partnerships, safety, or anything else.",
   path: "/contact",
 });
 
 const channels = [
   {
-    label: "Hugo, custom builds, partnerships",
+    label: "Mara, custom builds, partnerships",
     address: siteConfig.contactEmail,
-    subject: "Hugo",
+    subject: "Mara",
   },
   {
     label: "Safety reports & responsible disclosure",

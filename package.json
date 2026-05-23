@@ -1,8 +1,8 @@
 {
-  "name": "threatpeek",
+  "name": "mara",
   "version": "1.0.0",
   "private": true,
-  "description": "Free cybersecurity tools and threat intelligence website",
+  "description": "Mara — venode's cyber defence and threat intelligence model. Marketing site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

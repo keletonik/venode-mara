@@ -7,7 +7,7 @@ import { VenodeWordmark } from "./Icons";
 
 const nav = [
   { href: "/", label: "Home" },
-  { href: "/hugo", label: "Hugo" },
+  { href: "/mara", label: "Mara" },
   { href: "/lab", label: "Lab" },
   { href: "/journal", label: "Journal" },
   { href: "/research", label: "Research" },

@@ -3,7 +3,7 @@
  *
  *  - <VenodeWordmark/>  : "venode_" with the o in accent + blinking cursor.
  *  - <VoMark/>          : "vo." monogram used in the footer slab.
- *  - <HugoWordmark/>    : geometric stroke wordmark, the o in deep oxblood.
+ *  - <MaraWordmark/>    : Mara product wordmark, the o in deep oxblood.
  *  - <ArrowRight/>      : the only navigation glyph the site uses.
  */
 
@@ -36,10 +36,10 @@ export function VoMark({
 }
 
 /**
- * Geometric Hugo wordmark — direct port of the marque on venode.ai. The
- * 'o' is painted in deep oxblood, matching the published brand colour.
+ * Mara wordmark. The 'o' is painted in deep oxblood.
+ * Path data is a placeholder; the real Mara path is supplied separately.
  */
-export function HugoWordmark({
+export function MaraWordmark({
   className = "h-16 w-auto text-ink",
   accent = "#5C1A24",
 }: {
@@ -52,7 +52,7 @@ export function HugoWordmark({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Hugo"
+      aria-label="Mara"
       className={className}
     >
       <g strokeWidth="13" strokeLinecap="butt">

@@ -1,6 +1,6 @@
 /**
  * Research notes from Venode Labs. Each note is a short essay published as
- * part of the Hugo programme. Stored here as structured data so the site
+ * part of the Mara programme. Stored here as structured data so the site
  * needs no CMS or markdown pipeline.
  */
 
@@ -32,36 +32,36 @@ export const notes: Note[] = [
     num: "01",
     title: "Reasoning about an unknown sample.",
     description:
-      "How Hugo approaches a piece of malware it has never seen before — what to look at, what to suspend judgement on, and where to begin.",
+      "How Mara approaches a piece of malware it has never seen before: what to look at, what to suspend judgement on, and where to begin.",
     date: "2026-04-08",
     readingMinutes: 8,
     keywords: [
       "malware triage llm",
       "ai threat intelligence",
-      "hugo malware analysis",
+      "mara malware analysis",
     ],
     body: [
       {
         type: "p",
-        text: "Most malware is not novel. Most malware is a slight variation on something seen before, dressed up just enough to evade a signature and just little enough not to surprise anyone who has been doing this for a while. The interesting question is not how to catch the easy cases — those are caught — but how to think calmly about a sample when you genuinely do not yet know what it is.",
+        text: "Most malware is not novel. Most malware is a slight variation on something seen before, dressed up just enough to evade a signature and just little enough not to surprise anyone who has been doing this for a while. The interesting question is not how to catch the easy cases; those are caught. It is how to think calmly about a sample when you genuinely do not yet know what it is.",
       },
       {
         type: "p",
-        text: "Hugo&apos;s approach is unglamorous on purpose. It begins where a careful analyst begins: with the facts that survive any interpretation.",
+        text: "Mara&apos;s approach is unglamorous on purpose. It begins where a careful analyst begins: with the facts that survive any interpretation.",
       },
       { type: "h2", text: "Begin with what is true regardless of intent." },
       {
         type: "list",
         items: [
-          "File type and structural integrity — what the bytes claim to be, and whether the structure agrees.",
-          "Imports, sections, certificate, compile timestamp — observable surface, not yet meaning.",
-          "Strings and embedded resources — promising leads, always suspect.",
+          "File type and structural integrity. What the bytes claim to be, and whether the structure agrees.",
+          "Imports, sections, certificate, compile timestamp. Observable surface, not yet meaning.",
+          "Strings and embedded resources. Promising leads, always suspect.",
           "Network indicators, where present, and only after deciding whether to ever resolve them.",
         ],
       },
       {
         type: "p",
-        text: "Hugo lists these out. It does not yet say what the sample is. It says what is known. The model has been trained to resist the most common analyst mistake — narrating a hypothesis as if it were a finding — by simply not having a finding yet.",
+        text: "Mara lists these out. It does not yet say what the sample is. It says what is known. The model has been trained to resist the most common analyst mistake, narrating a hypothesis as if it were a finding, by simply not having a finding yet.",
       },
       {
         type: "h2",
@@ -69,7 +69,7 @@ export const notes: Note[] = [
       },
       {
         type: "p",
-        text: "From the surface, Hugo proposes a small set of plausible explanations and ranks them, each with the evidence for and the evidence against. Three or four is usually right. One is overconfident; ten is performative. The discipline is to keep more than one alive long enough for the analysis to actually discriminate between them.",
+        text: "From the surface, Mara proposes a small set of plausible explanations and ranks them, each with the evidence for and the evidence against. Three or four is usually right. One is overconfident; ten is performative. The discipline is to keep more than one alive long enough for the analysis to actually discriminate between them.",
       },
       {
         type: "pullquote",
@@ -78,14 +78,14 @@ export const notes: Note[] = [
       { type: "h2", text: "Test against behaviour, not against confidence." },
       {
         type: "p",
-        text: "Static analysis ends, eventually, where the sample wants you to think it ends. From there the question is what the sample actually does. Hugo connects to a sandbox of your choosing, reads the trace, and asks whether what it sees is consistent with each hypothesis it still holds open — including the boring ones it would rather rule out. A theory that survives boredom is usually right.",
+        text: "Static analysis ends, eventually, where the sample wants you to think it ends. From there the question is what the sample actually does. Mara connects to a sandbox of your choosing, reads the trace, and asks whether what it sees is consistent with each hypothesis it still holds open, including the boring ones it would rather rule out. A theory that survives boredom is usually right.",
       },
       {
         type: "code",
         lang: "transcript",
         text: `you   Look at the dropped payload from yesterday's IR — is it the same family?
 
-hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — one
+mara  Three things first. Same packer, yes. Same loader stub layout, mostly — one
       new resolver. Same C2 protocol header. So: same author or shared toolkit.
       Not enough to call it the same campaign.
 
@@ -98,7 +98,7 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
       },
       {
         type: "p",
-        text: "The transcript above is illustrative, not a quote. But the shape of the conversation is the shape Hugo is trained to produce: facts first, hypotheses second, discriminators third, and a question back to the human when the next step is a decision that should not be made by a model.",
+        text: "The transcript above is illustrative, not a quote. But the shape of the conversation is the shape Mara is trained to produce: facts first, hypotheses second, discriminators third, and a question back to the human when the next step is a decision that should not be made by a model.",
       },
     ],
   },
@@ -107,7 +107,7 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
     num: "02",
     title: "Attribution under uncertainty.",
     description:
-      "Why Hugo hedges on threat-actor names, and why we believe a model that hedges well is more useful than one that names confidently.",
+      "Why Mara hedges on threat-actor names, and why we believe a model that hedges well is more useful than one that names confidently.",
     date: "2026-03-22",
     readingMinutes: 6,
     keywords: [
@@ -126,13 +126,13 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
       },
       {
         type: "p",
-        text: "Hugo is trained, deliberately, to use the same calibrated language an experienced analyst uses: assess with high confidence, assess with moderate confidence, evidence is consistent with, cannot rule out. The point is not to be timid. The point is to be exactly as certain as the evidence allows, and no more.",
+        text: "Mara is trained, deliberately, to use the same calibrated language an experienced analyst uses: assess with high confidence, assess with moderate confidence, evidence is consistent with, cannot rule out. The point is not to be timid. The point is to be exactly as certain as the evidence allows, and no more.",
       },
-      { type: "h2", text: "What we ask Hugo to do." },
+      { type: "h2", text: "What we ask Mara to do." },
       {
         type: "list",
         items: [
-          "Surface the specific overlaps that support a name — and the ones that don&apos;t.",
+          "Surface the specific overlaps that support a name, and the ones that don&apos;t.",
           "Distinguish observed behaviour from inferred intent.",
           "Treat shared infrastructure as a hypothesis, never a conclusion.",
           "Name an actor only when the evidence would survive a sceptical second reader.",
@@ -149,7 +149,7 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
     num: "03",
     title: "A note on evals.",
     description:
-      "How we measure whether Hugo is actually useful for the work analysts do — not the work benchmarks pretend they do.",
+      "How we measure whether Mara is actually useful for the work analysts do, not the work benchmarks pretend they do.",
     date: "2026-03-10",
     readingMinutes: 7,
     keywords: ["llm evaluation", "security model evals", "cti benchmarks"],
@@ -166,10 +166,10 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
       {
         type: "list",
         items: [
-          "Triage realism — does Hugo&apos;s ranking of a queue match how a senior analyst would have ranked it?",
-          "Discriminating questions — when uncertain, does Hugo ask the question that actually separates hypotheses?",
-          "Calibration — when Hugo says &lsquo;high confidence&rsquo;, is it right at the rate we tell users to expect?",
-          "Useful refusals — does Hugo decline to fabricate, and decline gracefully?",
+          "Triage realism. Does Mara&apos;s ranking of a queue match how a senior analyst would have ranked it?",
+          "Discriminating questions. When uncertain, does Mara ask the question that actually separates hypotheses?",
+          "Calibration. When Mara says &lsquo;high confidence&rsquo;, is it right at the rate we tell users to expect?",
+          "Useful refusals. Does Mara decline to fabricate, and decline gracefully?",
         ],
       },
       {
@@ -187,14 +187,14 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
     num: "04",
     title: "Working in the open.",
     description:
-      "Why our research notes, our model cards and our evals are public — and which parts of Hugo we keep closed, and why.",
+      "Why our research notes, our model cards and our evals are public, and which parts of Mara we keep closed, and why.",
     date: "2026-02-27",
     readingMinutes: 5,
     keywords: ["open source security", "responsible ai disclosure"],
     body: [
       {
         type: "p",
-        text: "Security tooling has a long, complicated relationship with openness. Defensive work benefits from open knowledge — papers, talks, IOCs, playbooks. Offensive capability benefits from openness too, and not in a way anyone is grateful for. The honest position is to be specific about which is which.",
+        text: "Security tooling has a long, complicated relationship with openness. Defensive work benefits from open knowledge: papers, talks, IOCs, playbooks. Offensive capability benefits from openness too, and not in a way anyone is grateful for. The honest position is to be specific about which is which.",
       },
       { type: "h2", text: "What we publish." },
       {
@@ -202,7 +202,7 @@ hugo  Three things first. Same packer, yes. Same loader stub layout, mostly — 
         items: [
           "Research notes, including the ones that argue against work we shipped.",
           "Model cards: training data sources, refusal behaviour, known failure modes.",
-          "Evals, including the ones Hugo fails.",
+          "Evals, including the ones Mara fails.",
           "Methodology: how we red-team the model, what we instruct it not to do, and why.",
         ],
       },

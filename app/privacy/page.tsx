@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       </h1>
       <p className="mt-7 max-w-xl text-[18px] leading-[1.55] text-ink-2">
         Short, plain, and current. This page covers the marketing site you
-        are reading; the Hugo product has its own data terms inside the app.
+        are reading; the Mara product has its own data terms inside the app.
       </p>
 
       <div className="mt-14 max-w-prose space-y-12">
@@ -34,10 +34,10 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
-            Hugo.
+            Mara.
           </h2>
           <p className="mt-5 text-[17px] leading-[1.75] text-ink">
-            What you put into Hugo, and what Hugo says back, is private to
+            What you put into Mara, and what Mara says back, is private to
             your session. On the free tier we keep transcripts only long
             enough to investigate abuse and improve refusal behaviour, and we
             delete them on a documented schedule. On Pro and custom

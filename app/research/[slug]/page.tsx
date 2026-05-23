@@ -154,8 +154,8 @@ export default async function NotePage({
 
         <div className="mt-16 max-w-prose border-t border-hairline pt-8">
           <p className="text-[15px] text-ink-2">
-            Hugo is a research preview from venode. Feedback, corrections and
-            disagreements welcome —{" "}
+            Mara is a research preview from venode. Feedback, corrections and
+            disagreements welcome,{" "}
             <a
               href={`mailto:${siteConfig.contactEmail}`}
               className="text-ink underline-offset-4 hover:underline"
