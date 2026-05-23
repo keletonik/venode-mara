@@ -50,9 +50,9 @@ function renderBlock(block: Block, i: number) {
       return (
         <blockquote
           key={i}
-          className="my-10 border-l-2 border-accent pl-6 font-display text-[clamp(1.25rem,2.25vw,1.625rem)] italic font-medium leading-[1.4] text-ink"
+          className="my-10 border-l-2 border-accent pl-6 font-display text-[clamp(1.25rem,2.25vw,1.625rem)] font-semibold leading-[1.35] text-ink"
         >
-          “{block.text}”
+          {block.text}
         </blockquote>
       );
     case "list":
@@ -143,7 +143,7 @@ export default async function NotePage({
           <h1 className="display mt-7 text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.04]">
             {note.title}
           </h1>
-          <p className="mt-7 font-serif text-[19px] italic leading-[1.55] text-ink-2">
+          <p className="mt-7 text-[19px] leading-[1.55] text-ink-2">
             {note.description}
           </p>
         </header>

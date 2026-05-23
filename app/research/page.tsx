@@ -17,7 +17,8 @@ export default function ResearchIndexPage() {
     <article className="container-page py-24 sm:py-32">
       <span className="eyebrow">R · {notes.length} notes</span>
       <h1 className="display mt-7 max-w-3xl text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.04]">
-        From the lab. <em>Written carefully.</em>
+        From the lab.{" "}
+        <span className="quiet font-normal">Written carefully.</span>
       </h1>
       <p className="mt-8 max-w-xl text-[18px] leading-[1.55] text-ink-2">
         Short essays on how Hugo works, how we measure it, and the choices we

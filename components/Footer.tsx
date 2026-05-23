@@ -69,14 +69,14 @@ export default function Footer() {
                           href={l.href}
                           target={l.href.startsWith("http") ? "_blank" : undefined}
                           rel={l.href.startsWith("http") ? "noopener" : undefined}
-                          className="font-serif text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
+                          className="text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
                         >
                           {l.label}
                         </a>
                       ) : (
                         <Link
                           href={l.href}
-                          className="font-serif text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
+                          className="text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
                         >
                           {l.label}
                         </Link>
@@ -96,7 +96,7 @@ export default function Footer() {
                   <li key={n.slug}>
                     <Link
                       href={`/research/${n.slug}`}
-                      className="block font-serif text-[14px] leading-snug text-cream-warm/80 transition hover:text-cream-warm"
+                      className="block text-[14px] leading-snug text-cream-warm/80 transition hover:text-cream-warm"
                     >
                       {n.title}
                     </Link>

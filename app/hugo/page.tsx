@@ -47,32 +47,36 @@ const connectors = [
 export default function HugoPage() {
   return (
     <>
-      {/* HERO */}
       <section className="border-b border-hairline">
         <div className="container-page py-24 sm:py-32">
           <div className="grid gap-14 md:grid-cols-12">
             <div className="md:col-span-7">
               <span className="eyebrow">P-01 · Cyber language model</span>
               <div className="mt-10">
-                <HugoWordmark className="h-24 w-auto text-ink sm:h-32" />
+                <HugoWordmark
+                  className="h-24 w-auto text-ink sm:h-32"
+                  accent="#C8334B"
+                />
               </div>
               <h1 className="display mt-12 text-[clamp(2rem,5vw,3.75rem)] leading-[1.05]">
                 Cybersecurity intelligence.{" "}
-                <em>For the people defending things.</em>
+                <span className="quiet font-normal">
+                  For the people defending things.
+                </span>
               </h1>
             </div>
 
             <div className="md:col-span-5 md:mt-2">
-              <p className="lede max-w-md text-[18px] leading-[1.55] text-ink-2">
+              <p className="max-w-md text-[18px] leading-[1.55] text-ink-2">
                 Hugo is a language model trained to do cyber defense work the
                 way good analysts do it: carefully, with calibrated
                 confidence, and with the discipline to say what it does not
                 yet know.
               </p>
-              <p className="mt-5 max-w-md text-[15.5px] leading-[1.6] italic text-ink-2/85">
+              <p className="mt-5 max-w-md text-[15.5px] leading-[1.6] text-ink-2/85">
                 We should not cede the cyber advantage from AI to attackers
                 and criminals. Hugo is venode&apos;s contribution to keeping
-                that advantage with the defender.
+                that advantage on the defender&apos;s side of the line.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a href={siteConfig.appUrl} className="btn-primary">
@@ -87,7 +91,6 @@ export default function HugoPage() {
         </div>
       </section>
 
-      {/* CAPABILITIES */}
       <section className="border-b border-hairline">
         <div className="container-page py-24 sm:py-32">
           <span className="eyebrow">What Hugo is shaped to do</span>
@@ -98,10 +101,13 @@ export default function HugoPage() {
           <ol className="mt-14 grid gap-px bg-hairline sm:grid-cols-2">
             {capabilities.map((c, i) => (
               <li key={c.title} className="bg-bg p-7 sm:p-9">
-                <span className="font-mono text-[12px] uppercase text-accent" style={{ letterSpacing: "0.22em" }}>
+                <span
+                  className="font-mono text-[12px] uppercase text-accent"
+                  style={{ letterSpacing: "0.22em" }}
+                >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 font-display text-[20px] font-bold tracking-display text-ink">
+                <h3 className="mt-4 font-display text-[20px] font-extrabold tracking-display text-ink">
                   {c.title}
                 </h3>
                 <p className="mt-3 text-[16px] leading-[1.6] text-ink-2">
@@ -113,7 +119,6 @@ export default function HugoPage() {
         </div>
       </section>
 
-      {/* TRANSCRIPTS */}
       <section className="border-b border-hairline">
         <div className="container-page py-24 sm:py-32">
           <span className="eyebrow">Three small scenes</span>
@@ -143,10 +148,7 @@ export default function HugoPage() {
             <Transcript
               label="B · Naming an actor"
               lines={[
-                {
-                  who: "you",
-                  text: "Is this Lazarus?",
-                },
+                { who: "you", text: "Is this Lazarus?" },
                 {
                   who: "hugo",
                   text: "Two overlaps — the loader stub and the C2 header — are consistent with several DPRK-aligned clusters, and also with three crimeware kits that borrow from them. I'd assess with moderate confidence that this is DPRK-related work; I would not name Lazarus specifically without seeing infrastructure or victimology. Happy to write that up if you want.",
@@ -171,12 +173,14 @@ export default function HugoPage() {
         </div>
       </section>
 
-      {/* PRICING / PRO */}
       <section id="pricing" className="border-b border-hairline">
         <div className="container-page py-24 sm:py-32">
           <span className="eyebrow">P-01 · Pricing</span>
           <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4vw,3rem)] leading-[1.08]">
-            One Hugo. <em>Free for the curious. Pro for the work.</em>
+            One Hugo.{" "}
+            <span className="quiet font-normal">
+              Free for the curious. Pro for the work.
+            </span>
           </h2>
 
           <div className="mt-14 grid gap-px bg-hairline md:grid-cols-2">
@@ -185,9 +189,7 @@ export default function HugoPage() {
                 <h3 className="font-display text-[24px] font-extrabold tracking-display text-ink">
                   Free
                 </h3>
-                <span className="font-mono text-[13px] text-ink-2">
-                  $0
-                </span>
+                <span className="font-mono text-[13px] text-ink-2">$0</span>
               </div>
               <p className="mt-2 text-[15px] text-ink-2">
                 For analysts, students and the curious.
@@ -203,7 +205,9 @@ export default function HugoPage() {
                     key={x}
                     className="flex items-baseline gap-3 text-[15px] leading-[1.55] text-ink"
                   >
-                    <span className="font-mono text-[11px] text-ink-2/60">—</span>
+                    <span className="font-mono text-[11px] text-ink-2/60">
+                      —
+                    </span>
                     <span>{x}</span>
                   </li>
                 ))}
@@ -238,7 +242,9 @@ export default function HugoPage() {
                     key={x}
                     className="flex items-baseline gap-3 text-[15px] leading-[1.55] text-ink"
                   >
-                    <span className="font-mono text-[11px] text-ink-2/60">—</span>
+                    <span className="font-mono text-[11px] text-ink-2/60">
+                      —
+                    </span>
                     <span>{x}</span>
                   </li>
                 ))}

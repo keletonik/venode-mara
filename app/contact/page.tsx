@@ -32,7 +32,8 @@ export default function ContactPage() {
     <article className="container-page py-24 sm:py-32">
       <span className="eyebrow">Connect</span>
       <h1 className="display mt-7 max-w-3xl text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.04]">
-        Talk to us. <em>We read everything.</em>
+        Talk to us.{" "}
+        <span className="quiet font-normal">We read everything.</span>
       </h1>
 
       <ol className="mt-16 max-w-3xl divide-y divide-hairline border-y border-hairline">

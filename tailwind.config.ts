@@ -1,9 +1,5 @@
 import type { Config } from "tailwindcss";
 
-/**
- * Design tokens mirror venode.ai's CSS custom properties. Refer to
- * app/globals.css for the source-of-truth mapping.
- */
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -13,24 +9,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#FAF9F5",
-        surface: "#F1EDE2",
+        bg: "#08070a",
+        surface: "#11100f",
+        raised: "#1a1815",
         ink: {
-          DEFAULT: "#141412",
-          2: "#5A5854",
-          warm: "#1A1816",
+          DEFAULT: "#F4F1EA",
+          2: "#A89F8F",
+          3: "#6F665B",
+          dim: "#3a342d",
         },
         cream: {
-          DEFAULT: "#FAF9F5",
-          warm: "#F4F1EA",
+          DEFAULT: "#F4F1EA",
+          warm: "#EFE8DA",
         },
         accent: {
-          DEFAULT: "#8E2436",
-          deep: "#5C1A24",
-          lift: "#C8334B",
+          DEFAULT: "#C8334B",
+          deep: "#8E2436",
+          ember: "#5C1A24",
         },
-        hairline: "rgba(20,20,18,0.10)",
-        hair2: "rgba(20,20,18,0.18)",
+        hairline: "rgba(244,241,234,0.08)",
+        hair2: "rgba(244,241,234,0.16)",
       },
       fontFamily: {
         display: [
@@ -48,13 +46,6 @@ const config: Config = {
           "-apple-system",
           "sans-serif",
         ],
-        serif: [
-          "var(--font-serif)",
-          "Lora",
-          "Georgia",
-          "Cambria",
-          "serif",
-        ],
         mono: [
           "var(--font-mono)",
           "Geist Mono",
@@ -64,7 +55,7 @@ const config: Config = {
         ],
       },
       letterSpacing: {
-        display: "-0.04em",
+        display: "-0.045em",
         widewide: "0.10em",
         widerwide: "0.22em",
       },

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
 import { ArrowRight, HugoWordmark } from "@/components/Icons";
+import HeroIntro from "@/components/HeroIntro";
 
 export const metadata = pageMetadata({
   title: siteConfig.displayName,
@@ -60,62 +61,24 @@ const customBuilds = [
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
-      <section
-        aria-labelledby="hero-h"
-        className="border-b border-hairline"
-      >
-        <div className="container-page grid gap-14 py-24 sm:py-32 md:grid-cols-12 md:gap-10">
-          <div className="md:col-span-7">
-            <span className="eyebrow">
-              Venode · A research lab
-            </span>
-            <h1
-              id="hero-h"
-              className="display mt-7 text-[clamp(2.75rem,7vw,5.5rem)] leading-[1.02]"
-            >
-              Quiet research.{" "}
-              <em>Working tools for defenders.</em>
-            </h1>
-          </div>
-
-          <div className="md:col-span-5 md:mt-2">
-            <p className="lede max-w-md text-[18px] leading-[1.55] text-ink-2">
-              Venode is an AI research lab. Hugo is our language model for
-              cyber defense — built to triage at speed, reason under
-              uncertainty, and stay out of the attacker&apos;s way.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Link href="/hugo" className="btn-primary">
-                See Hugo <ArrowRight className="h-3 w-3" />
-              </Link>
-              <Link href="#hugo" className="btn-ghost">
-                See products
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* HERO — animated intro slider */}
+      <HeroIntro />
 
       {/* P-01 · HUGO FEATURE */}
-      <section
-        id="hugo"
-        aria-labelledby="hugo-h"
-        className="border-b border-hairline"
-      >
+      <section id="hugo" className="border-b border-hairline">
         <div className="container-page py-28 sm:py-36">
           <div className="mx-auto max-w-3xl text-center">
             <span className="eyebrow">P-01 · Cyber language model</span>
 
-            <div className="mt-8 flex justify-center">
-              <HugoWordmark className="h-20 w-auto sm:h-24 text-ink" />
+            <div className="mt-10 flex justify-center">
+              <HugoWordmark
+                className="h-20 w-auto text-ink sm:h-28"
+                accent="#C8334B"
+              />
             </div>
 
-            <p className="mt-10 font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-tight tracking-display text-ink">
-              One Hugo.{" "}
-              <span className="font-serif italic font-normal text-ink-2">
-                Tiered by plan.
-              </span>
+            <p className="mt-12 font-display text-[clamp(1.75rem,3.25vw,2.5rem)] font-extrabold leading-tight tracking-display text-ink">
+              One Hugo. <span className="quiet font-normal">Tiered by plan.</span>
             </p>
 
             <p className="mx-auto mt-7 max-w-xl text-[17px] leading-[1.65] text-ink-2">
@@ -128,25 +91,28 @@ export default function HomePage() {
             </p>
 
             <div className="mx-auto mt-14 grid max-w-2xl gap-px bg-hairline sm:grid-cols-2">
-              <Tier name={siteConfig.tiers.free.name} text={siteConfig.tiers.free.blurb} />
-              <Tier name={siteConfig.tiers.pro.name} text={siteConfig.tiers.pro.blurb} />
+              <Tier
+                name={siteConfig.tiers.free.name}
+                text={siteConfig.tiers.free.blurb}
+              />
+              <Tier
+                name={siteConfig.tiers.pro.name}
+                text={siteConfig.tiers.pro.blurb}
+              />
             </div>
 
-            <Link href="/hugo" className="btn-primary mt-14">
+            <a href={siteConfig.appUrl} className="btn-primary mt-14">
               Open Hugo <ArrowRight className="h-3 w-3" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
 
       {/* VENODE LABS */}
-      <section aria-labelledby="labs-h" className="border-b border-hairline">
+      <section className="border-b border-hairline">
         <div className="container-page py-28 sm:py-36">
           <header className="max-w-3xl">
-            <h2
-              id="labs-h"
-              className="display text-[clamp(2.25rem,5vw,4rem)] leading-[1.05]"
-            >
+            <h2 className="display text-[clamp(2.25rem,5vw,4rem)] leading-[1.04]">
               Venode Labs.
             </h2>
             <p className="mt-6 max-w-xl text-[18px] leading-[1.55] text-ink-2">
@@ -163,11 +129,14 @@ export default function HomePage() {
                 key={a.n}
                 className="grid items-baseline gap-6 py-8 md:grid-cols-[3rem_1fr]"
               >
-                <span className="font-mono text-[12px] uppercase text-accent" style={{ letterSpacing: "0.22em" }}>
+                <span
+                  className="font-mono text-[12px] uppercase text-accent"
+                  style={{ letterSpacing: "0.22em" }}
+                >
                   {a.n}
                 </span>
                 <div>
-                  <h4 className="font-display text-[clamp(1.25rem,2vw,1.625rem)] font-bold tracking-display text-ink">
+                  <h4 className="font-display text-[clamp(1.25rem,2vw,1.625rem)] font-extrabold tracking-display text-ink">
                     {a.title}
                   </h4>
                   <p className="mt-3 max-w-2xl text-[16.5px] leading-[1.65] text-ink-2">
@@ -180,21 +149,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CUSTOM BUILDS — warm surface band */}
+      {/* CUSTOM BUILDS — raised dark surface band */}
       <section
-        aria-labelledby="builds-h"
         className="border-b border-hairline"
-        style={{ background: "#F4F1EA" }}
+        style={{ background: "#11100f" }}
       >
         <div className="container-page grid gap-12 py-28 sm:py-36 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-5">
             <span className="eyebrow">L-01 · Custom builds</span>
-            <h3
-              id="builds-h"
-              className="display mt-7 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08]"
-            >
+            <h3 className="display mt-7 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08]">
               Custom builds.{" "}
-              <em>Built for you, not trained on you.</em>
+              <span className="quiet font-normal">
+                Built for you, not trained on you.
+              </span>
             </h3>
             <p className="mt-7 max-w-md text-[17px] leading-[1.6] text-ink-2">
               If you don&apos;t want a shared product, we build one for you.
@@ -223,11 +190,14 @@ export default function HomePage() {
                   i > 0 ? "border-t border-hairline" : ""
                 }`}
               >
-                <span className="font-mono text-[12px] uppercase text-ink-2" style={{ letterSpacing: "0.22em" }}>
+                <span
+                  className="font-mono text-[12px] uppercase text-ink-2"
+                  style={{ letterSpacing: "0.22em" }}
+                >
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h4 className="font-display text-[19px] font-bold tracking-display text-ink">
+                  <h4 className="font-display text-[19px] font-extrabold tracking-display text-ink">
                     {b.title}
                   </h4>
                   <p className="mt-2 max-w-xl text-[16px] leading-[1.6] text-ink-2">
@@ -241,12 +211,9 @@ export default function HomePage() {
       </section>
 
       {/* BUILT IN THE OPEN — final CTA */}
-      <section aria-labelledby="cta-h">
+      <section>
         <div className="container-page py-28 sm:py-40">
-          <h2
-            id="cta-h"
-            className="display max-w-3xl text-[clamp(2.5rem,6vw,5rem)] leading-[1.03]"
-          >
+          <h2 className="display max-w-3xl text-[clamp(2.5rem,6vw,5rem)] leading-[1.02]">
             Built in the open.
           </h2>
           <p className="mt-7 max-w-xl text-[18px] leading-[1.55] text-ink-2">

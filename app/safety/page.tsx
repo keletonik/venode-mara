@@ -14,7 +14,8 @@ export default function SafetyPage() {
     <article className="container-page py-24 sm:py-32">
       <span className="eyebrow">L-02 · Safety</span>
       <h1 className="display mt-7 max-w-3xl text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.04]">
-        Safety is the work, <em>not the disclaimer.</em>
+        Safety is the work,{" "}
+        <span className="quiet font-normal">not the disclaimer.</span>
       </h1>
       <p className="mt-8 max-w-xl text-[18px] leading-[1.55] text-ink-2">
         Hugo is a dual-use tool by definition. Almost everything that helps a
@@ -44,7 +45,7 @@ export default function SafetyPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-5 font-serif text-[15.5px] italic leading-[1.55] text-ink-2">
+          <p className="mt-5 text-[15.5px] leading-[1.55] text-ink-2">
             These boundaries are enforced through training, refusal behaviour
             and a separate review layer. They are not perfect. The model card
             documents the failure modes we have measured.

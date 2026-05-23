@@ -7,7 +7,9 @@ export default function NotFound() {
       <span className="eyebrow">404 · Not found</span>
       <h1 className="display mt-7 max-w-2xl text-[clamp(2.75rem,7vw,5rem)] leading-[1.04]">
         Not found.{" "}
-        <em>Either the link is wrong or we have not written this yet.</em>
+        <span className="quiet font-normal">
+          Either the link is wrong or we have not written this yet.
+        </span>
       </h1>
       <Link href="/" className="btn-primary mt-12">
         Back to venode <ArrowRight className="h-3 w-3" />

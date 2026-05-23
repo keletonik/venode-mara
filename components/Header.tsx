@@ -8,9 +8,9 @@ import { VenodeWordmark } from "./Icons";
 const nav = [
   { href: "/", label: "Home" },
   { href: "/hugo", label: "Hugo" },
-  { href: "/lab", label: "Lab" },
-  { href: "/journal", label: "Journal" },
   { href: "/research", label: "Research" },
+  { href: "/safety", label: "Safety" },
+  { href: "/about", label: "Lab" },
 ];
 
 export default function Header() {
@@ -26,17 +26,17 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-bg ${
+      className={`sticky top-0 z-40 bg-bg/85 backdrop-blur ${
         scrolled ? "border-b border-hairline" : "border-b border-transparent"
       } transition-colors`}
     >
-      <div className="container-page flex h-[76px] items-center gap-6">
+      <div className="container-page flex h-[72px] items-center gap-6">
         <Link
           href="/"
-          className="text-[26px] sm:text-[30px]"
+          aria-label="venode home"
           onClick={() => setOpen(false)}
         >
-          <VenodeWordmark className="text-[26px] sm:text-[30px]" />
+          <VenodeWordmark className="text-[24px] sm:text-[28px]" />
         </Link>
 
         <nav
@@ -47,8 +47,8 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="font-mono text-[13px] font-medium text-ink-2 transition hover:text-ink"
-              style={{ letterSpacing: "0.04em" }}
+              className="font-mono text-[12px] font-medium uppercase text-ink-2 transition hover:text-ink"
+              style={{ letterSpacing: "0.10em" }}
             >
               {item.label}
             </Link>
@@ -59,7 +59,7 @@ export default function Header() {
           href={siteConfig.appUrl}
           className="hidden sm:inline-flex btn-primary"
         >
-          Sign up
+          Open Hugo
         </a>
 
         <button
@@ -95,7 +95,7 @@ export default function Header() {
               className="btn-primary mt-6 self-start"
               onClick={() => setOpen(false)}
             >
-              Sign up
+              Open Hugo
             </a>
           </div>
         </div>

@@ -3,24 +3,20 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Tokens — direct port of the venode.ai design system. The CSS custom
-   properties below are used for chrome that does not benefit from being
-   restated as Tailwind utilities (the wordmark cursor, footer slab,
-   selection colour, etc.).
+   Tokens — dark / mysterious. Black-bg with cream foreground, oxblood
+   accent retained for the wordmark and key hover states.
    ───────────────────────────────────────────────────────────────────── */
 :root {
-  --bg: #FAF9F5;
-  --surface: #F1EDE2;
-  --ink: #141412;
-  --ink-2: #5A5854;
-  --accent: #8E2436;
-  --hairline: rgba(20, 20, 18, 0.10);
-  --hair-2: rgba(20, 20, 18, 0.18);
-  --cream-warm: #F4F1EA;
-  --ink-warm: #1A1816;
-  --oxblood: #5C1A24;
-  --oxblood-lift: #C8334B;
-
+  --bg: #08070a;
+  --surface: #11100f;
+  --raised: #1a1815;
+  --ink: #F4F1EA;
+  --ink-2: #A89F8F;
+  --ink-3: #6F665B;
+  --accent: #C8334B;
+  --accent-deep: #8E2436;
+  --hairline: rgba(244, 241, 234, 0.08);
+  --hair-2: rgba(244, 241, 234, 0.16);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -29,38 +25,61 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    @apply font-serif antialiased;
+    @apply font-sans antialiased;
     font-size: 17px;
-    line-height: 1.65;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
+    /* subtle radial vignette from above for the "mysterious" feel */
+    background-image:
+      radial-gradient(60% 50% at 50% 0%, rgba(200, 51, 75, 0.06), transparent 70%),
+      radial-gradient(50% 40% at 50% 100%, rgba(200, 51, 75, 0.03), transparent 70%);
+    background-attachment: fixed;
   }
-  ::selection { background: var(--accent); color: var(--bg); }
-  h1, h2, h3, h4 { @apply font-display tracking-display text-ink; }
+  /* very fine grain — adds mystery without being noisy */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(rgba(244,241,234,0.018) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+  }
+  ::selection { background: var(--accent); color: var(--ink); }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    letter-spacing: -0.045em;
+    font-style: normal;
+  }
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 1px solid var(--accent);
     outline-offset: 3px;
   }
   a { color: inherit; text-decoration: none; }
   img, svg { display: block; max-width: 100%; }
+  /* Absolutely no italics anywhere. */
+  em, i { font-style: normal; }
 }
 
 @layer components {
   .container-page {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
   }
   @media (max-width: 768px) {
-    .container-page { padding: 0 24px; }
+    .container-page { padding: 0 20px; }
   }
 
-  /* The venode_ wordmark used in the header — large Inter at weight 900
-     with the 'o' coloured oxblood and a blinking underscore "cursor". */
+  /* venode_ marque — large Inter at weight 900, o painted accent,
+     animated underscore cursor at the end. */
   .wordmark {
-    @apply inline-flex items-baseline font-display leading-none;
+    @apply inline-flex items-baseline font-display leading-none text-ink;
     font-weight: 900;
-    letter-spacing: -0.04em;
-    color: var(--ink);
+    letter-spacing: -0.045em;
   }
   .wordmark .o { color: var(--accent); font-weight: 700; }
   .wordmark .cursor {
@@ -81,25 +100,35 @@
     .wordmark .cursor { animation: none; }
   }
 
-  /* The vo. monogram used in the footer (black slab). */
+  /* vo. monogram — used larger in the footer slab. */
   .vo-mark {
-    @apply inline-flex items-baseline font-display leading-none;
+    @apply inline-flex items-baseline font-display leading-none text-cream;
     font-weight: 900;
-    letter-spacing: -0.04em;
-    color: var(--cream-warm);
+    letter-spacing: -0.045em;
   }
   .vo-mark .o { color: var(--accent); font-weight: 700; }
   .vo-mark .dot { color: var(--accent); }
 
-  /* Eyebrow / label — Geist Mono, uppercase. */
   .eyebrow {
     @apply font-mono uppercase text-ink-2;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.22em;
   }
 
-  /* Primary CTA: black slab button with mono uppercase text. */
+  .display {
+    @apply font-display text-ink;
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    font-style: normal;
+  }
+  /* Secondary tone for headline second-clauses (replaces the old <em> italic). */
+  .display .quiet {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  /* Primary CTA: cream slab with black text — inverted for dark theme. */
   .btn-primary {
     @apply inline-flex items-center gap-2 font-mono uppercase transition;
     background: var(--ink);
@@ -109,12 +138,10 @@
     font-size: 12px;
     letter-spacing: 0.10em;
   }
-  .btn-primary:hover { background: var(--accent); }
+  .btn-primary:hover { background: var(--accent); color: var(--ink); }
 
-  /* Quiet ghost CTA */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 font-mono uppercase transition;
-    color: var(--ink-2);
+    @apply inline-flex items-center gap-2 font-mono uppercase transition text-ink-2;
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.10em;
@@ -123,39 +150,27 @@
   }
   .btn-ghost:hover {
     color: var(--ink);
-    border-bottom-color: var(--ink);
-  }
-
-  /* Inline text-link with arrow */
-  .arrow-link {
-    @apply inline-flex items-center gap-1.5 transition;
-    color: var(--ink);
-    border-bottom: 1px solid var(--hairline);
-    padding-bottom: 2px;
-  }
-  .arrow-link:hover { border-bottom-color: var(--ink); }
-
-  /* Display headlines */
-  .display {
-    @apply font-display tracking-display text-ink;
-    font-weight: 900;
-  }
-  .display em {
-    color: var(--accent);
-    font-style: italic;
-    font-family: var(--font-serif);
-    font-weight: 500;
-  }
-
-  /* Body emphasis: italic Lora */
-  .lede em {
-    font-style: italic;
-    color: var(--ink-2);
+    border-bottom-color: var(--ink-2);
   }
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-rise { animation: rise 0.35s ease-out both; }
+.animate-rise { animation: rise 0.45s ease-out both; }
+
+/* HeroIntro animation: each slide crossfades with a subtle vertical
+   translate. Pure CSS opacity + transform transitions toggled by a
+   data attribute set in the client component. */
+.slide {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  pointer-events: none;
+}
+.slide[data-active="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

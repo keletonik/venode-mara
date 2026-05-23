@@ -15,7 +15,9 @@ export default function AboutPage() {
       <span className="eyebrow">L-01 · About</span>
       <h1 className="display mt-7 max-w-3xl text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.04]">
         venode is a small research lab.{" "}
-        <em>We build the tools we want to exist.</em>
+        <span className="quiet font-normal">
+          We build the tools we want to exist.
+        </span>
       </h1>
 
       <div className="mt-14 max-w-prose space-y-12">
