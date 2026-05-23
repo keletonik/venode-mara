@@ -5,38 +5,36 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "About Venode Labs — a small research lab building cybersecurity intelligence tools, including Hugo.",
+    "About venode — a small AI research lab building Hugo, a cybersecurity intelligence model.",
   path: "/about",
 });
 
 export default function AboutPage() {
   return (
-    <article className="container-page pt-20 pb-24 sm:pt-28">
-      <p className="label">Lab</p>
-      <h1 className="mt-8 max-w-3xl text-[clamp(2.25rem,5vw,4rem)] leading-[1.05] tracking-tightest">
-        <span className="font-medium">Venode Labs.</span>{" "}
-        <span className="text-ink-500">
-          A small research lab building tools for the people defending things.
-        </span>
+    <article className="container-page py-24 sm:py-32">
+      <span className="eyebrow">L-01 · About</span>
+      <h1 className="display mt-7 max-w-3xl text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.04]">
+        venode is a small research lab.{" "}
+        <em>We build the tools we want to exist.</em>
       </h1>
 
-      <div className="mt-12 max-w-prose space-y-12 text-[17px] leading-[1.7] text-ink-700">
-        <p>
-          We work on cybersecurity intelligence — the kind of slow, careful
-          analysis that turns a queue of alerts into a story, a sample into a
+      <div className="mt-14 max-w-prose space-y-12">
+        <p className="text-[17px] leading-[1.75] text-ink">
+          We work on cybersecurity intelligence — the slow, careful analysis
+          that turns a queue of alerts into a story, a sample into a
           hypothesis, an incident into something a team can actually learn
           from.
         </p>
 
-        <p>
-          Hugo is our first public product. It is a language model trained for
-          this work, and it is shipped as a research preview because that is
-          what it is — a thing we are still learning how to build well, in the
+        <p className="text-[17px] leading-[1.75] text-ink">
+          Hugo is our first public product. It is a language model trained
+          for that work, and it is shipped as a research preview because that
+          is what it is — a thing we are still learning to build well, in the
           open, with the people who do this work for a living.
         </p>
 
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
             What we believe.
           </h2>
           <ul className="mt-5 space-y-3">
@@ -46,8 +44,11 @@ export default function AboutPage() {
               "Defenders deserve good tools. Most security work is still done by tired people with too many tabs open.",
               "Publishing the failure is part of the science.",
             ].map((x) => (
-              <li key={x} className="flex items-baseline gap-3">
-                <span className="font-mono text-[11px] text-ink-400">—</span>
+              <li
+                key={x}
+                className="flex items-baseline gap-4 text-[16.5px] leading-[1.65] text-ink"
+              >
+                <span className="font-mono text-[11px] text-accent">—</span>
                 <span>{x}</span>
               </li>
             ))}
@@ -55,34 +56,22 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
-            Who we are.
-          </h2>
-          <p className="mt-5">
-            A small team of analysts, engineers and researchers. We have spent
-            years on the defender side of cybersecurity and a few years
-            building language models. Hugo is what happens when those two
-            careers sit together at one desk.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
             How to reach us.
           </h2>
-          <p className="mt-5">
+          <p className="mt-5 text-[17px] leading-[1.75] text-ink">
             For Hugo, custom builds, partnerships, journalism, or anything
             else —{" "}
             <a
               href={`mailto:${siteConfig.contactEmail}`}
-              className="text-ink-900 underline-offset-4 hover:underline"
+              className="text-ink underline-offset-4 hover:underline"
             >
               {siteConfig.contactEmail}
             </a>
             . Or the longer{" "}
             <Link
               href="/contact"
-              className="text-ink-900 underline-offset-4 hover:underline"
+              className="text-ink underline-offset-4 hover:underline"
             >
               contact page
             </Link>

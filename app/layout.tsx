@@ -1,19 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Lora, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/site.config";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const sans = Geist({
+/* Inter at heavy weights stands in for Inter Display on the venode marque. */
+const display = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const serif = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
 const mono = Geist_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -30,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#faf8f3",
+  themeColor: "#FAF9F5",
 };
 
 export default function RootLayout({
@@ -39,14 +50,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
-      <body className="flex min-h-screen flex-col font-sans">
+    <html
+      lang="en"
+      className={`${display.variable} ${serif.variable} ${mono.variable}`}
+    >
+      <body className="flex min-h-screen flex-col">
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Venode Labs",
+            name: "venode",
             url: siteConfig.labUrl,
+            description: "Venode is an AI research lab. We build the tools we want to exist.",
           }}
         />
         <JsonLd
@@ -60,7 +75,9 @@ export default function RootLayout({
           }}
         />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

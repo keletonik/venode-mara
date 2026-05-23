@@ -1,40 +1,41 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { Mark } from "./Icons";
+import { VoMark } from "./Icons";
+import { notes } from "@/lib/research";
 
 const columns = [
   {
     title: "Products",
     links: [
       { href: "/hugo", label: "Hugo" },
-      { href: "/hugo#pro", label: "Hugo Pro" },
-      { href: "/contact", label: "Custom builds" },
+      { href: siteConfig.appUrl, label: "Hugo Cloud" },
+      { href: "/hugo#pricing", label: "Pricing" },
     ],
   },
   {
     title: "Research",
     links: [
-      { href: "/research", label: "Notes" },
-      { href: "/safety", label: "Safety" },
+      { href: "/research", label: "Post-training" },
+      { href: "/research", label: "Long context" },
+      { href: "/research", label: "Editorial alignment" },
+      { href: "/research", label: "Inference economics" },
     ],
   },
   {
     title: "Lab",
     links: [
-      { href: "/about", label: "About Venode" },
-      { href: siteConfig.labUrl, label: "venode.ai ↗", external: true },
+      { href: "/lab", label: "Lab" },
+      { href: "/about", label: "About" },
+      { href: "/safety", label: "Safety" },
     ],
   },
   {
     title: "Connect",
     links: [
+      { href: `mailto:${siteConfig.contactEmail}`, label: siteConfig.contactEmail },
       { href: "/contact", label: "Contact" },
-      {
-        href: `mailto:${siteConfig.contactEmail}`,
-        label: siteConfig.contactEmail,
-      },
       ...(siteConfig.github
-        ? [{ href: siteConfig.github, label: "GitHub ↗", external: true }]
+        ? [{ href: siteConfig.github, label: "GitHub" }]
         : []),
     ],
   },
@@ -42,68 +43,80 @@ const columns = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const recent = [...notes]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 4);
 
   return (
-    <footer className="mt-32 border-t border-rule">
-      <div className="container-wide grid gap-12 py-16 md:grid-cols-12">
-        <div className="md:col-span-4">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-ink-800"
-          >
-            <Mark className="h-3.5 w-3.5" />
-            <span className="text-[15px] tracking-tightest">
-              {siteConfig.lab}
-              <span className="mx-1.5 text-ink-400">·</span>
-              <span className="text-ink-900">{siteConfig.name}</span>
-            </span>
+    <footer className="mt-32 bg-black text-cream-warm">
+      <div className="container-page py-20">
+        <div className="grid items-start gap-12 md:grid-cols-[auto_1fr]">
+          <Link href="/" aria-label="venode home" className="self-start">
+            <VoMark className="text-[64px]" />
           </Link>
-          <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-ink-500">
-            A cybersecurity intelligence model from Venode Labs. Quiet
-            research, working tools.
-          </p>
+
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+            {columns.map((c) => (
+              <div key={c.title}>
+                <h4 className="font-mono text-[11px] font-bold uppercase text-cream-warm/70" style={{ letterSpacing: "0.22em" }}>
+                  {c.title}
+                </h4>
+                <ul className="mt-4 space-y-2.5">
+                  {c.links.map((l) => (
+                    <li key={l.label}>
+                      {l.href.startsWith("http") || l.href.startsWith("mailto:") ? (
+                        <a
+                          href={l.href}
+                          target={l.href.startsWith("http") ? "_blank" : undefined}
+                          rel={l.href.startsWith("http") ? "noopener" : undefined}
+                          className="font-serif text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
+                        >
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={l.href}
+                          className="font-serif text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
+                        >
+                          {l.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            <div>
+              <h4 className="font-mono text-[11px] font-bold uppercase text-cream-warm/70" style={{ letterSpacing: "0.22em" }}>
+                News
+              </h4>
+              <ul className="mt-4 space-y-4">
+                {recent.map((n) => (
+                  <li key={n.slug}>
+                    <Link
+                      href={`/research/${n.slug}`}
+                      className="block font-serif text-[14px] leading-snug text-cream-warm/80 transition hover:text-cream-warm"
+                    >
+                      {n.title}
+                    </Link>
+                    <span className="mt-1 block font-mono text-[10px] uppercase text-cream-warm/40" style={{ letterSpacing: "0.18em" }}>
+                      {new Date(n.date).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        {columns.map((c) => (
-          <div key={c.title} className="md:col-span-2">
-            <h3 className="label">{c.title}</h3>
-            <ul className="mt-4 space-y-2.5">
-              {c.links.map((l) => (
-                <li key={l.label}>
-                  {"external" in l && l.external ? (
-                    <a
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener"
-                      className="text-[14px] text-ink-700 hover:text-ink-900"
-                    >
-                      {l.label}
-                    </a>
-                  ) : (
-                    <Link
-                      href={l.href}
-                      className="text-[14px] text-ink-700 hover:text-ink-900"
-                    >
-                      {l.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="border-t border-rule">
-        <div className="container-wide flex flex-col gap-2 py-6 text-[13px] text-ink-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} Venode Labs. {siteConfig.displayName} is a research preview.
-          </p>
-          <p>
-            <Link href="/privacy" className="hover:text-ink-900">
-              Privacy
-            </Link>
-          </p>
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-cream-warm/15 pt-6 font-mono text-[12px] text-cream-warm/55" style={{ letterSpacing: "0.06em" }}>
+          <span>© {year} venode</span>
+          <span>{siteConfig.url.replace(/^https?:\/\//, "")}</span>
         </div>
       </div>
     </footer>

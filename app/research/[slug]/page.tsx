@@ -33,7 +33,7 @@ function renderBlock(block: Block, i: number) {
       return (
         <h2
           key={i}
-          className="mt-14 text-[clamp(1.5rem,2.5vw,1.875rem)] leading-[1.2] tracking-tightest text-ink-900"
+          className="mt-14 font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink"
         >
           {block.text}
         </h2>
@@ -42,7 +42,7 @@ function renderBlock(block: Block, i: number) {
       return (
         <p
           key={i}
-          className="mt-5 text-[17px] leading-[1.7] text-ink-700"
+          className="mt-5 text-[17.5px] leading-[1.75] text-ink"
           dangerouslySetInnerHTML={{ __html: block.text }}
         />
       );
@@ -50,9 +50,9 @@ function renderBlock(block: Block, i: number) {
       return (
         <blockquote
           key={i}
-          className="my-10 border-l border-ink-300 pl-6 text-[20px] italic leading-[1.5] text-ink-800"
+          className="my-10 border-l-2 border-accent pl-6 font-display text-[clamp(1.25rem,2.25vw,1.625rem)] italic font-medium leading-[1.4] text-ink"
         >
-          {block.text}
+          “{block.text}”
         </blockquote>
       );
     case "list":
@@ -61,9 +61,9 @@ function renderBlock(block: Block, i: number) {
           {block.items.map((it, j) => (
             <li
               key={j}
-              className="flex items-baseline gap-3 text-[16.5px] leading-[1.65] text-ink-700"
+              className="flex items-baseline gap-4 text-[16.5px] leading-[1.65] text-ink"
             >
-              <span className="font-mono text-[11px] text-ink-400">—</span>
+              <span className="font-mono text-[11px] text-accent">—</span>
               <span dangerouslySetInnerHTML={{ __html: it }} />
             </li>
           ))}
@@ -73,10 +73,10 @@ function renderBlock(block: Block, i: number) {
       return (
         <div
           key={i}
-          className="my-8 border border-rule bg-paper-alt/60 p-5 font-mono text-[13px] leading-[1.65] text-ink-700"
+          className="my-8 border border-hairline bg-surface/50 p-5 font-mono text-[13.5px] leading-[1.65] text-ink"
         >
           {block.lang && (
-            <p className="mb-3 text-[11px] uppercase tracking-wider2 text-ink-400">
+            <p className="mb-3 font-mono text-[10px] uppercase text-accent" style={{ letterSpacing: "0.22em" }}>
               // {block.lang}
             </p>
           )}
@@ -98,7 +98,7 @@ export default async function NotePage({
   if (!note) notFound();
 
   const more = notes.filter((n) => n.slug !== note.slug).slice(0, 3);
-  const formattedDate = new Date(note.date).toLocaleDateString("en-US", {
+  const formattedDate = new Date(note.date).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -114,34 +114,36 @@ export default async function NotePage({
           description: note.description,
           datePublished: note.date,
           dateModified: note.date,
-          author: { "@type": "Organization", name: "Venode Labs" },
-          publisher: { "@type": "Organization", name: "Venode Labs" },
+          author: { "@type": "Organization", name: "venode" },
+          publisher: { "@type": "Organization", name: "venode" },
           mainEntityOfPage: canonical(`/research/${note.slug}`),
         }}
       />
 
-      <article className="container-page pt-20 pb-16 sm:pt-28">
-        <nav className="flex items-center gap-2 text-[13px] text-ink-500">
-          <Link href="/" className="hover:text-ink-900">
+      <article className="container-page py-20 sm:py-28">
+        <nav className="flex items-center gap-3 font-mono text-[12px] uppercase text-ink-2" style={{ letterSpacing: "0.18em" }}>
+          <Link href="/" className="hover:text-ink">
             {siteConfig.lab}
           </Link>
-          <span className="text-ink-300">·</span>
-          <Link href="/research" className="hover:text-ink-900">
+          <span className="text-ink-2/40">·</span>
+          <Link href="/research" className="hover:text-ink">
             Research
           </Link>
         </nav>
 
         <header className="mt-12 max-w-3xl">
           <div className="flex items-baseline gap-4">
-            <span className="label">{note.num}</span>
-            <span className="font-mono text-[12px] text-ink-400">
+            <span className="font-mono text-[12px] uppercase text-accent" style={{ letterSpacing: "0.22em" }}>
+              R-{note.num}
+            </span>
+            <span className="font-mono text-[12px] uppercase text-ink-2/70" style={{ letterSpacing: "0.18em" }}>
               {formattedDate} · {note.readingMinutes} min
             </span>
           </div>
-          <h1 className="mt-6 text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] tracking-tightest">
+          <h1 className="display mt-7 text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.04]">
             {note.title}
           </h1>
-          <p className="mt-6 text-[19px] leading-relaxed text-ink-500">
+          <p className="mt-7 font-serif text-[19px] italic leading-[1.55] text-ink-2">
             {note.description}
           </p>
         </header>
@@ -150,13 +152,13 @@ export default async function NotePage({
           {note.body.map(renderBlock)}
         </div>
 
-        <div className="mt-16 max-w-prose border-t border-rule pt-8">
-          <p className="text-[14px] text-ink-500">
-            Hugo is a research preview from Venode Labs. Feedback, corrections
-            and disagreements welcome —{" "}
+        <div className="mt-16 max-w-prose border-t border-hairline pt-8">
+          <p className="text-[15px] text-ink-2">
+            Hugo is a research preview from venode. Feedback, corrections and
+            disagreements welcome —{" "}
             <a
               href={`mailto:${siteConfig.contactEmail}`}
-              className="text-ink-800 underline-offset-4 hover:underline"
+              className="text-ink underline-offset-4 hover:underline"
             >
               {siteConfig.contactEmail}
             </a>
@@ -166,30 +168,32 @@ export default async function NotePage({
       </article>
 
       {more.length > 0 && (
-        <section className="border-t border-rule">
+        <section className="border-t border-hairline">
           <div className="container-page py-20">
-            <span className="label">More notes</span>
-            <ul className="mt-8 divide-y divide-rule border-y border-rule">
+            <span className="eyebrow">More notes</span>
+            <ol className="mt-8 divide-y divide-hairline border-y border-hairline">
               {more.map((n) => (
                 <li key={n.slug}>
                   <Link
                     href={`/research/${n.slug}`}
-                    className="group grid items-baseline gap-6 py-6 md:grid-cols-[3rem_1fr_2rem]"
+                    className="group grid items-baseline gap-6 py-6 md:grid-cols-[4rem_1fr_2rem]"
                   >
-                    <span className="label">{n.num}</span>
+                    <span className="font-mono text-[12px] uppercase text-accent" style={{ letterSpacing: "0.22em" }}>
+                      R-{n.num}
+                    </span>
                     <div>
-                      <h3 className="text-[19px] tracking-tightest text-ink-900 group-hover:underline">
+                      <h3 className="font-display text-[20px] font-bold tracking-display text-ink group-hover:underline">
                         {n.title}
                       </h3>
-                      <p className="mt-1.5 max-w-2xl text-[14.5px] leading-relaxed text-ink-500">
+                      <p className="mt-1.5 max-w-2xl text-[15px] leading-[1.6] text-ink-2">
                         {n.description}
                       </p>
                     </div>
-                    <ArrowRight className="hidden h-3.5 w-3.5 text-ink-400 transition group-hover:translate-x-0.5 md:block md:justify-self-end" />
+                    <ArrowRight className="hidden h-3.5 w-3.5 text-ink-2 md:block md:justify-self-end" />
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </section>
       )}

@@ -2,70 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Tokens — direct port of the venode.ai design system. The CSS custom
+   properties below are used for chrome that does not benefit from being
+   restated as Tailwind utilities (the wordmark cursor, footer slab,
+   selection colour, etc.).
+   ───────────────────────────────────────────────────────────────────── */
+:root {
+  --bg: #FAF9F5;
+  --surface: #F1EDE2;
+  --ink: #141412;
+  --ink-2: #5A5854;
+  --accent: #8E2436;
+  --hairline: rgba(20, 20, 18, 0.10);
+  --hair-2: rgba(20, 20, 18, 0.18);
+  --cream-warm: #F4F1EA;
+  --ink-warm: #1A1816;
+  --oxblood: #5C1A24;
+  --oxblood-lift: #C8334B;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
   body {
-    @apply bg-paper text-ink antialiased font-sans;
-    font-feature-settings: "ss01", "kern";
+    background: var(--bg);
+    color: var(--ink);
+    @apply font-serif antialiased;
+    font-size: 17px;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
   }
-  ::selection {
-    @apply bg-ink/15 text-ink;
-  }
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply text-ink-900;
-  }
+  ::selection { background: var(--accent); color: var(--bg); }
+  h1, h2, h3, h4 { @apply font-display tracking-display text-ink; }
   :focus-visible {
-    @apply outline-none ring-1 ring-ink-700 ring-offset-2 ring-offset-paper;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
-  a {
-    text-decoration: none;
-  }
-  input,
-  textarea {
-    @apply font-sans;
-  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
 }
 
 @layer components {
   .container-page {
-    @apply mx-auto max-w-page px-6 sm:px-10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
   }
-  .container-wide {
-    @apply mx-auto max-w-wide px-6 sm:px-10;
+  @media (max-width: 768px) {
+    .container-page { padding: 0 24px; }
   }
-  .label {
-    @apply font-mono text-[11px] uppercase tracking-wider2 text-ink-500;
+
+  /* The venode_ wordmark used in the header — large Inter at weight 900
+     with the 'o' coloured oxblood and a blinking underscore "cursor". */
+  .wordmark {
+    @apply inline-flex items-baseline font-display leading-none;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--ink);
   }
+  .wordmark .o { color: var(--accent); font-weight: 700; }
+  .wordmark .cursor {
+    display: inline-block;
+    width: 0.42em;
+    height: 0.10em;
+    background: var(--accent);
+    margin-left: 0.10em;
+    margin-bottom: 0.16em;
+    align-self: flex-end;
+    animation: cursor-blink 1.05s steps(2) infinite;
+  }
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wordmark .cursor { animation: none; }
+  }
+
+  /* The vo. monogram used in the footer (black slab). */
+  .vo-mark {
+    @apply inline-flex items-baseline font-display leading-none;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--cream-warm);
+  }
+  .vo-mark .o { color: var(--accent); font-weight: 700; }
+  .vo-mark .dot { color: var(--accent); }
+
+  /* Eyebrow / label — Geist Mono, uppercase. */
+  .eyebrow {
+    @apply font-mono uppercase text-ink-2;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+  }
+
+  /* Primary CTA: black slab button with mono uppercase text. */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 font-mono uppercase transition;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.10em;
+  }
+  .btn-primary:hover { background: var(--accent); }
+
+  /* Quiet ghost CTA */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 font-mono uppercase transition;
+    color: var(--ink-2);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 4px;
+  }
+  .btn-ghost:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  /* Inline text-link with arrow */
+  .arrow-link {
+    @apply inline-flex items-center gap-1.5 transition;
+    color: var(--ink);
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 2px;
+  }
+  .arrow-link:hover { border-bottom-color: var(--ink); }
+
+  /* Display headlines */
   .display {
-    @apply font-sans tracking-tightest;
+    @apply font-display tracking-display text-ink;
+    font-weight: 900;
   }
-  /* Inline text-CTA with an arrow */
-  .link-arrow {
-    @apply inline-flex items-center gap-1.5 border-b border-ink-300 pb-0.5 text-ink-800 transition hover:border-ink-800;
+  .display em {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--font-serif);
+    font-weight: 500;
   }
-  .link-arrow .arrow {
-    @apply transition group-hover:translate-x-0.5;
-  }
-  .rule {
-    @apply border-t border-rule;
+
+  /* Body emphasis: italic Lora */
+  .lede em {
+    font-style: italic;
+    color: var(--ink-2);
   }
 }
 
 @keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.animate-rise {
-  animation: rise 0.35s ease-out both;
-}
+.animate-rise { animation: rise 0.35s ease-out both; }

@@ -1,14 +1,19 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight } from "@/components/Icons";
+import { ArrowRight, HugoWordmark } from "@/components/Icons";
 
 export const metadata = pageMetadata({
   title: "Hugo",
   description:
-    "Hugo is a cybersecurity intelligence model from Venode Labs. Triage at speed, reason under uncertainty, produce the work — without losing the analyst.",
+    "Hugo is venode's language model for cyber defense. Triage at speed, reason under uncertainty, produce the work — without ceding the cyber advantage to attackers.",
   path: "/hugo",
-  keywords: ["hugo llm", "cybersecurity ai model", "threat intelligence agent"],
+  keywords: [
+    "venode hugo",
+    "cybersecurity language model",
+    "ai for cyber defenders",
+    "threat intelligence llm",
+  ],
 });
 
 const capabilities = [
@@ -21,8 +26,8 @@ const capabilities = [
     text: "Triaging an alert is not a classification problem. Hugo keeps a small set of explanations live, scores each against new evidence, and tells you which question would actually separate them.",
   },
   {
-    title: "Ask the discriminating question.",
-    text: "When uncertain, Hugo says what it does not know and what it would need to know. It does not invent an answer. It points at the next sensor to look at.",
+    title: "Refuse the offensive ask.",
+    text: "Hugo will not write functional exploit code, plan intrusions, or help with operational offensive work. The refusal behaviour is documented in the model card, not bolted on.",
   },
   {
     title: "Produce the work.",
@@ -36,83 +41,91 @@ const connectors = [
   "Sandbox — Joe, Hatching, Cape",
   "TIP — MISP, OpenCTI",
   "Ticketing — Jira, ServiceNow, Tines",
-  "Source — GitHub, GitLab, Bitbucket",
+  "Source — GitHub, GitLab",
 ];
 
 export default function HugoPage() {
   return (
     <>
       {/* HERO */}
-      <section className="container-page pt-20 pb-20 sm:pt-28">
-        <p className="label">{siteConfig.lab} · {siteConfig.name}</p>
-        <h1 className="mt-8 max-w-3xl text-[clamp(2.25rem,5vw,4rem)] leading-[1.05] tracking-tightest">
-          <span className="font-medium">Hugo</span>{" "}
-          <span className="text-ink-500">
-            sits beside the analyst — not in front of them.
-          </span>
-        </h1>
-        <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-ink-600">
-          A cybersecurity intelligence model trained to think the way good
-          analysts think: carefully, with calibrated confidence, and with the
-          discipline to say what it does not yet know.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <a
-            href={siteConfig.appUrl}
-            className="group inline-flex items-center gap-2 text-[15px] text-ink-900 underline-offset-4 hover:underline"
-          >
-            Open Hugo
-            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
-          </a>
-          <Link
-            href="#pricing"
-            className="group inline-flex items-center gap-2 text-[15px] text-ink-700 underline-offset-4 hover:text-ink-900 hover:underline"
-          >
-            See Hugo Pro
-            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      </section>
-
-      {/* CAPABILITIES */}
-      <section className="border-t border-rule">
-        <div className="container-page py-24 sm:py-28">
-          <span className="label">What Hugo is good at</span>
-          <h2 className="mt-6 max-w-2xl text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.15] tracking-tightest">
-            Four things Hugo is shaped to do well.
-          </h2>
-
-          <div className="mt-14 grid gap-12 sm:grid-cols-2">
-            {capabilities.map((c, i) => (
-              <div key={c.title}>
-                <span className="label">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 text-[20px] tracking-tightest text-ink-900">
-                  {c.title}
-                </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-ink-600">
-                  {c.text}
-                </p>
+      <section className="border-b border-hairline">
+        <div className="container-page py-24 sm:py-32">
+          <div className="grid gap-14 md:grid-cols-12">
+            <div className="md:col-span-7">
+              <span className="eyebrow">P-01 · Cyber language model</span>
+              <div className="mt-10">
+                <HugoWordmark className="h-24 w-auto text-ink sm:h-32" />
               </div>
-            ))}
+              <h1 className="display mt-12 text-[clamp(2rem,5vw,3.75rem)] leading-[1.05]">
+                Cybersecurity intelligence.{" "}
+                <em>For the people defending things.</em>
+              </h1>
+            </div>
+
+            <div className="md:col-span-5 md:mt-2">
+              <p className="lede max-w-md text-[18px] leading-[1.55] text-ink-2">
+                Hugo is a language model trained to do cyber defense work the
+                way good analysts do it: carefully, with calibrated
+                confidence, and with the discipline to say what it does not
+                yet know.
+              </p>
+              <p className="mt-5 max-w-md text-[15.5px] leading-[1.6] italic text-ink-2/85">
+                We should not cede the cyber advantage from AI to attackers
+                and criminals. Hugo is venode&apos;s contribution to keeping
+                that advantage with the defender.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <a href={siteConfig.appUrl} className="btn-primary">
+                  Open Hugo <ArrowRight className="h-3 w-3" />
+                </a>
+                <Link href="#pricing" className="btn-ghost">
+                  See pricing
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* TRANSCRIPTS */}
-      <section className="border-t border-rule">
-        <div className="container-page py-24 sm:py-28">
-          <span className="label">In conversation</span>
-          <h2 className="mt-6 max-w-2xl text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.15] tracking-tightest">
-            Three small scenes.
+      {/* CAPABILITIES */}
+      <section className="border-b border-hairline">
+        <div className="container-page py-24 sm:py-32">
+          <span className="eyebrow">What Hugo is shaped to do</span>
+          <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4vw,3rem)] leading-[1.08]">
+            Four habits, learned on purpose.
           </h2>
-          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-ink-600">
-            Illustrative transcripts of Hugo at work. Real Hugo, when you open
-            it, behaves the same way; these are condensed for reading.
+
+          <ol className="mt-14 grid gap-px bg-hairline sm:grid-cols-2">
+            {capabilities.map((c, i) => (
+              <li key={c.title} className="bg-bg p-7 sm:p-9">
+                <span className="font-mono text-[12px] uppercase text-accent" style={{ letterSpacing: "0.22em" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-4 font-display text-[20px] font-bold tracking-display text-ink">
+                  {c.title}
+                </h3>
+                <p className="mt-3 text-[16px] leading-[1.6] text-ink-2">
+                  {c.text}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* TRANSCRIPTS */}
+      <section className="border-b border-hairline">
+        <div className="container-page py-24 sm:py-32">
+          <span className="eyebrow">Three small scenes</span>
+          <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4vw,3rem)] leading-[1.08]">
+            Hugo, in conversation.
+          </h2>
+          <p className="mt-6 max-w-xl text-[17px] leading-[1.6] text-ink-2">
+            Illustrative transcripts. Real Hugo, when you open it, behaves the
+            same way; these are condensed for reading.
           </p>
 
-          <div className="mt-14 space-y-12">
+          <div className="mt-14 space-y-14">
             <Transcript
               label="A · Triaging an alert"
               lines={[
@@ -122,7 +135,7 @@ export default function HugoPage() {
                 },
                 {
                   who: "hugo",
-                  text: "Two things that change the answer: was wmic invoked from a script the user normally runs, and is the parent shell interactive? If both yes, lean low. If either no, treat as medium and pull the parent script. I'd want to see the script before I commit to a severity.",
+                  text: "Two things change the answer: was wmic invoked from a script the user normally runs, and is the parent shell interactive? If both yes, lean low. If either no, treat as medium and pull the parent script. I'd want to see the script before I commit to a severity.",
                 },
               ]}
             />
@@ -142,7 +155,7 @@ export default function HugoPage() {
             />
 
             <Transcript
-              label="C · Drafting the write-up"
+              label="C · Drafting the customer note"
               lines={[
                 {
                   who: "you",
@@ -158,75 +171,105 @@ export default function HugoPage() {
         </div>
       </section>
 
-      {/* CONNECTORS / PRO */}
-      <section id="pricing" className="border-t border-rule">
-        <div className="container-page py-24 sm:py-28">
-          <span className="label">Hugo Pro</span>
-          <h2 className="mt-6 max-w-2xl text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.15] tracking-tightest">
-            The same brain, with hands.
+      {/* PRICING / PRO */}
+      <section id="pricing" className="border-b border-hairline">
+        <div className="container-page py-24 sm:py-32">
+          <span className="eyebrow">P-01 · Pricing</span>
+          <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4vw,3rem)] leading-[1.08]">
+            One Hugo. <em>Free for the curious. Pro for the work.</em>
           </h2>
-          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-ink-600">
-            Hugo Pro keeps the model that already worked and gives it the
-            connectors, the context, and the API to be useful across an entire
-            investigation rather than a single message.
-          </p>
 
-          <div className="mt-12 grid gap-14 md:grid-cols-2">
-            <div>
-              <h3 className="label">Adds</h3>
-              <ul className="mt-4 space-y-3">
+          <div className="mt-14 grid gap-px bg-hairline md:grid-cols-2">
+            <div className="bg-bg p-8 sm:p-10">
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-display text-[24px] font-extrabold tracking-display text-ink">
+                  Free
+                </h3>
+                <span className="font-mono text-[13px] text-ink-2">
+                  $0
+                </span>
+              </div>
+              <p className="mt-2 text-[15px] text-ink-2">
+                For analysts, students and the curious.
+              </p>
+              <ul className="mt-8 space-y-3">
                 {[
-                  "Agentic workflows over multiple artefacts.",
-                  "Long-context investigations up to 200k tokens.",
-                  "Private connectors into your tools.",
-                  "Structured outputs (STIX, OpenCTI, MISP, JSON).",
-                  "API access with usage metering.",
-                  "Audit log of every reasoning step.",
+                  "Hugo on the fast model.",
+                  "Single-question triage and sample inspection.",
+                  "Public CTI references.",
+                  "Per-minute rate limit, no daily cap.",
                 ].map((x) => (
                   <li
                     key={x}
-                    className="flex items-baseline gap-3 text-[15px] leading-relaxed text-ink-700"
+                    className="flex items-baseline gap-3 text-[15px] leading-[1.55] text-ink"
                   >
-                    <span className="font-mono text-[11px] text-ink-400">—</span>
+                    <span className="font-mono text-[11px] text-ink-2/60">—</span>
                     <span>{x}</span>
                   </li>
                 ))}
               </ul>
+              <a href={siteConfig.appUrl} className="btn-primary mt-10">
+                Open Hugo <ArrowRight className="h-3 w-3" />
+              </a>
             </div>
 
-            <div>
-              <h3 className="label">Connects to</h3>
-              <ul className="mt-4 space-y-3">
-                {connectors.map((c) => (
+            <div className="bg-bg p-8 sm:p-10">
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-display text-[24px] font-extrabold tracking-display text-ink">
+                  Pro
+                </h3>
+                <span className="font-mono text-[13px] text-ink-2">
+                  $20 / month
+                </span>
+              </div>
+              <p className="mt-2 text-[15px] text-ink-2">
+                For teams who do this for a living.
+              </p>
+              <ul className="mt-8 space-y-3">
+                {[
+                  "Hugo on the thinking model.",
+                  "Multi-step investigations, agentic tool use.",
+                  "Long-context up to 200K tokens.",
+                  "Private connectors into your stack.",
+                  "Structured outputs (STIX, MISP, JSON).",
+                  "API access with usage metering.",
+                ].map((x) => (
                   <li
-                    key={c}
-                    className="flex items-baseline gap-3 text-[15px] leading-relaxed text-ink-700"
+                    key={x}
+                    className="flex items-baseline gap-3 text-[15px] leading-[1.55] text-ink"
                   >
-                    <span className="font-mono text-[11px] text-ink-400">—</span>
-                    <span>{c}</span>
+                    <span className="font-mono text-[11px] text-ink-2/60">—</span>
+                    <span>{x}</span>
                   </li>
                 ))}
               </ul>
+              <a href={siteConfig.appUrl} className="btn-primary mt-10">
+                Start Pro <ArrowRight className="h-3 w-3" />
+              </a>
             </div>
           </div>
 
-          <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-rule pt-10">
-            <span className="font-mono text-[15px] text-ink-700">
-              {siteConfig.tiers.pro.price}
-            </span>
-            <a
-              href={siteConfig.tiers.pro.href}
-              className="group inline-flex items-center gap-2 text-[15px] text-ink-900 underline-offset-4 hover:underline"
-            >
-              Start Pro
-              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
-            </a>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 text-[15px] text-ink-700 underline-offset-4 hover:text-ink-900 hover:underline"
-            >
-              Custom builds for teams
-              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+          <div className="mt-12">
+            <h3 className="eyebrow">Pro connects to</h3>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {connectors.map((c) => (
+                <li
+                  key={c}
+                  className="flex items-baseline gap-3 text-[15.5px] leading-[1.55] text-ink"
+                >
+                  <span className="font-mono text-[11px] text-ink-2/60">—</span>
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-hairline pt-10">
+            <Link href="/contact" className="btn-primary">
+              Custom builds for teams <ArrowRight className="h-3 w-3" />
+            </Link>
+            <Link href="/safety" className="btn-ghost">
+              Safety &amp; refusal behaviour
             </Link>
           </div>
         </div>
@@ -244,20 +287,21 @@ function Transcript({
 }) {
   return (
     <div>
-      <p className="label">{label}</p>
-      <div className="mt-4 space-y-4 border-l border-rule pl-6">
+      <span className="eyebrow">{label}</span>
+      <div className="mt-5 space-y-5 border-l border-hairline pl-6">
         {lines.map((l, i) => (
           <div key={i} className="flex gap-4">
             <span
-              className={`shrink-0 font-mono text-[12px] uppercase tracking-wider2 ${
-                l.who === "hugo" ? "text-ink-900" : "text-ink-400"
+              className={`shrink-0 font-mono text-[11px] uppercase ${
+                l.who === "hugo" ? "text-accent" : "text-ink-2/70"
               }`}
+              style={{ letterSpacing: "0.22em" }}
             >
               {l.who}
             </span>
             <p
-              className={`text-[15.5px] leading-relaxed ${
-                l.who === "hugo" ? "text-ink-800" : "text-ink-600"
+              className={`text-[16px] leading-[1.7] ${
+                l.who === "hugo" ? "text-ink" : "text-ink-2"
               }`}
             >
               {l.text}

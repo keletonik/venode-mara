@@ -1,81 +1,90 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/site.config";
-import { Mark } from "./Icons";
+import { VenodeWordmark } from "./Icons";
 
 const nav = [
+  { href: "/", label: "Home" },
   { href: "/hugo", label: "Hugo" },
+  { href: "/lab", label: "Lab" },
+  { href: "/journal", label: "Journal" },
   { href: "/research", label: "Research" },
-  { href: "/about", label: "Lab" },
-  { href: "/safety", label: "Safety" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-paper/85 backdrop-blur">
-      <div className="container-wide flex items-center justify-between py-5">
+    <header
+      className={`sticky top-0 z-40 bg-bg ${
+        scrolled ? "border-b border-hairline" : "border-b border-transparent"
+      } transition-colors`}
+    >
+      <div className="container-page flex h-[76px] items-center gap-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-ink-800"
+          className="text-[26px] sm:text-[30px]"
           onClick={() => setOpen(false)}
         >
-          <Mark className="h-3.5 w-3.5" />
-          <span className="text-[15px] tracking-tightest">
-            <a
-              href={siteConfig.labUrl}
-              className="text-ink-800 hover:text-ink-900"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {siteConfig.lab}
-            </a>
-            <span className="mx-1.5 text-ink-400">·</span>
-            <span className="text-ink-900">{siteConfig.name}</span>
-          </span>
+          <VenodeWordmark className="text-[26px] sm:text-[30px]" />
         </Link>
 
-        <nav className="hidden items-center gap-7 sm:flex">
+        <nav
+          aria-label="Primary"
+          className="ml-auto hidden items-center gap-7 sm:flex"
+        >
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-[14px] text-ink-500 transition hover:text-ink-900"
+              className="font-mono text-[13px] font-medium text-ink-2 transition hover:text-ink"
+              style={{ letterSpacing: "0.04em" }}
             >
               {item.label}
             </Link>
           ))}
-          <a
-            href={siteConfig.appUrl}
-            className="text-[14px] text-ink-900 underline-offset-4 hover:underline"
-          >
-            Open Hugo →
-          </a>
         </nav>
+
+        <a
+          href={siteConfig.appUrl}
+          className="hidden sm:inline-flex btn-primary"
+        >
+          Sign up
+        </a>
 
         <button
           type="button"
-          className="p-1 text-ink-700 hover:text-ink-900 sm:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
+          className="ml-auto inline-flex h-11 w-11 items-center justify-center border border-hair2 text-ink sm:hidden"
         >
-          <span className="text-[15px] tracking-tightest">
-            {open ? "×" : "menu"}
-          </span>
+          <div className="flex flex-col gap-1">
+            <span className="block h-[2px] w-[18px] bg-current" />
+            <span className="block h-[2px] w-[18px] bg-current" />
+            <span className="block h-[2px] w-[18px] bg-current" />
+          </div>
         </button>
       </div>
 
       {open && (
-        <nav className="border-t border-rule sm:hidden">
-          <div className="container-wide flex flex-col py-4">
+        <div className="border-t border-hairline bg-bg sm:hidden">
+          <div className="container-page flex flex-col py-6">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="py-2 text-[15px] text-ink-700 hover:text-ink-900"
+                className="border-b border-hairline py-4 font-display text-[26px] font-extrabold leading-none tracking-display text-ink"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -83,13 +92,13 @@ export default function Header() {
             ))}
             <a
               href={siteConfig.appUrl}
-              className="mt-2 py-2 text-[15px] text-ink-900"
+              className="btn-primary mt-6 self-start"
               onClick={() => setOpen(false)}
             >
-              Open Hugo →
+              Sign up
             </a>
           </div>
-        </nav>
+        </div>
       )}
     </header>
   );

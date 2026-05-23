@@ -11,21 +11,20 @@ export const metadata = pageMetadata({
 
 export default function SafetyPage() {
   return (
-    <article className="container-page pt-20 pb-24 sm:pt-28">
-      <p className="label">Safety</p>
-      <h1 className="mt-8 max-w-3xl text-[clamp(2.25rem,5vw,4rem)] leading-[1.05] tracking-tightest">
-        <span className="font-medium">Safety</span>{" "}
-        <span className="text-ink-500">is the work, not the disclaimer.</span>
+    <article className="container-page py-24 sm:py-32">
+      <span className="eyebrow">L-02 · Safety</span>
+      <h1 className="display mt-7 max-w-3xl text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.04]">
+        Safety is the work, <em>not the disclaimer.</em>
       </h1>
-      <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-ink-600">
-        Hugo is a dual-use tool by definition. Everything that helps a
+      <p className="mt-8 max-w-xl text-[18px] leading-[1.55] text-ink-2">
+        Hugo is a dual-use tool by definition. Almost everything that helps a
         defender investigate an attack would help an attacker plan one. We
-        take that seriously and write down our position clearly.
+        take that seriously, draw the lines explicitly, and write them down.
       </p>
 
-      <div className="mt-16 max-w-prose space-y-14 text-[17px] leading-[1.7] text-ink-700">
+      <div className="mt-16 max-w-prose space-y-14">
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
             What Hugo will not do.
           </h2>
           <ul className="mt-5 space-y-3">
@@ -33,16 +32,19 @@ export default function SafetyPage() {
               "Author functional offensive code targeting a specific named victim, environment or asset.",
               "Author novel exploit code for unpatched vulnerabilities.",
               "Help with operational planning of intrusions, fraud or extortion.",
-              "Defame, doxx or attribute attacks to identifiable individuals.",
+              "Defame, doxx, or attribute attacks to identifiable individuals.",
               "Produce content for harassment, child safety violations, or other prohibited categories.",
             ].map((x) => (
-              <li key={x} className="flex items-baseline gap-3">
-                <span className="font-mono text-[11px] text-ink-400">—</span>
+              <li
+                key={x}
+                className="flex items-baseline gap-4 text-[16.5px] leading-[1.65] text-ink"
+              >
+                <span className="font-mono text-[11px] text-accent">—</span>
                 <span>{x}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-5 text-[15px] text-ink-500">
+          <p className="mt-5 font-serif text-[15.5px] italic leading-[1.55] text-ink-2">
             These boundaries are enforced through training, refusal behaviour
             and a separate review layer. They are not perfect. The model card
             documents the failure modes we have measured.
@@ -50,7 +52,7 @@ export default function SafetyPage() {
         </section>
 
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
             What Hugo will help with.
           </h2>
           <ul className="mt-5 space-y-3">
@@ -60,8 +62,11 @@ export default function SafetyPage() {
               "Reasoning about adversary TTPs at the level of frameworks like ATT&CK.",
               "Writing the artefact: post-mortems, customer notes, runbooks, detection rules.",
             ].map((x) => (
-              <li key={x} className="flex items-baseline gap-3">
-                <span className="font-mono text-[11px] text-ink-400">—</span>
+              <li
+                key={x}
+                className="flex items-baseline gap-4 text-[16.5px] leading-[1.65] text-ink"
+              >
+                <span className="font-mono text-[11px] text-accent">—</span>
                 <span>{x}</span>
               </li>
             ))}
@@ -69,10 +74,10 @@ export default function SafetyPage() {
         </section>
 
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
             How we evaluate.
           </h2>
-          <p className="mt-5">
+          <p className="mt-5 text-[17px] leading-[1.75] text-ink">
             We test Hugo on the work, not on trivia. Our evaluation panel
             includes practising SOC analysts, IR consultants, threat-intel
             leads and an external red team. They run live cases, score
@@ -83,20 +88,20 @@ export default function SafetyPage() {
         </section>
 
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
             Responsible disclosure.
           </h2>
-          <p className="mt-5">
+          <p className="mt-5 text-[17px] leading-[1.75] text-ink">
             If you find a way to make Hugo do something it should not, or a
             failure of judgement that matters, please tell us before telling
             anyone else. We respond inside one business day and credit
             researchers who would like to be credited.
           </p>
-          <p className="mt-4">
+          <p className="mt-4 text-[17px] leading-[1.75] text-ink">
             Email{" "}
             <a
               href={`mailto:${siteConfig.contactEmail}?subject=Safety%20report`}
-              className="text-ink-900 underline-offset-4 hover:underline"
+              className="text-ink underline-offset-4 hover:underline"
             >
               {siteConfig.contactEmail}
             </a>{" "}
@@ -105,17 +110,17 @@ export default function SafetyPage() {
         </section>
 
         <section>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.875rem)] tracking-tightest text-ink-900">
-            A note on the boundary.
+          <h2 className="font-display text-[clamp(1.5rem,2.75vw,2rem)] font-bold leading-[1.2] tracking-display text-ink">
+            On the boundary itself.
           </h2>
-          <p className="mt-5">
+          <p className="mt-5 text-[17px] leading-[1.75] text-ink">
             Where the line between defensive and offensive sits is a judgement
-            call, and not always ours alone. We talk about specific cases in
-            our research notes — including the ones where we changed our
-            minds. Read{" "}
+            call, and not always ours alone. We write up specific cases in our
+            research notes — including the ones where we changed our minds.
+            Read{" "}
             <Link
               href="/research/working-in-the-open"
-              className="text-ink-900 underline-offset-4 hover:underline"
+              className="text-ink underline-offset-4 hover:underline"
             >
               Working in the open
             </Link>{" "}

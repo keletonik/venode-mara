@@ -1,45 +1,57 @@
-# Hugo — a Venode Labs marketing site
+# Hugo — a venode product
 
-A research-lab style marketing site for **Hugo**, a cybersecurity
-intelligence language model from **Venode Labs**. Built in the
-typographic, restrained aesthetic of `venode.ai`.
+Marketing site for **Hugo**, a cybersecurity intelligence language model
+from **venode**. Built as a sibling property to `venode.ai`, sharing the
+parent lab's design system: warm-cream paper, oxblood accent, Inter
+Display + Lora + Geist Mono typography, the `venode_` wordmark and the
+`vo.` footer monogram.
 
-## What it is
+Hugo's positioning draws on the established framework for cyber-defense
+AI (defenders, dual-use honesty, calibrated confidence, refusal-first
+safety) and applies it to a venode-grown model.
 
-A static Next.js site presenting Hugo the way a serious AI lab presents a
-model: hero, product tiers, research areas, custom builds for teams,
-research notes, safety page, about, contact. No tools, no affiliate
-links — this is product positioning.
+## Identity
 
-## Stack
+Colour tokens are mirrored from `venode.ai`:
 
-- Next.js 15 (App Router) · React 19 · TypeScript
-- Tailwind CSS 3
-- `next/font/google` — Geist Sans + Geist Mono
-- No backend, no database, deployable to Vercel free tier
+| Token | Value |
+|---|---|
+| `--bg` (page) | `#FAF9F5` |
+| `--surface` (warm band) | `#F1EDE2` |
+| `--ink` (text) | `#141412` |
+| `--ink-2` (subdued) | `#5A5854` |
+| `--accent` (oxblood) | `#8E2436` |
+| `--oxblood` (Hugo wordmark) | `#5C1A24` |
+| `--cream-warm` (footer text) | `#F4F1EA` |
 
-## Edit
+Typography:
 
-All copy and product configuration lives in **two places**:
+- `Inter` at heavy weights stands in for Inter Display on the marque
+- `Lora` (serif) for body copy
+- `Geist Mono` for labels, eyebrows and CTAs
 
-1. `site.config.ts` — brand, tagline, URLs, contact email, product tiers.
-2. `lib/research.ts` — the research notes, written as structured data.
+Marks:
 
-To add a research note, push a new entry to the `notes` array.
-
-To swap the model name (e.g. for a second product alongside Hugo),
-update `siteConfig.name` and `siteConfig.displayName`.
+- `<VenodeWordmark/>` — `venode_` with the o in accent + blinking cursor
+- `<VoMark/>` — `vo.` monogram for the black footer slab
+- `<HugoWordmark/>` — geometric stroke wordmark, the o in deep oxblood
 
 ## Pages
 
-- `/` — Hero, "One Hugo" tiers, research areas, custom builds, latest notes.
-- `/hugo` — Product detail with capability breakdown, transcripts and Pro.
-- `/research` — All research notes.
-- `/research/[slug]` — Individual notes.
-- `/safety` — What Hugo will and will not do.
-- `/about` — About Venode Labs.
-- `/contact` — Channels in / contact addresses.
-- `/privacy` — Plain privacy statement.
+- `/` — Hero, `P-01` Hugo feature with the wordmark + `One Hugo. Tiered by plan.`, `Venode Labs.` with research areas, `L-01` custom builds warm band, `Built in the open` final CTA.
+- `/hugo` — Product detail. Capabilities, three illustrative transcripts, Pro tier + connectors, custom-build CTA.
+- `/research` + `/research/[slug]` — Research notes (R-01 … R-04).
+- `/safety` — Dual-use boundaries, refusal behaviour, responsible disclosure.
+- `/about` — Venode lab statement.
+- `/contact` — Channels.
+- `/privacy` — Short, plain.
+
+## Edit
+
+Everything brand- and product-level lives in `site.config.ts`. Notes
+live in `lib/research.ts`. To add a note, push a new entry to the
+`notes` array — it appears automatically in the research index,
+sitemap, and footer "News" column.
 
 ## Deploy
 
@@ -49,14 +61,8 @@ npm run dev      # http://localhost:3000
 npm run build    # production build
 ```
 
-Import the repo on Vercel → Deploy. Point a domain at the project, set
-`siteConfig.url` to that domain, and the site is live.
+Stack: Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 3
+· `next/font/google` for Inter / Lora / Geist Mono.
 
-## Identity
-
-- Cream paper background (`#faf8f3`) · charcoal ink (`#1a1a18`)
-- No accent colour — emphasis through weight, italics and whitespace
-- Lowercase wordmark with a dot separator: `venode · hugo`
-- Numbered sections (`01`, `02`, `03`, `04`)
-- Text CTAs with arrows (`Open Hugo →`); no buttons
-- Geist Sans for everything, Geist Mono for labels and code
+Deployable to Vercel free tier. No database, no environment variables
+required.

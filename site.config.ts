@@ -1,73 +1,52 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────
- *  SITE CONFIG  —  Hugo · a Venode Labs product
- * ─────────────────────────────────────────────────────────────────────────
- *  Edit this file and redeploy. Everything else reads from here.
+ *  SITE CONFIG  —  Hugo · a venode research lab product
+ *  Cybersecurity intelligence model. One file to edit before deploy.
  * ─────────────────────────────────────────────────────────────────────────
  */
 
 export const siteConfig = {
-  /** Lab / parent brand */
+  /** Parent lab brand */
   lab: "venode",
-  /** Product name */
+  /** Product */
   name: "hugo",
-  /** Long display title used in page metadata */
   displayName: "Hugo",
 
   /** One-line product positioning */
   tagline: "A cybersecurity intelligence model.",
 
   description:
-    "Hugo is a language model from Venode Labs trained on threat reports, " +
-    "malware analyses, incident write-ups and adversary playbooks. It is " +
-    "built for the people who defend things.",
+    "Hugo is venode's language model for cyber defense. Trained on threat " +
+    "reports, malware analyses, incident write-ups and adversary playbooks " +
+    "— built for the people defending things.",
 
-  /**
-   * Your live URL. CHANGE THIS to your real domain before launch — it is
-   * used for canonical tags, sitemap, robots.txt and social metadata.
-   */
+  /** Update before launch. Used for canonicals, sitemap, OG. */
   url: "https://hugo.venode.ai",
 
-  /** Parent lab URL (used in the wordmark link) */
+  /** Parent lab URL. */
   labUrl: "https://venode.ai",
 
-  /** Where the "Open Hugo" CTA points. Replace with your app URL. */
+  /** Where "Open Hugo" / "Sign up" point. */
   appUrl: "https://hugo.venode.ai/chat",
 
-  /** Where the "Talk to us" CTAs point. */
-  contactEmail: "hugo@venode.ai",
+  /** Where contact CTAs send mail. */
+  contactEmail: "hello@venode.ai",
 
-  /** Repo, social, etc. — leave "" to hide. */
-  github: "https://github.com/venode",
+  /** Social. Leave "" to hide. */
+  github: "",
   twitter: "",
 
-  /** Headline pricing tiers shown on the home page. */
+  /** Hugo's two-tier offering, matching venode's "One Hugo, tiered by plan" model. */
   tiers: {
     free: {
-      name: "Hugo",
-      price: "Free",
-      blurb: "For analysts, students and the curious.",
-      features: [
-        "Chat with Hugo on threat intel, malware and IR.",
-        "Single-file sample and report analysis.",
-        "Public threat-intelligence references.",
-        "5,000 tokens of context.",
-      ],
-      cta: "Open Hugo",
-      href: "https://hugo.venode.ai/chat",
+      name: "Free",
+      blurb:
+        "Hugo on the fast model. Single-question triage, sample inspection, public CTI sources. Per-minute rate limit, no daily cap.",
     },
     pro: {
-      name: "Hugo Pro",
-      price: "$20 / month",
-      blurb: "For teams who do this for a living.",
-      features: [
-        "Agentic workflows across multiple artefacts.",
-        "Private connectors: SIEM, EDR, ticketing, sandbox.",
-        "Long-context investigations up to 200k tokens.",
-        "API access and structured outputs.",
-      ],
-      cta: "Start Pro",
-      href: "https://hugo.venode.ai/pro",
+      name: "Pro",
+      blurb:
+        "Hugo on the thinking model. Multi-step investigations, private connectors, structured outputs and long context up to 200K tokens.",
     },
   },
 } as const;
