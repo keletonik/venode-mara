@@ -1,108 +1,111 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { tools } from "@/lib/tools";
-import { guides } from "@/lib/guides";
-import { Logo } from "./Icons";
+import { Mark } from "./Icons";
+
+const columns = [
+  {
+    title: "Products",
+    links: [
+      { href: "/hugo", label: "Hugo" },
+      { href: "/hugo#pro", label: "Hugo Pro" },
+      { href: "/contact", label: "Custom builds" },
+    ],
+  },
+  {
+    title: "Research",
+    links: [
+      { href: "/research", label: "Notes" },
+      { href: "/safety", label: "Safety" },
+    ],
+  },
+  {
+    title: "Lab",
+    links: [
+      { href: "/about", label: "About Venode" },
+      { href: siteConfig.labUrl, label: "venode.ai ↗", external: true },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { href: "/contact", label: "Contact" },
+      {
+        href: `mailto:${siteConfig.contactEmail}`,
+        label: siteConfig.contactEmail,
+      },
+      ...(siteConfig.github
+        ? [{ href: siteConfig.github, label: "GitHub ↗", external: true }]
+        : []),
+    ],
+  },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-ink-700 bg-ink-950">
-      <div className="container-wide grid gap-12 py-14 md:grid-cols-12">
+    <footer className="mt-32 border-t border-rule">
+      <div className="container-wide grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-4">
-          <div className="flex items-center gap-2.5">
-            <Logo className="h-7 w-7" />
-            <span className="font-mono text-sm font-medium uppercase tracking-widewide text-cream">
-              {siteConfig.name}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-ink-800"
+          >
+            <Mark className="h-3.5 w-3.5" />
+            <span className="text-[15px] tracking-tightest">
+              {siteConfig.lab}
+              <span className="mx-1.5 text-ink-400">·</span>
+              <span className="text-ink-900">{siteConfig.name}</span>
             </span>
-          </div>
-          <p className="mt-4 max-w-xs font-display text-xl leading-snug text-cream/90">
-            {siteConfig.tagline}
-          </p>
-          <p className="mt-3 text-sm text-ash">
-            Every tool runs in your browser. We never see or store what you
-            type.
+          </Link>
+          <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-ink-500">
+            A cybersecurity intelligence model from Venode Labs. Quiet
+            research, working tools.
           </p>
         </div>
 
-        <FooterCol num="01" title="Tools">
-          {tools.map((t) => (
-            <FooterLink key={t.slug} href={`/tools/${t.slug}`}>
-              {t.name}
-            </FooterLink>
-          ))}
-        </FooterCol>
-
-        <FooterCol num="02" title="Guides">
-          {guides.map((g) => (
-            <FooterLink key={g.slug} href={`/guides/${g.slug}`}>
-              {g.title}
-            </FooterLink>
-          ))}
-        </FooterCol>
-
-        <FooterCol num="03" title="Site">
-          <FooterLink href="/about">About</FooterLink>
-          <FooterLink href="/privacy">Privacy</FooterLink>
-          <FooterLink href="/disclosure">Affiliate disclosure</FooterLink>
-        </FooterCol>
+        {columns.map((c) => (
+          <div key={c.title} className="md:col-span-2">
+            <h3 className="label">{c.title}</h3>
+            <ul className="mt-4 space-y-2.5">
+              {c.links.map((l) => (
+                <li key={l.label}>
+                  {"external" in l && l.external ? (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-[14px] text-ink-700 hover:text-ink-900"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={l.href}
+                      className="text-[14px] text-ink-700 hover:text-ink-900"
+                    >
+                      {l.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
-      <div className="border-t border-ink-700">
-        <div className="container-wide flex flex-col gap-3 py-6 text-xs text-ash sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono uppercase tracking-widewide">
-            © {year} {siteConfig.name} — Educational. No warranty.
+      <div className="border-t border-rule">
+        <div className="container-wide flex flex-col gap-2 py-6 text-[13px] text-ink-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} Venode Labs. {siteConfig.displayName} is a research preview.
           </p>
           <p>
-            Some links are affiliate links;{" "}
-            <Link href="/disclosure" className="text-cream hover:text-accent">
-              full disclosure →
+            <Link href="/privacy" className="hover:text-ink-900">
+              Privacy
             </Link>
           </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({
-  num,
-  title,
-  children,
-}: {
-  num: string;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="md:col-span-3">
-      <div className="flex items-baseline gap-2">
-        <span className="font-mono text-xs text-ash/60">// {num}</span>
-        <h3 className="font-mono text-xs uppercase tracking-widewide text-cream">
-          {title}
-        </h3>
-      </div>
-      <ul className="mt-4 space-y-2.5">{children}</ul>
-    </div>
-  );
-}
-
-function FooterLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <li>
-      <Link
-        href={href}
-        className="text-sm text-ash transition hover:text-accent"
-      >
-        {children}
-      </Link>
-    </li>
   );
 }

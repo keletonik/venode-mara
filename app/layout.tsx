@@ -1,27 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/site.config";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const inter = Inter({
+const sans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const serif = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
+const mono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
@@ -30,16 +21,16 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
+    default: `${siteConfig.displayName} · ${siteConfig.tagline}`,
+    template: `%s · ${siteConfig.displayName}`,
   },
   description: siteConfig.description,
-  applicationName: siteConfig.name,
+  applicationName: siteConfig.displayName,
   robots: { index: true, follow: true },
 };
 
 export const viewport = {
-  themeColor: "#05070a",
+  themeColor: "#faf8f3",
 };
 
 export default function RootLayout({
@@ -47,44 +38,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { enabled, adsenseClient } = siteConfig.ads;
-
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${serif.variable} ${mono.variable}`}
-    >
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            description: siteConfig.description,
+            name: "Venode Labs",
+            url: siteConfig.labUrl,
           }}
         />
         <JsonLd
           data={{
             "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: siteConfig.name,
+            "@type": "SoftwareApplication",
+            name: siteConfig.displayName,
+            applicationCategory: "SecurityApplication",
+            description: siteConfig.description,
             url: siteConfig.url,
           }}
         />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-
-        {enabled && adsenseClient ? (
-          <Script
-            id="adsense-loader"
-            async
-            strategy="afterInteractive"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-            crossOrigin="anonymous"
-          />
-        ) : null}
       </body>
     </html>
   );

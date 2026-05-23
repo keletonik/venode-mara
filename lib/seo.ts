@@ -12,10 +12,13 @@ export function pageMetadata(opts: {
   keywords?: string[];
 }): Metadata {
   const url = canonical(opts.path);
-  const fullTitle =
-    opts.title === siteConfig.name
-      ? `${siteConfig.name} — ${siteConfig.tagline}`
-      : `${opts.title} | ${siteConfig.name}`;
+  const isHome = opts.path === "/";
+  const dedupe = opts.title.toLowerCase() === siteConfig.displayName.toLowerCase();
+  const fullTitle = isHome
+    ? `${siteConfig.displayName} · ${siteConfig.tagline}`
+    : dedupe
+      ? `${siteConfig.displayName} · ${siteConfig.tagline}`
+      : `${opts.title} · ${siteConfig.displayName}`;
 
   return {
     title: { absolute: fullTitle },
@@ -26,7 +29,7 @@ export function pageMetadata(opts: {
       title: fullTitle,
       description: opts.description,
       url,
-      siteName: siteConfig.name,
+      siteName: siteConfig.displayName,
       type: "website",
     },
     twitter: {

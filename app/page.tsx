@@ -1,38 +1,60 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { tools } from "@/lib/tools";
-import { guides } from "@/lib/guides";
+import { notes } from "@/lib/research";
 import { pageMetadata } from "@/lib/seo";
-import { ToolCard, GuideCard } from "@/components/Cards";
-import { Icon } from "@/components/Icons";
+import { ArrowRight } from "@/components/Icons";
 
 export const metadata = pageMetadata({
-  title: siteConfig.name,
+  title: siteConfig.displayName,
   description: siteConfig.description,
   path: "/",
   keywords: [
-    "free cybersecurity tools",
-    "password breach checker",
-    "is this link safe",
-    "online security tools",
+    "cybersecurity language model",
+    "threat intelligence ai",
+    "hugo venode",
+    "security llm",
   ],
 });
 
-const trust = [
+const researchAreas = [
   {
     n: "01",
-    title: "Browser-only",
-    text: "Every tool runs locally. Passwords and links never reach a server.",
+    title: "Threat intelligence",
+    text: "Hugo reads CTI reports, normalises IOCs, builds attribution timelines and tells you what it does not know.",
   },
   {
     n: "02",
-    title: "No signup, no cost",
-    text: "No accounts, no email, no paywall. Open a tool and use it instantly.",
+    title: "Malware analysis",
+    text: "Reasoning over disassembly, sandbox traces, behaviour and YARA rules. Hypotheses before conclusions.",
   },
   {
     n: "03",
-    title: "Real breach data",
-    text: "Checks query the industry-standard k-anonymity model — accurate and anonymous.",
+    title: "Incident response",
+    text: "Triage at speed: question the alert, follow the trail, draft the write-up. Sit beside the analyst, not in front of them.",
+  },
+  {
+    n: "04",
+    title: "Adversary simulation",
+    text: "TTP libraries, plausible attacker plans, blue-team practice. Useful for the people preparing for the next one.",
+  },
+];
+
+const customBuilds = [
+  {
+    title: "For your stack.",
+    text: "Connect Hugo to your SIEM, EDR, ticketing system and sandbox. We provide the connectors; your data does not leave your environment.",
+  },
+  {
+    title: "On your data.",
+    text: "Fine-tune on your detection logic, runbooks, and historical incidents. Hugo learns how your team thinks.",
+  },
+  {
+    title: "In your environment.",
+    text: "On-premise, in your VPC, or in our managed service. Pick the deployment that your security team can sign off on.",
+  },
+  {
+    title: "With our guarantees.",
+    text: "Model cards, eval reports, red-team writeups and refusal behaviour documented before, not after.",
   },
 ];
 
@@ -40,191 +62,198 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-ink-700">
-        {/* glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(55% 50% at 25% 0%, rgba(190,242,100,0.10), transparent 70%)",
-          }}
-        />
-        <div className="container-wide relative pb-24 pt-16 sm:pt-24">
-          {/* status bar */}
-          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-widewide text-ash">
-            <span className="live-dot" />
-            <span className="text-cream">
-              Threat intelligence · live
+      <section className="container-page pt-20 pb-24 sm:pt-32 sm:pb-32">
+        <div className="max-w-3xl">
+          <p className="label">Venode Labs · A research preview</p>
+
+          <h1 className="mt-10 font-sans text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.05] tracking-tightest text-ink-900">
+            <span className="font-medium">Hugo.</span>{" "}
+            <span className="text-ink-500">
+              A cybersecurity intelligence model.
             </span>
-            <span className="h-px flex-1 bg-ink-700" />
-            <span>v1.0</span>
-          </div>
+          </h1>
 
-          <div className="mt-12 grid items-end gap-10 md:grid-cols-12">
-            <div className="md:col-span-8">
-              <h1 className="font-display text-[clamp(2.75rem,7vw,5.5rem)] leading-[1.02] tracking-tightest text-cream">
-                Find out if you&apos;ve been{" "}
-                <em className="text-accent">exposed</em>.
-              </h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300">
-                A free toolkit for the everyday threats that actually catch
-                people out — reused passwords, phishing links, weak secrets.
-                Everything runs in your browser. We never see what you type.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/tools/password-checker"
-                  className="group inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-xs uppercase tracking-widewide text-ink-950 transition hover:bg-accent-soft"
-                >
-                  Check my password
-                  <Icon
-                    name="arrow"
-                    className="h-4 w-4 transition group-hover:translate-x-0.5"
-                  />
-                </Link>
-                <Link
-                  href="/tools"
-                  className="inline-flex items-center gap-2 border border-ink-600 px-5 py-3 font-mono text-xs uppercase tracking-widewide text-cream transition hover:border-accent/60 hover:text-accent"
-                >
-                  All tools
-                </Link>
-              </div>
-            </div>
+          <p className="mt-8 max-w-xl text-[18px] leading-relaxed text-ink-600">
+            Trained on threat reports, malware analyses, incident write-ups and
+            adversary playbooks. Built for the people defending things — to
+            triage at speed, to reason carefully under uncertainty, and to
+            produce the work.
+          </p>
 
-            {/* terminal-style stats panel */}
-            <div className="md:col-span-4">
-              <div className="border border-ink-700 bg-ink-900/70 p-5">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-widewide text-ash">
-                    // Stat
-                  </span>
-                  <span className="font-mono text-[11px] text-ash/70">
-                    breach-db
-                  </span>
-                </div>
-                <p className="mt-4 font-display text-5xl leading-none tracking-tightest text-cream">
-                  14B+
-                </p>
-                <p className="mt-2 text-sm text-ash">
-                  Leaked passwords this toolkit can check yours against —
-                  privately, in your browser, in under a second.
-                </p>
-                <div className="mt-4 border-t border-ink-700 pt-4">
-                  <span className="font-mono text-[11px] uppercase tracking-widewide text-ash/70">
-                    Average exposure
-                  </span>
-                  <p className="mt-1 font-mono text-sm text-cream">
-                    81% of people reuse at least one password.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a
+              href={siteConfig.appUrl}
+              className="group inline-flex items-center gap-2 text-[15px] text-ink-900 underline-offset-4 hover:underline"
+            >
+              Open Hugo
+              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+            </a>
+            <Link
+              href="/research"
+              className="group inline-flex items-center gap-2 text-[15px] text-ink-700 underline-offset-4 hover:text-ink-900 hover:underline"
+            >
+              Read research
+              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* TRUST STRIP */}
-      <section className="border-b border-ink-700">
-        <div className="container-wide grid gap-px bg-ink-700 sm:grid-cols-3">
-          {trust.map((t) => (
-            <div key={t.n} className="bg-ink-950 p-7">
-              <div className="flex items-baseline gap-2">
-                <span className="font-mono text-xs text-accent">// {t.n}</span>
-                <span className="font-mono text-xs uppercase tracking-widewide text-cream">
-                  {t.title}
-                </span>
+      {/* ONE HUGO — pricing */}
+      <section id="pricing" className="border-t border-rule">
+        <div className="container-page py-24 sm:py-32">
+          <div className="flex items-baseline gap-4">
+            <span className="label">01 — Product</span>
+          </div>
+          <h2 className="mt-6 max-w-2xl text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tightest">
+            One Hugo.{" "}
+            <span className="text-ink-500">Free for analysts. Pro for teams.</span>
+          </h2>
+          <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink-600">
+            We do not split the model. The same Hugo answers a curious student
+            and a tier-3 SOC analyst. Pro adds the connectors, the context, and
+            the API — not a different brain.
+          </p>
+
+          <div className="mt-14 grid gap-px bg-rule md:grid-cols-2">
+            <Tier tier={siteConfig.tiers.free} />
+            <Tier tier={siteConfig.tiers.pro} />
+          </div>
+        </div>
+      </section>
+
+      {/* RESEARCH AREAS */}
+      <section className="border-t border-rule">
+        <div className="container-page py-24 sm:py-32">
+          <span className="label">02 — Research areas</span>
+          <h2 className="mt-6 max-w-2xl text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tightest">
+            Where Hugo is most at home.
+          </h2>
+
+          <div className="mt-14 grid gap-px bg-rule sm:grid-cols-2">
+            {researchAreas.map((area) => (
+              <div key={area.n} className="bg-paper p-8 sm:p-10">
+                <span className="label">{area.n}</span>
+                <h3 className="mt-3 text-[22px] tracking-tightest text-ink-900">
+                  {area.title}
+                </h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-ink-600">
+                  {area.text}
+                </p>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-ash">{t.text}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* TOOLS */}
-      <section className="container-wide py-20">
-        <SectionHeader
-          eyebrow="§ 01 — The toolkit"
-          title="Six focused tools."
-          tail={
+      {/* CUSTOM BUILDS */}
+      <section className="border-t border-rule">
+        <div className="container-page py-24 sm:py-32">
+          <span className="label">03 — Custom builds</span>
+          <h2 className="mt-6 max-w-2xl text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tightest">
+            Bring Hugo to your stack.
+          </h2>
+          <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink-600">
+            For SOCs, MSSPs, threat-intel teams and IR retainers who need Hugo
+            to live where their data already does.
+          </p>
+
+          <div className="mt-14 grid gap-12 sm:grid-cols-2">
+            {customBuilds.map((c) => (
+              <div key={c.title}>
+                <h3 className="text-[19px] tracking-tightest text-ink-900">
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-ink-600">
+                  {c.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12">
             <Link
-              href="/tools"
-              className="font-mono text-xs uppercase tracking-widewide text-accent hover:underline"
+              href="/contact"
+              className="group inline-flex items-center gap-2 text-[15px] text-ink-900 underline-offset-4 hover:underline"
             >
-              View all →
+              Talk to us about a custom build
+              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
             </Link>
-          }
-        />
-        <div className="mt-10 grid gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map((tool) => (
-            <div key={tool.slug} className="bg-ink-950">
-              <ToolCard tool={tool} />
-            </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* GUIDES */}
-      <section className="container-wide pb-20">
-        <SectionHeader
-          eyebrow="§ 02 — Field notes"
-          title={
-            <>
-              Plain-English guides,{" "}
-              <em className="text-ash">written carefully.</em>
-            </>
-          }
-          tail={
+      {/* LATEST RESEARCH */}
+      <section className="border-t border-rule">
+        <div className="container-page py-24 sm:py-32">
+          <div className="flex items-end justify-between">
+            <div>
+              <span className="label">04 — Recent notes</span>
+              <h2 className="mt-6 max-w-2xl text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tightest">
+                From the lab.
+              </h2>
+            </div>
             <Link
-              href="/guides"
-              className="font-mono text-xs uppercase tracking-widewide text-accent hover:underline"
+              href="/research"
+              className="hidden text-[15px] text-ink-700 underline-offset-4 hover:text-ink-900 hover:underline sm:inline-block"
             >
-              All guides →
+              All notes →
             </Link>
-          }
-        />
-        <div className="mt-10 grid gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.slice(0, 3).map((guide) => (
-            <div key={guide.slug} className="bg-ink-950">
-              <GuideCard guide={guide} />
-            </div>
-          ))}
+          </div>
+
+          <ul className="mt-12 divide-y divide-rule border-y border-rule">
+            {notes.slice(0, 4).map((n) => (
+              <li key={n.slug}>
+                <Link
+                  href={`/research/${n.slug}`}
+                  className="group flex items-baseline gap-6 py-6 transition hover:bg-paper-alt/40"
+                >
+                  <span className="label w-10 shrink-0">{n.num}</span>
+                  <span className="flex-1">
+                    <span className="text-[20px] tracking-tightest text-ink-900 group-hover:underline">
+                      {n.title}
+                    </span>
+                    <span className="mt-1 block max-w-2xl text-[15px] leading-relaxed text-ink-500">
+                      {n.description}
+                    </span>
+                  </span>
+                  <span className="hidden font-mono text-[12px] text-ink-400 sm:inline">
+                    {n.readingMinutes} min
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* CLOSING CTA */}
-      <section className="container-wide pb-20">
-        <div className="relative border border-ink-700 bg-ink-900 p-10 sm:p-16">
-          <span
-            aria-hidden="true"
-            className="absolute -left-px -top-px h-4 w-4 border-l border-t border-accent"
-          />
-          <span
-            aria-hidden="true"
-            className="absolute -bottom-px -right-px h-4 w-4 border-b border-r border-accent"
-          />
+      {/* CLOSING */}
+      <section className="border-t border-rule">
+        <div className="container-page py-24 sm:py-32">
           <div className="max-w-2xl">
-            <span className="font-mono text-xs uppercase tracking-widewide text-accent">
-              // 10 seconds
-            </span>
-            <h2 className="mt-3 font-display text-4xl leading-tight tracking-tightest text-cream sm:text-5xl">
-              The most common way people get hacked is{" "}
-              <em>a password that already leaked</em>.
-            </h2>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-ash">
-              Find out if yours has, privately, in your browser. Then fix it
-              once and never have to think about it again.
+            <p className="text-[clamp(1.5rem,2.5vw,2rem)] leading-[1.25] tracking-tightest text-ink-900">
+              We are building Hugo carefully, in public, with the people who
+              have done this work for a long time.{" "}
+              <span className="text-ink-500">
+                Read about what we will and will not ship, and why.
+              </span>
             </p>
-            <Link
-              href="/tools/password-checker"
-              className="group mt-8 inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-xs uppercase tracking-widewide text-ink-950 transition hover:bg-accent-soft"
-            >
-              Run the breach check
-              <Icon
-                name="arrow"
-                className="h-4 w-4 transition group-hover:translate-x-0.5"
-              />
-            </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+              <Link
+                href="/safety"
+                className="group inline-flex items-center gap-2 text-[15px] text-ink-900 underline-offset-4 hover:underline"
+              >
+                Safety &amp; disclosure
+                <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-2 text-[15px] text-ink-700 underline-offset-4 hover:text-ink-900 hover:underline"
+              >
+                About Venode Labs
+                <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -232,26 +261,40 @@ export default function HomePage() {
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  tail,
+function Tier({
+  tier,
 }: {
-  eyebrow: string;
-  title: React.ReactNode;
-  tail?: React.ReactNode;
+  tier: (typeof siteConfig.tiers)[keyof typeof siteConfig.tiers];
 }) {
   return (
-    <div className="flex flex-col gap-5 border-b border-ink-700 pb-6 md:flex-row md:items-end md:justify-between">
-      <div>
-        <span className="font-mono text-xs uppercase tracking-widewide text-ash">
-          {eyebrow}
-        </span>
-        <h2 className="mt-3 font-display text-4xl leading-tight tracking-tightest text-cream sm:text-5xl">
-          {title}
-        </h2>
+    <div className="bg-paper p-8 sm:p-10">
+      <div className="flex items-baseline justify-between">
+        <h3 className="text-[22px] tracking-tightest text-ink-900">
+          {tier.name}
+        </h3>
+        <span className="font-mono text-[13px] text-ink-500">{tier.price}</span>
       </div>
-      {tail && <div>{tail}</div>}
+      <p className="mt-2 text-[15px] text-ink-500">{tier.blurb}</p>
+      <ul className="mt-7 space-y-3">
+        {tier.features.map((f) => (
+          <li
+            key={f}
+            className="flex items-baseline gap-3 text-[15px] leading-relaxed text-ink-700"
+          >
+            <span className="font-mono text-[11px] text-ink-400" aria-hidden>
+              —
+            </span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <a
+        href={tier.href}
+        className="group mt-9 inline-flex items-center gap-2 text-[15px] text-ink-900 underline-offset-4 hover:underline"
+      >
+        {tier.cta}
+        <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+      </a>
     </div>
   );
 }

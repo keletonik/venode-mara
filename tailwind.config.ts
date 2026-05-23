@@ -9,26 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /* Warm-cream paper */
+        paper: {
+          DEFAULT: "#faf8f3",
+          alt: "#f3f0e7",
+          deep: "#ebe7da",
+        },
+        /* Ink — text & marks */
         ink: {
-          950: "#05070a",
-          900: "#090c11",
-          850: "#0c1015",
-          800: "#11161d",
-          700: "#1b2129",
-          600: "#262d37",
+          DEFAULT: "#1a1a18",
+          900: "#0c0c0b",
+          800: "#1a1a18",
+          700: "#2a2a26",
+          600: "#3d3d38",
+          500: "#56564f",
+          400: "#76756d",
+          300: "#9a9890",
         },
-        accent: {
-          DEFAULT: "#bef264",
-          soft: "#d9f99d",
-          deep: "#84cc16",
-        },
+        rule: "#e3dfd0",
+        /* Accent kept only for state colors, never used for chrome */
         signal: {
-          good: "#bef264",
-          warn: "#f5b544",
-          bad: "#fb7185",
+          good: "#3a6b3a",
+          warn: "#a06a1f",
+          bad: "#a23a2c",
         },
-        cream: "#e8ebef",
-        ash: "#7a828c",
       },
       fontFamily: {
         sans: [
@@ -39,13 +43,6 @@ const config: Config = {
           "Segoe UI",
           "sans-serif",
         ],
-        display: [
-          "var(--font-display)",
-          "ui-serif",
-          "Georgia",
-          "Cambria",
-          "serif",
-        ],
         mono: [
           "var(--font-mono)",
           "ui-monospace",
@@ -55,11 +52,13 @@ const config: Config = {
         ],
       },
       letterSpacing: {
-        tightest: "-0.04em",
-        widewide: "0.22em",
+        tightest: "-0.035em",
+        wider2: "0.18em",
       },
       maxWidth: {
-        content: "76rem",
+        prose: "38rem",
+        page: "62rem",
+        wide: "76rem",
       },
       borderRadius: {
         DEFAULT: "2px",

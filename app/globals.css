@@ -7,24 +7,23 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-ink-950 text-slate-300 antialiased font-sans;
-    background-image:
-      linear-gradient(rgba(190, 242, 100, 0.015), rgba(190, 242, 100, 0)),
-      radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 100% 100%, 24px 24px;
-    background-attachment: fixed;
+    @apply bg-paper text-ink antialiased font-sans;
+    font-feature-settings: "ss01", "kern";
   }
   ::selection {
-    @apply bg-accent/30 text-cream;
+    @apply bg-ink/15 text-ink;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply text-cream;
+    @apply text-ink-900;
   }
   :focus-visible {
-    @apply outline-none ring-1 ring-accent ring-offset-2 ring-offset-ink-950;
+    @apply outline-none ring-1 ring-ink-700 ring-offset-2 ring-offset-paper;
+  }
+  a {
+    text-decoration: none;
   }
   input,
   textarea {
@@ -33,61 +32,40 @@
 }
 
 @layer components {
-  .container-wide {
-    @apply mx-auto max-w-content px-5 sm:px-8;
+  .container-page {
+    @apply mx-auto max-w-page px-6 sm:px-10;
   }
-  .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-widewide text-ash;
+  .container-wide {
+    @apply mx-auto max-w-wide px-6 sm:px-10;
+  }
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-wider2 text-ink-500;
   }
   .display {
-    @apply font-display tracking-tightest text-cream;
+    @apply font-sans tracking-tightest;
   }
-  .hairline {
-    @apply border border-ink-700;
+  /* Inline text-CTA with an arrow */
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 border-b border-ink-300 pb-0.5 text-ink-800 transition hover:border-ink-800;
   }
-}
-
-/* Live indicator dot used in the header / status badges */
-.live-dot {
-  position: relative;
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background: #bef264;
-  box-shadow: 0 0 0 0 rgba(190, 242, 100, 0.55);
-  animation: pulse 2.2s ease-out infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(190, 242, 100, 0.55);
+  .link-arrow .arrow {
+    @apply transition group-hover:translate-x-0.5;
   }
-  70% {
-    box-shadow: 0 0 0 7px rgba(190, 242, 100, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(190, 242, 100, 0);
+  .rule {
+    @apply border-t border-rule;
   }
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 .animate-rise {
   animation: rise 0.35s ease-out both;
-}
-
-/* Inputs: subtle terminal-style caret */
-input,
-textarea {
-  caret-color: #bef264;
 }
