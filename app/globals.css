@@ -3,25 +3,23 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────────────────
-   mara · tokens
-   Dark, mysterious, defender-side. Cream on near-black with a brighter
-   oxblood accent. No serif. No italics. Anywhere. Ever.
+   mara · tokens (editorial dark)
+   Cream on near-black. Oxblood used sparingly. Lighter display
+   weights at large sizes — calm, confident, magazine-grade.
    ───────────────────────────────────────────────────────────────────── */
 :root {
-  --bg: #08070a;
-  --surface: #11100f;
-  --raised: #1a1815;
-  --ink: #F4F1EA;
-  --ink-2: #A89F8F;
-  --ink-3: #6F665B;
-  --ink-4: #46413a;
-  --accent: #C8334B;
-  --accent-deep: #8E2436;
-  --accent-ember: #5C1A24;
-  --hairline: rgba(244, 241, 234, 0.08);
-  --hair-2: rgba(244, 241, 234, 0.16);
+  --bg: #0a0a0c;
+  --bg-2: #0d0d10;
+  --surface: #14141a;
+  --ink: #F2EFE7;
+  --ink-2: #9C968B;
+  --ink-3: #5d574e;
+  --ink-4: #38332d;
+  --accent: #B33347;
+  --accent-quiet: #6E2330;
+  --hairline: rgba(242, 239, 231, 0.08);
+  --hair-2: rgba(242, 239, 231, 0.14);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-quint: cubic-bezier(0.83, 0, 0.17, 1);
 }
 
 @layer base {
@@ -31,50 +29,26 @@
     color: var(--ink);
     @apply font-sans antialiased;
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.55;
     text-rendering: optimizeLegibility;
+    /* Very gentle radial — far less dramatic than before */
     background-image:
-      radial-gradient(60% 50% at 50% 0%, rgba(200,51,75,0.07), transparent 65%),
-      radial-gradient(50% 40% at 50% 100%, rgba(200,51,75,0.04), transparent 70%);
+      radial-gradient(70% 60% at 50% 0%, rgba(179, 51, 71, 0.04), transparent 70%);
     background-attachment: fixed;
     overflow-x: hidden;
-  }
-  /* Fine-grain noise overlay */
-  body::before {
-    content: "";
-    position: fixed; inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background-image: radial-gradient(rgba(244,241,234,0.022) 1px, transparent 1px);
-    background-size: 3px 3px;
-    mix-blend-mode: overlay;
-    opacity: 0.65;
-  }
-  /* Subtle horizontal scanlines — adds CRT depth on dark surfaces */
-  body::after {
-    content: "";
-    position: fixed; inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background-image: repeating-linear-gradient(
-      0deg,
-      rgba(244,241,234,0.018) 0px,
-      rgba(244,241,234,0.018) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    opacity: 0.55;
   }
   ::selection { background: var(--accent); color: var(--ink); }
   h1, h2, h3, h4 {
     @apply font-display text-ink;
-    letter-spacing: -0.045em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     font-style: normal;
   }
   em, i, cite, address { font-style: normal; }
   :focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
   a { color: inherit; text-decoration: none; }
   img, svg { display: block; max-width: 100%; }
+  p { font-weight: 400; }
 }
 
 @layer components {
@@ -85,23 +59,31 @@
     position: relative;
     z-index: 1;
   }
-  @media (max-width: 768px) { .container-page { padding: 0 20px; } }
+  .container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 768px) {
+    .container-page, .container-narrow { padding: 0 22px; }
+  }
 
-  /* ── Brand marks ─────────────────────────────────────────────────── */
-
+  /* ── Wordmark with blinking cursor ───────────────────────────────── */
   .wordmark {
     @apply font-display leading-none text-ink;
-    font-weight: 900;
-    letter-spacing: -0.045em;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
-  .wordmark .a { color: var(--accent); font-weight: 800; }
+  .wordmark .a { color: var(--accent); font-weight: 600; }
   .wordmark .cursor {
     display: inline-block;
-    width: 0.42em;
-    height: 0.10em;
+    width: 0.40em;
+    height: 0.08em;
     background: var(--accent);
     margin-left: 0.10em;
-    margin-bottom: 0.18em;
+    margin-bottom: 0.16em;
     align-self: flex-end;
     animation: cursor-blink 1.05s steps(2) infinite;
   }
@@ -109,186 +91,122 @@
     0%, 100% { opacity: 1; }
     50%      { opacity: 0; }
   }
-
   .venode-mark {
     @apply inline-flex items-baseline font-display leading-none text-ink;
-    font-weight: 900;
-    letter-spacing: -0.045em;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
-  .venode-mark .o { color: var(--accent); font-weight: 800; }
+  .venode-mark .o { color: var(--accent); font-weight: 600; }
 
-  /* ── Type ────────────────────────────────────────────────────────── */
+  /* ── Type — editorial scale ──────────────────────────────────────── */
   .eyebrow {
-    @apply font-mono uppercase text-ink-2;
+    @apply font-mono uppercase text-ink-3;
     font-weight: 500;
     font-size: 11px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
   }
   .display {
     @apply font-display text-ink;
-    font-weight: 900;
-    letter-spacing: -0.045em;
-  }
-  .display .quiet {
-    color: var(--ink-2);
     font-weight: 500;
+    letter-spacing: -0.025em;
   }
+  .display .quiet { color: var(--ink-2); font-weight: 400; }
 
   /* ── Buttons ─────────────────────────────────────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 font-mono uppercase transition;
+    @apply inline-flex items-center gap-2 font-sans transition;
     background: var(--ink);
     color: var(--bg);
-    padding: 13px 22px;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.10em;
-    position: relative;
-    overflow: hidden;
+    padding: 12px 22px;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: -0.005em;
   }
-  .btn-primary::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: var(--accent);
-    transform: translateY(101%);
-    transition: transform 320ms var(--ease);
-    z-index: 0;
-  }
-  .btn-primary > * { position: relative; z-index: 1; }
-  .btn-primary:hover { color: var(--ink); }
-  .btn-primary:hover::after { transform: translateY(0); }
+  .btn-primary:hover { background: var(--accent); color: var(--ink); }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 font-mono uppercase transition text-ink-2;
+    @apply inline-flex items-center gap-2 transition text-ink;
     font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.10em;
-    border-bottom: 1px solid var(--hairline);
-    padding-bottom: 5px;
+    font-size: 14px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--ink-3);
   }
-  .btn-ghost:hover {
-    color: var(--ink);
-    border-bottom-color: var(--ink-2);
-  }
+  .btn-ghost:hover { border-bottom-color: var(--ink); }
 
-  /* ── Cells ───────────────────────────────────────────────────────── */
-  .cell {
-    @apply bg-bg p-8 sm:p-10;
-    position: relative;
-    transition: background 280ms var(--ease);
+  .arrow-link {
+    @apply inline-flex items-center gap-2 transition text-ink-2;
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
   }
-  .cell::before {
-    content: "";
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--accent);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 420ms var(--ease);
+  .arrow-link:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink-3);
   }
-  .cell:hover { background: rgba(244,241,234,0.022); }
-  .cell:hover::before { transform: scaleY(1); }
 }
 
 /* ─────────────────────────────────────────────────────────────────────
    Motion
    ───────────────────────────────────────────────────────────────────── */
 
-/* Hero letter rise */
-@keyframes letter-rise {
-  0%   { opacity: 0; transform: translateY(36px); filter: blur(6px); }
-  60%  { opacity: 1; transform: translateY(0);    filter: blur(0); }
-  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
-}
-.letter {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(36px);
-  animation: letter-rise 900ms var(--ease-quint) forwards;
-  will-change: transform, opacity, filter;
-}
-
-/* General cascade fade-up */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .fade-up {
   opacity: 0;
-  animation: fade-up 700ms var(--ease) forwards;
+  animation: fade-up 900ms var(--ease) forwards;
   will-change: transform, opacity;
 }
 
-/* Scroll-triggered reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+  transform: translateY(16px);
+  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
   will-change: transform, opacity;
 }
-.reveal.in {
-  opacity: 1;
-  transform: translateY(0);
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Hero field-mark animation: dots fade in scattered */
+@keyframes dot-in {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: var(--final-opacity, 0.4); transform: scale(1); }
+}
+.field-dot {
+  opacity: 0;
+  animation: dot-in 1400ms var(--ease) forwards;
+  transform-origin: center;
+  transform-box: fill-box;
+  will-change: opacity, transform;
 }
 
-/* Marquee */
-@keyframes scroll-x {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* Slow horizontal sweep across the field */
+@keyframes field-sweep {
+  0%   { transform: translateX(-30%); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateX(130%); opacity: 0; }
 }
-.marquee-track {
-  display: inline-flex;
-  white-space: nowrap;
-  animation: scroll-x 48s linear infinite;
-}
-.marquee:hover .marquee-track { animation-play-state: paused; }
-
-/* Live pulse dot */
-@keyframes pulse-ring {
-  0%   { transform: scale(0.6); opacity: 0.7; }
-  100% { transform: scale(2.4); opacity: 0;   }
-}
-.pulse-dot {
-  position: relative;
-  display: inline-flex;
-  width: 8px; height: 8px;
-}
-.pulse-dot::before,
-.pulse-dot::after {
-  content: "";
-  position: absolute; inset: 0;
-  border-radius: 9999px;
-  background: var(--accent);
-}
-.pulse-dot::after {
-  animation: pulse-ring 1.8s var(--ease) infinite;
+.field-sweep {
+  animation: field-sweep 9s linear infinite;
+  will-change: transform, opacity;
 }
 
-/* Constellation — line draw, node pop, accent pulse */
-@keyframes cnst-draw {
-  to { stroke-dashoffset: 0; }
-}
-@keyframes cnst-pop {
-  0%   { opacity: 0; transform: scale(0.4); }
-  60%  { opacity: 1; transform: scale(1.18); }
-  100% { opacity: 1; transform: scale(1); }
-}
-@keyframes cnst-pulse {
-  0%   { transform: scale(0.6); opacity: 0.45; }
-  70%  { transform: scale(2.2); opacity: 0;    }
-  100% { transform: scale(2.2); opacity: 0;    }
+/* Anomaly pulse */
+@keyframes anomaly-pulse {
+  0%   { r: 3; opacity: 0.7; }
+  100% { r: 18; opacity: 0; }
 }
 
-/* Spec-card row sweep — used by ModelCard */
-@keyframes row-sweep {
-  from { transform: translateX(-100%); opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
+/* Cursor blink anywhere */
+@keyframes cursor-blink-fast {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .letter, .fade-up { animation: none; opacity: 1; transform: none; filter: none; }
+  .fade-up, .field-dot { animation: none; opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee-track,
-  .wordmark .cursor,
-  .pulse-dot::after { animation: none; }
+  .wordmark .cursor, .field-sweep { animation: none; }
 }

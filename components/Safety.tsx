@@ -7,88 +7,53 @@ const willNot = [
   "Defame, doxx, or attribute attacks to identifiable individuals.",
 ];
 
-const will = [
-  "Detection engineering, threat modelling, red-team and blue-team education.",
-  "Analysis of samples already in the wild and reported on publicly.",
-  "Reasoning about adversary TTPs at the level of frameworks like ATT&CK.",
-  "Drafting the artefact: post-mortems, customer notes, runbooks, rules.",
-];
-
 export default function Safety() {
   return (
-    <section
-      id="safety"
-      className="border-b border-hairline"
-      style={{ background: "#0c0b0e" }}
-    >
-      <div className="container-page py-28 sm:py-36">
+    <section id="safety" className="border-t border-hairline">
+      <div className="container-narrow py-32 sm:py-40">
         <Reveal>
-          <span className="eyebrow">06 · Safety</span>
+          <span className="eyebrow">Safety</span>
         </Reveal>
         <Reveal delay={120}>
-          <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05]">
-            Safety is the work,{" "}
-            <span className="quiet font-normal">not the disclaimer.</span>
+          <h2 className="display mt-6 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08]">
+            Safety is the work, not the disclaimer.
           </h2>
         </Reveal>
-        <Reveal delay={200}>
-          <p className="mt-6 max-w-xl text-[17px] leading-[1.6] text-ink-2">
-            Mara is a dual-use tool by definition. Almost everything that
-            helps a defender investigate an attack would help an attacker
-            plan one. We take that seriously, draw the lines explicitly, and
-            write them down.
-          </p>
-        </Reveal>
 
-        <div className="mt-14 grid gap-px bg-hairline md:grid-cols-2">
-          <Reveal  className="bg-[#0c0b0e] p-8 sm:p-10">
-            <h3
-              className="font-mono text-[12px] uppercase text-accent"
-              style={{ letterSpacing: "0.22em" }}
-            >
-              Mara will not
-            </h3>
-            <ul className="mt-6 space-y-3">
-              {willNot.map((x) => (
-                <li
-                  key={x}
-                  className="flex items-baseline gap-3 text-[15.5px] leading-[1.6] text-ink"
-                >
-                  <span className="font-mono text-[11px] text-accent">×</span>
-                  <span>{x}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="mt-10 space-y-6 text-[18px] leading-[1.75] text-ink-2">
+          <Reveal delay={120}>
+            <p>
+              Mara is a dual-use tool by definition. Almost everything that
+              helps a defender investigate an attack would help an attacker
+              plan one. We take that seriously, draw the lines explicitly,
+              and write them down.
+            </p>
           </Reveal>
-
-          <Reveal  className="bg-[#0c0b0e] p-8 sm:p-10" delay={120}>
-            <h3
-              className="font-mono text-[12px] uppercase text-ink-2"
-              style={{ letterSpacing: "0.22em" }}
-            >
-              Mara will help with
-            </h3>
-            <ul className="mt-6 space-y-3">
-              {will.map((x) => (
-                <li
-                  key={x}
-                  className="flex items-baseline gap-3 text-[15.5px] leading-[1.6] text-ink"
-                >
-                  <span className="font-mono text-[11px] text-ink-2">→</span>
-                  <span>{x}</span>
-                </li>
-              ))}
-            </ul>
+          <Reveal delay={200}>
+            <p className="text-ink">
+              Mara will not —
+            </p>
           </Reveal>
         </div>
 
-        <Reveal delay={240}>
-          <p className="mt-10 max-w-2xl text-[15.5px] leading-[1.6] text-ink-2">
-            These boundaries are enforced through training, refusal
-            behaviour and a separate review layer. They are not perfect — the
-            model card documents the failure modes we have measured. If you
-            find a way to make Mara do something it should not, write to us
-            before anyone else.
+        <Reveal delay={280}>
+          <ul className="mt-6 space-y-4 text-[17px] leading-[1.65] text-ink">
+            {willNot.map((x) => (
+              <li key={x} className="flex items-baseline gap-3">
+                <span className="mt-1 h-px w-3 bg-accent" />
+                <span>{x}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal delay={360}>
+          <p className="mt-10 text-[16.5px] leading-[1.7] text-ink-2">
+            These boundaries are enforced through training, refusal behaviour
+            and a separate review layer. They are not perfect — the model
+            card documents the failure modes we have measured. If you find a
+            way to make Mara do something it should not, write to us before
+            anyone else.
           </p>
         </Reveal>
       </div>

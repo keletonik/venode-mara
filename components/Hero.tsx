@@ -1,304 +1,127 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { ArrowRight, ArrowDown, MaraConstellation } from "./Icons";
+import { ArrowRight } from "./Icons";
+import FieldMark from "./FieldMark";
 
 /**
- * Hero v2 — split composition.
- *
- * Left:  eyebrow status row · large "mara" with letter-rise · cycling
- *        tagline · paragraph · CTAs · scroll hint.
- * Right: a framed "intelligence panel" containing the constellation
- *        mark drawing itself in, surrounded by telemetry-style
- *        readouts that update on a slow tick.
- * Bg:    radial accent glow tracking the cursor.
+ * Hero — calm announcement. Two columns: editorial copy on the left,
+ * the FieldMark artifact on the right. Asymmetric (5 / 7), generous
+ * breathing room, no template chrome.
  */
 
-const LETTERS = ["m", "a", "r", "a"];
-const ACCENT_INDEXES = new Set([1, 3]);
-
 const TAGLINES = [
-  "Cybersecurity intelligence.",
-  "Built for defenders.",
-  "Calibrated. Restrained. Useful.",
+  "A language model for cyber defense.",
+  "Built for the people defending things.",
+  "Calibrated, restrained, refusing the offensive ask.",
 ];
-const TAGLINE_INTERVAL = 4200;
+const TAGLINE_INTERVAL = 5200;
 
 export default function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
   const [tag, setTag] = useState(0);
-  const [tick, setTick] = useState(0);
 
   useEffect(() => {
-    const id1 = window.setInterval(
+    const id = window.setInterval(
       () => setTag((t) => (t + 1) % TAGLINES.length),
       TAGLINE_INTERVAL,
     );
-    const id2 = window.setInterval(() => setTick((t) => t + 1), 2200);
-    return () => {
-      window.clearInterval(id1);
-      window.clearInterval(id2);
-    };
+    return () => window.clearInterval(id);
   }, []);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width) * 100;
-      const y = ((e.clientY - r.top) / r.height) * 100;
-      el.style.setProperty("--mx", `${x}%`);
-      el.style.setProperty("--my", `${y}%`);
-    };
-    el.addEventListener("mousemove", onMove);
-    return () => el.removeEventListener("mousemove", onMove);
-  }, []);
-
-  // Faux telemetry that drifts a little on the tick
-  const t = telemetry(tick);
 
   return (
     <section
-      ref={ref}
       aria-label="mara — introduction"
-      className="relative isolate overflow-hidden border-b border-hairline"
-      style={
-        {
-          ["--mx" as string]: "50%",
-          ["--my" as string]: "30%",
-        } as React.CSSProperties
-      }
+      className="relative isolate overflow-hidden"
     >
-      {/* Parallax glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 transition-[background] duration-300"
-        style={{
-          background:
-            "radial-gradient(40% 50% at var(--mx) var(--my), rgba(200,51,75,0.10), transparent 70%)",
-        }}
-      />
-
-      <CornerTicks />
-
-      <div className="container-page relative grid min-h-[88svh] gap-12 pb-16 pt-24 sm:pt-28 md:grid-cols-12 md:gap-10">
-        {/* ── LEFT: status / wordmark / tagline / CTAs ────────────────── */}
-        <div className="md:col-span-7 md:self-center">
-          <div
-            className="flex flex-wrap items-center gap-x-5 gap-y-3 fade-up"
-            style={{ animationDelay: "120ms" }}
+      <div className="container-page relative grid min-h-[88svh] items-center gap-12 py-24 sm:py-28 md:grid-cols-12 md:gap-16">
+        {/* ── LEFT: editorial copy ────────────────────────────────── */}
+        <div className="md:col-span-5">
+          <p
+            className="font-mono text-[11px] uppercase text-ink-3 fade-up"
+            style={{ letterSpacing: "0.18em", animationDelay: "100ms" }}
           >
-            <span
-              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase text-ink-2"
-              style={{ letterSpacing: "0.22em" }}
-            >
-              <span className="pulse-dot" />
-              Venode · cyber language model · 01
-            </span>
-            <span className="hidden h-px flex-1 bg-hairline sm:block" />
-            <span
-              className="hidden font-mono text-[11px] uppercase text-ink-3 sm:inline"
-              style={{ letterSpacing: "0.22em" }}
-            >
-              v0.1 · research preview
-            </span>
-          </div>
+            mara · v0.1 · 2026
+          </p>
 
           <h1
-            aria-label="mara"
-            className="display mt-10 flex select-none items-baseline leading-[0.88]"
-            style={{ fontSize: "clamp(5.5rem, 17vw, 17rem)" }}
+            className="display mt-7 text-[clamp(3rem,7vw,5.5rem)] leading-[1.02] fade-up"
+            style={{ animationDelay: "240ms" }}
           >
-            {LETTERS.map((ch, i) => (
-              <span
-                key={i}
-                className="letter"
-                style={{
-                  animationDelay: `${280 + i * 110}ms`,
-                  color: ACCENT_INDEXES.has(i) ? "var(--accent)" : undefined,
-                }}
-              >
-                {ch}
-              </span>
-            ))}
-            <span
-              className="letter"
-              style={{ animationDelay: `${280 + LETTERS.length * 110}ms` }}
-            >
-              <span
-                className="ml-3 inline-block align-baseline"
-                style={{
-                  width: "0.42em",
-                  height: "0.08em",
-                  background: "var(--accent)",
-                  animation: "cursor-blink 1.05s steps(2) infinite",
-                  animationDelay: "1300ms",
-                  marginBottom: "0.18em",
-                }}
-                aria-hidden="true"
-              />
-            </span>
+            Introducing Mara.
           </h1>
 
           <div
-            className="relative mt-8 h-[40px] sm:h-[52px] fade-up"
-            style={{ animationDelay: "950ms" }}
+            className="relative mt-7 h-[44px] sm:h-[52px] fade-up"
+            style={{ animationDelay: "480ms" }}
           >
-            {TAGLINES.map((tag_, i) => (
+            {TAGLINES.map((line, i) => (
               <p
-                key={tag_}
+                key={line}
                 aria-hidden={i !== tag}
-                className="absolute inset-x-0 top-0 font-display text-[clamp(1.35rem,2.6vw,2rem)] font-extrabold tracking-tight text-ink transition-all duration-700"
+                className="absolute inset-x-0 top-0 font-display text-[clamp(1.25rem,2.2vw,1.75rem)] leading-snug text-ink-2 transition-all duration-700"
                 style={{
-                  letterSpacing: "-0.025em",
+                  fontWeight: 400,
+                  letterSpacing: "-0.015em",
                   opacity: i === tag ? 1 : 0,
-                  transform: i === tag ? "translateY(0)" : "translateY(10px)",
+                  transform: i === tag ? "translateY(0)" : "translateY(8px)",
                 }}
               >
-                {tag_}
+                {line}
               </p>
             ))}
           </div>
 
           <p
-            className="mt-6 max-w-xl text-[17px] leading-[1.6] text-ink-2 fade-up"
-            style={{ animationDelay: "1200ms" }}
+            className="mt-10 max-w-md text-[17px] leading-[1.6] text-ink-2 fade-up"
+            style={{ animationDelay: "720ms" }}
           >
-            A language model trained on threat reports, malware analyses,
-            incident write-ups and adversary playbooks. Built to triage at
-            speed, reason carefully under uncertainty, and refuse the
-            offensive ask.
+            Mara is venode&apos;s first public model. Trained on threat
+            reports, malware analyses, incident write-ups and adversary
+            playbooks — for the people defending things, not the ones
+            attacking them.
           </p>
 
           <div
-            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4 fade-up"
-            style={{ animationDelay: "1500ms" }}
+            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 fade-up"
+            style={{ animationDelay: "960ms" }}
           >
             <a href={siteConfig.appUrl} className="btn-primary">
               Open Mara <ArrowRight className="h-3 w-3" />
             </a>
-            <Link href="#demo" className="btn-ghost">
-              See it think
+            <Link href="#why" className="arrow-link">
+              Read the argument <ArrowRight className="h-3 w-3" />
             </Link>
-          </div>
-
-          <div
-            className="mt-14 flex items-center gap-3 fade-up"
-            style={{ animationDelay: "1900ms" }}
-          >
-            <span
-              className="font-mono text-[10px] uppercase text-ink-3"
-              style={{ letterSpacing: "0.22em" }}
-            >
-              Scroll
-            </span>
-            <span className="h-px w-12 bg-hairline" />
-            <ArrowDown className="h-3 w-3 text-ink-3" />
           </div>
         </div>
 
-        {/* ── RIGHT: intelligence panel with constellation + telemetry ─ */}
-        <div className="md:col-span-5 md:self-center">
+        {/* ── RIGHT: the artifact ─────────────────────────────────── */}
+        <div className="md:col-span-7">
           <div
-            className="relative aspect-square w-full max-w-[480px] border border-hairline bg-[#0c0b0e] fade-up"
-            style={{
-              animationDelay: "600ms",
-              boxShadow:
-                "inset 0 1px 0 rgba(244,241,234,0.04), 0 30px 80px -40px rgba(200,51,75,0.18)",
-            }}
+            className="relative aspect-[16/11] w-full overflow-hidden bg-bg-2 fade-up"
+            style={{ animationDelay: "400ms" }}
           >
-            {/* panel header */}
-            <div className="absolute left-0 right-0 top-0 flex items-center justify-between border-b border-hairline px-4 py-2.5">
+            <FieldMark />
+            {/* Caption / metadata baseline — feels editorial, like an
+                image with its credit line beneath it. */}
+            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between border-t border-hairline bg-bg/60 px-5 py-3 backdrop-blur">
               <span
-                className="font-mono text-[10px] uppercase text-ink-2"
-                style={{ letterSpacing: "0.22em" }}
+                className="font-mono text-[10.5px] uppercase text-ink-3"
+                style={{ letterSpacing: "0.18em" }}
               >
-                live · cluster-08 · soc/3
+                field · 240 nodes · anomaly observed
               </span>
-              <span className="pulse-dot" />
-            </div>
-
-            {/* corner ticks */}
-            <span aria-hidden className="pointer-events-none absolute -left-px -top-px h-3 w-3 border-l border-t border-accent" />
-            <span aria-hidden className="pointer-events-none absolute -right-px -top-px h-3 w-3 border-r border-t border-accent" />
-            <span aria-hidden className="pointer-events-none absolute -bottom-px -left-px h-3 w-3 border-b border-l border-accent" />
-            <span aria-hidden className="pointer-events-none absolute -bottom-px -right-px h-3 w-3 border-b border-r border-accent" />
-
-            {/* constellation */}
-            <div className="absolute inset-0 grid place-items-center px-8 pt-10">
-              <div className="aspect-square w-full max-w-[300px]">
-                <MaraConstellation />
-              </div>
-            </div>
-
-            {/* telemetry footer */}
-            <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 border-t border-hairline">
-              <Stat label="nodes" value={t.nodes} />
-              <Stat label="anomaly" value={t.anomaly} accent />
-              <Stat label="σ" value={t.sigma} divider={false} />
+              <span
+                className="font-mono text-[10.5px] uppercase text-ink-3"
+                style={{ letterSpacing: "0.18em" }}
+              >
+                fig. 01
+              </span>
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-}
-
-function Stat({
-  label,
-  value,
-  accent,
-  divider = true,
-}: {
-  label: string;
-  value: string;
-  accent?: boolean;
-  divider?: boolean;
-}) {
-  return (
-    <div
-      className={`px-3 py-3 ${divider ? "border-r border-hairline" : ""}`}
-    >
-      <p
-        className="font-mono text-[9.5px] uppercase text-ink-3"
-        style={{ letterSpacing: "0.22em" }}
-      >
-        {label}
-      </p>
-      <p
-        className={`mt-1 font-mono text-[12px] ${
-          accent ? "text-accent" : "text-ink"
-        }`}
-        style={{ letterSpacing: "0.08em" }}
-      >
-        {value}
-      </p>
-    </div>
-  );
-}
-
-function CornerTicks() {
-  return (
-    <>
-      <span aria-hidden className="pointer-events-none absolute left-4 top-4 h-3 w-3 border-l border-t border-ink-3 sm:left-8 sm:top-8" />
-      <span aria-hidden className="pointer-events-none absolute right-4 top-4 h-3 w-3 border-r border-t border-ink-3 sm:right-8 sm:top-8" />
-      <span aria-hidden className="pointer-events-none absolute bottom-4 left-4 h-3 w-3 border-b border-l border-ink-3 sm:bottom-8 sm:left-8" />
-      <span aria-hidden className="pointer-events-none absolute bottom-4 right-4 h-3 w-3 border-b border-r border-ink-3 sm:bottom-8 sm:right-8" />
-    </>
-  );
-}
-
-/* Slowly drifting fake telemetry — same values on first render across
-   server/client, so no hydration mismatch. */
-function telemetry(tick: number) {
-  const sigma = (2.0 + (tick * 0.07) % 0.9).toFixed(2);
-  const anomaly = tick % 4 === 0 ? "isolated" : "tracking";
-  return {
-    nodes: "09",
-    anomaly,
-    sigma: `+${sigma}`,
-  };
 }

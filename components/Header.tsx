@@ -28,7 +28,7 @@ export default function Header() {
           className="fade-up"
           style={{ animationDelay: "100ms" }}
         >
-          <MaraWordmark className="text-[20px] sm:text-[24px]" />
+          <MaraWordmark showGlyph={false} className="text-[20px] sm:text-[22px]" />
         </Link>
 
         <nav className="ml-auto flex items-center gap-6">
