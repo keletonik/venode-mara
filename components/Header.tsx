@@ -43,7 +43,7 @@ export default function Header() {
             className="btn-primary fade-up"
             style={{ animationDelay: "260ms" }}
           >
-            Open Mara <ArrowRight className="h-3 w-3" />
+            Join preview <ArrowRight className="h-3 w-3" />
           </a>
         </nav>
       </div>

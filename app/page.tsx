@@ -113,7 +113,7 @@ export default function Page() {
           <Reveal delay={240}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               <a href={siteConfig.appUrl} className="btn-primary">
-                Open Mara <ArrowRight className="h-3 w-3" />
+                Join the preview <ArrowRight className="h-3 w-3" />
               </a>
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
