@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight, MaraWordmark } from "@/components/Icons";
+import { ArrowRight } from "@/components/Icons";
+import MaraIntro from "@/components/MaraIntro";
 
 export const metadata = pageMetadata({
   title: siteConfig.displayName,
@@ -97,47 +98,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* P-01 · MARA FEATURE */}
-      <section
-        id="mara"
-        aria-labelledby="mara-h"
-        className="border-b border-hairline"
-      >
-        <div className="container-page py-28 sm:py-36">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">P-01 · Cyber defence model</span>
-
-            <div className="mt-8 flex justify-center">
-              <MaraWordmark className="h-20 w-auto sm:h-24 text-ink" />
-            </div>
-
-            <p className="mt-10 font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-tight tracking-display text-ink">
-              One Mara.{" "}
-              <span className="font-serif italic font-normal text-ink-2">
-                Tiered by plan.
-              </span>
-            </p>
-
-            <p className="mx-auto mt-7 max-w-xl text-[17px] leading-[1.65] text-ink-2">
-              Mara is venode&apos;s model for the work of cyber defence:
-              triage, malware analysis, threat intelligence, incident
-              response. One Mara, served from the cloud and exposed through
-              one API. The free tier runs the fast model; paid plans route to
-              the thinking model with the full tool surface, sandbox, SIEM,
-              sources, wired in.
-            </p>
-
-            <div className="mx-auto mt-14 grid max-w-2xl gap-px bg-hairline sm:grid-cols-2">
-              <Tier name={siteConfig.tiers.free.name} text={siteConfig.tiers.free.blurb} />
-              <Tier name={siteConfig.tiers.pro.name} text={siteConfig.tiers.pro.blurb} />
-            </div>
-
-            <Link href="/mara" className="btn-primary mt-14">
-              Open Mara <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* P-01 · MARA CENTERPIECE */}
+      <MaraIntro />
 
       {/* VENODE LABS */}
       <section aria-labelledby="labs-h" className="border-b border-hairline">
@@ -267,16 +229,5 @@ export default function HomePage() {
         </div>
       </section>
     </>
-  );
-}
-
-function Tier({ name, text }: { name: string; text: string }) {
-  return (
-    <div className="bg-bg p-7 text-left">
-      <span className="font-display text-[18px] font-extrabold tracking-display text-ink">
-        {name}
-      </span>
-      <p className="mt-2 text-[15px] leading-[1.55] text-ink-2">{text}</p>
-    </div>
   );
 }

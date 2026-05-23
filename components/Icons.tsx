@@ -36,15 +36,18 @@ export function VoMark({
 }
 
 /**
- * Mara wordmark. The 'o' is painted in deep oxblood.
+ * Mara wordmark. The 'o' is painted in deep oxblood. When `animated` is
+ * set, the strokes draw on via stroke-dashoffset.
  * Path data is a placeholder; the real Mara path is supplied separately.
  */
 export function MaraWordmark({
   className = "h-16 w-auto text-ink",
   accent = "#5C1A24",
+  animated = false,
 }: {
   className?: string;
   accent?: string;
+  animated?: boolean;
 }) {
   return (
     <svg
@@ -58,10 +61,12 @@ export function MaraWordmark({
       <g strokeWidth="13" strokeLinecap="butt">
         <path
           stroke="currentColor"
+          className={animated ? "mara-path-1" : undefined}
           d="M6.5 10V110M71.5 10V110M6.5 60H71.5 M106.5 10V72A31.5 31.5 0 0 0 169.5 72V10 M262.88 19.12A43.5 43.5 0 1 0 291.5 60H252"
         />
         <path
           stroke={accent}
+          className={animated ? "mara-path-2" : undefined}
           d="M408.41 39.58A43.5 43.5 0 1 1 390.42 21.59"
         />
       </g>
