@@ -8,11 +8,8 @@ export default function Footer() {
     <footer className="border-t border-hairline">
       <div className="container-page flex flex-wrap items-center justify-between gap-6 py-10">
         <div className="flex items-center gap-3">
-          <Link href="/">
-            <MaraWordmark
-              showGlyph={false}
-              className="text-[16px]"
-            />
+          <Link href="/" aria-label="mara">
+            <MaraWordmark className="text-[18px]" />
           </Link>
           <span className="text-ink-3">·</span>
           <a

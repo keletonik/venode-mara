@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/site.config";
 import { MaraWordmark, ArrowRight } from "./Icons";
 
+/**
+ * Sticky glassmorphism nav. Wordmark on the left; one primary CTA on
+ * the right. Border-bottom appears only after a few pixels of scroll
+ * to keep the hero clean at top.
+ */
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,18 +22,18 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-bg/85 backdrop-blur transition-colors ${
+      className={`sticky top-0 z-40 glass-nav transition-colors ${
         scrolled ? "border-b border-hairline" : "border-b border-transparent"
       }`}
     >
       <div className="container-page flex h-[68px] items-center">
         <Link
           href="/"
-          aria-label="mara home"
+          aria-label="mara"
           className="fade-up"
           style={{ animationDelay: "100ms" }}
         >
-          <MaraWordmark showGlyph={false} className="text-[20px] sm:text-[22px]" />
+          <MaraWordmark className="text-[22px] sm:text-[26px]" />
         </Link>
 
         <nav className="ml-auto flex items-center gap-6">

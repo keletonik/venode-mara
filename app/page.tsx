@@ -1,40 +1,26 @@
 /* ─────────────────────────────────────────────────────────────────────
  * mara · venode's cybersecurity language model.
  *
- * MASTER PROMPT (this iteration)
+ * Built against the MARA Master Redesign Protocol — see RESEARCH.md,
+ * DESIGN_SYSTEM.md, AUDIT_PRE.md and PROGRESS.md at the repo root.
  *
- *   ROLE: brand designer + motion designer + typographer + Next.js
- *   engineer + senior security product writer.
+ * Stack
+ *   - Bricolage Grotesque (display + wordmark) via next/font/google
+ *   - Inter (body)
+ *   - Geist Mono (labels, code)
+ *   - Tailwind 3 + CSS custom properties
  *
- *   TASTE BAR: openai.com, anthropic.com, mistral.ai, stripe.com,
- *   linear.app. Editorial calm. Premium restraint. One beautiful
- *   visual artifact, not five decorative ones.
- *
- *   KILL LIST (template tropes to remove)
- *   - CRT scanlines, crosshair corner ticks, telemetry panels.
- *   - Section eyebrows numbered "01 ·", "02 ·".
- *   - The marquee scrolling band.
- *   - Heavy 800/900 display weights with extreme tracking.
- *   - Mono labels everywhere. Mono only where it earns its keep.
- *   - Card-tick hover affordances.
- *
- *   KEEP LIST
- *   - Dark palette · cream type · oxblood accent USED SPARINGLY.
- *   - The wordmark with blinking cursor.
- *   - IntersectionObserver fade-up reveals.
- *
- *   THIS PASS
- *   - Calm announcement hero: "Introducing Mara." paired with the
- *     FieldMark — a generative point-field with one anomaly.
- *   - An editorial manifesto block "Why mara" in a narrow centered
- *     column.
- *   - Demo transcript reframed as an editorial conversation, no
- *     terminal chrome.
- *   - Capabilities as four declarative rows on hairlines.
- *   - Pricing as a calm three-column comparison.
- *   - Model card as a calm two-column table.
- *   - Safety as a single centered manifesto.
- *   - A signature closing.
+ * Section order
+ *   00  Sticky glassmorphism header (mara wordmark + Join preview CTA)
+ *   01  Hero — full-bleed atmosphere, oversized headline, cycling sub
+ *   02  Argument — narrow editorial column
+ *   03  Bento — 2026 modular grid, five facets of the model
+ *   04  Demo — typewriter conversation
+ *   05  Tiers — pre-launch honest plans
+ *   06  Model card — commitment sheet, no fictional numbers
+ *   07  Safety — refusal-first manifesto
+ *   08  Closing — centered signature
+ *   09  Footer — minimal signature row
  * ─────────────────────────────────────────────────────────────────── */
 
 import { siteConfig } from "@/site.config";
@@ -42,8 +28,8 @@ import { pageMetadata } from "@/lib/seo";
 import { ArrowRight, VenodeMark } from "@/components/Icons";
 import Hero from "@/components/Hero";
 import Argument from "@/components/Argument";
+import Bento from "@/components/Bento";
 import DemoTranscript from "@/components/DemoTranscript";
-import Capabilities from "@/components/Capabilities";
 import Tiers from "@/components/Tiers";
 import ModelCard from "@/components/ModelCard";
 import Safety from "@/components/Safety";
@@ -67,8 +53,9 @@ export default function Page() {
     <>
       <Hero />
       <Argument />
+      <Bento />
 
-      {/* Demo — presented as an editorial transcript, no terminal chrome */}
+      {/* Demo */}
       <section id="demo" className="border-t border-hairline">
         <div className="container-page py-32 sm:py-40">
           <Reveal>
@@ -92,7 +79,6 @@ export default function Page() {
         </div>
       </section>
 
-      <Capabilities />
       <Tiers />
       <ModelCard />
       <Safety />
@@ -101,8 +87,11 @@ export default function Page() {
       <section className="border-t border-hairline">
         <div className="container-narrow py-32 text-center sm:py-40">
           <Reveal>
-            <p className="font-mono text-[11px] uppercase text-ink-3" style={{ letterSpacing: "0.18em" }}>
-              Open Mara
+            <p
+              className="font-mono text-[11px] uppercase text-ink-3"
+              style={{ letterSpacing: "0.18em" }}
+            >
+              Join the preview
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -113,7 +102,7 @@ export default function Page() {
           <Reveal delay={240}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               <a href={siteConfig.appUrl} className="btn-primary">
-                Join the preview <ArrowRight className="h-3 w-3" />
+                Request access <ArrowRight className="h-3 w-3" />
               </a>
               <a
                 href={`mailto:${siteConfig.contactEmail}`}

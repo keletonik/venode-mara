@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────────────────
-   mara · tokens (editorial dark)
-   Cream on near-black. Oxblood used sparingly. Lighter display
-   weights at large sizes — calm, confident, magazine-grade.
+   MARA · design tokens
+   Tokens are documented in DESIGN_SYSTEM.md. Edit there first, then
+   mirror into the :root block below + tailwind.config.ts.
    ───────────────────────────────────────────────────────────────────── */
 :root {
-  --bg: #0a0a0c;
+  --bg: #08070a;
   --bg-2: #0d0d10;
   --surface: #14141a;
   --ink: #F2EFE7;
@@ -27,13 +27,12 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    @apply font-sans antialiased;
+    @apply font-body antialiased;
     font-size: 17px;
-    line-height: 1.55;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
-    /* Very gentle radial — far less dramatic than before */
     background-image:
-      radial-gradient(70% 60% at 50% 0%, rgba(179, 51, 71, 0.04), transparent 70%);
+      radial-gradient(70% 60% at 50% 0%, rgba(179, 51, 71, 0.05), transparent 70%);
     background-attachment: fixed;
     overflow-x: hidden;
   }
@@ -41,7 +40,7 @@
   h1, h2, h3, h4 {
     @apply font-display text-ink;
     font-weight: 500;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     font-style: normal;
   }
   em, i, cite, address { font-style: normal; }
@@ -70,35 +69,26 @@
     .container-page, .container-narrow { padding: 0 22px; }
   }
 
-  /* ── Wordmark with blinking cursor ───────────────────────────────── */
+  /* ── Brand marks ─────────────────────────────────────────────────── */
+  /* Wordmark = "mara" in Bricolage Grotesque, single tone, tight.
+     No coloured letters. No cursor underscore. The typeface IS the
+     distinction. */
   .wordmark {
     @apply font-display leading-none text-ink;
-    font-weight: 600;
-    letter-spacing: -0.025em;
+    font-weight: 700;
+    letter-spacing: -0.045em;
   }
-  .wordmark .a { color: var(--accent); font-weight: 600; }
-  .wordmark .cursor {
-    display: inline-block;
-    width: 0.40em;
-    height: 0.08em;
-    background: var(--accent);
-    margin-left: 0.10em;
-    margin-bottom: 0.16em;
-    align-self: flex-end;
-    animation: cursor-blink 1.05s steps(2) infinite;
-  }
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0; }
-  }
+  /* Constellation glyph CSS lives in the SVG component itself. */
+
+  /* Parent venode wordmark — kept simple. */
   .venode-mark {
     @apply inline-flex items-baseline font-display leading-none text-ink;
     font-weight: 600;
     letter-spacing: -0.025em;
   }
-  .venode-mark .o { color: var(--accent); font-weight: 600; }
+  .venode-mark .o { color: var(--accent); font-weight: 700; }
 
-  /* ── Type — editorial scale ──────────────────────────────────────── */
+  /* ── Type ────────────────────────────────────────────────────────── */
   .eyebrow {
     @apply font-mono uppercase text-ink-3;
     font-weight: 500;
@@ -114,7 +104,7 @@
 
   /* ── Buttons ─────────────────────────────────────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 font-sans transition;
+    @apply inline-flex items-center gap-2 font-body transition;
     background: var(--ink);
     color: var(--bg);
     padding: 12px 22px;
@@ -144,6 +134,45 @@
     color: var(--ink);
     border-bottom-color: var(--ink-3);
   }
+
+  /* ── Bento cell ──────────────────────────────────────────────────── */
+  /* Glass-on-dark — subtle translucent surface with a hairline border.
+     Used in the <Bento /> grid only. */
+  .bento-cell {
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+    border: 1px solid var(--hairline);
+    padding: 28px;
+    position: relative;
+    transition: border-color 280ms var(--ease), background 280ms var(--ease);
+  }
+  .bento-cell:hover {
+    border-color: var(--hair-2);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  }
+  .bento-cell .bento-eyebrow {
+    @apply font-mono uppercase text-ink-3;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+  }
+  .bento-cell .bento-title {
+    @apply font-display text-ink;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .bento-cell .bento-body {
+    @apply text-ink-2;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  /* ── Glass nav ───────────────────────────────────────────────────── */
+  /* Used by the sticky header. */
+  .glass-nav {
+    background: rgba(8, 7, 10, 0.55);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -168,45 +197,19 @@
 }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
-/* Hero field-mark animation: dots fade in scattered */
-@keyframes dot-in {
-  from { opacity: 0; transform: scale(0.5); }
-  to   { opacity: var(--final-opacity, 0.4); transform: scale(1); }
-}
-.field-dot {
-  opacity: 0;
-  animation: dot-in 1400ms var(--ease) forwards;
-  transform-origin: center;
-  transform-box: fill-box;
-  will-change: opacity, transform;
-}
-
-/* Slow horizontal sweep across the field */
-@keyframes field-sweep {
-  0%   { transform: translateX(-30%); opacity: 0; }
-  10%  { opacity: 0.6; }
-  90%  { opacity: 0.6; }
-  100% { transform: translateX(130%); opacity: 0; }
-}
-.field-sweep {
-  animation: field-sweep 9s linear infinite;
-  will-change: transform, opacity;
-}
-
-/* Anomaly pulse */
+/* Anomaly pulse for the hero accent node */
 @keyframes anomaly-pulse {
-  0%   { r: 3; opacity: 0.7; }
-  100% { r: 18; opacity: 0; }
+  0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0.55; }
+  100% { transform: translate(-50%, -50%) scale(4.5); opacity: 0;    }
 }
 
-/* Cursor blink anywhere */
+/* Cursor blink anywhere (kept for the demo typewriter) */
 @keyframes cursor-blink-fast {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up, .field-dot { animation: none; opacity: 1; transform: none; }
+  .fade-up { animation: none; opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .wordmark .cursor, .field-sweep { animation: none; }
 }
