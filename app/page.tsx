@@ -145,7 +145,7 @@ export default function HomePage() {
       {/* CUSTOM BUILDS — warm surface band */}
       <section
         aria-labelledby="builds-h"
-        className="border-b border-hairline"
+        className="on-warm border-b border-hairline"
         style={{ background: "#F4F1EA" }}
       >
         <div className="container-page grid gap-12 py-28 sm:py-36 md:grid-cols-12 md:gap-10">
@@ -199,6 +199,82 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* JOIN THE PREVIEW — enterprise CTA */}
+      <section
+        id="join"
+        aria-labelledby="join-h"
+        className="border-b border-hairline"
+      >
+        <div className="container-page grid gap-12 py-28 sm:py-36 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-6">
+            <span className="eyebrow">P-01 · Enterprise preview</span>
+            <h2
+              id="join-h"
+              className="display mt-7 text-[clamp(2rem,5vw,3.75rem)] leading-[1.05]"
+            >
+              Join the Mara preview.{" "}
+              <em>For organisations, not individual users.</em>
+            </h2>
+            <p className="mt-7 max-w-md text-[17px] leading-[1.6] text-ink-2">
+              Mara is in private preview with a small cohort of security
+              organisations. The preview is shaped for SOCs, IR teams and
+              threat-intel functions inside enterprises and government. Tell us
+              about your team, your stack and your deployment and we will be in
+              touch.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Link href="/join" className="btn-primary">
+                Apply for the preview <ArrowRight className="h-3 w-3" />
+              </Link>
+              <a
+                href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent("Mara preview")}`}
+                className="btn-ghost"
+              >
+                Email us instead
+              </a>
+            </div>
+          </div>
+
+          <ul className="md:col-span-6 md:mt-2">
+            {[
+              {
+                label: "Mara + Hugo",
+                text: "The team tier: $30 per seat per month, organisation minimum of 5 seats. SSO, audit logs, tenant isolation.",
+              },
+              {
+                label: "Tenant-deployed",
+                text: "Hosted by venode, in your tenant, or hybrid — your call. Your data stays in your environment.",
+              },
+              {
+                label: "B2B onboarding",
+                text: "Briefing call, paper trail for procurement, security review, MSA and DPA. The boring parts done properly.",
+              },
+              {
+                label: "No training on your data",
+                text: "Your corpus does not train any other model. Not for revenue, not for partnerships, not at all.",
+              },
+            ].map((b, i) => (
+              <li
+                key={b.label}
+                className={`grid items-baseline gap-6 py-6 md:grid-cols-[8rem_1fr] ${
+                  i > 0 ? "border-t border-hairline" : ""
+                }`}
+              >
+                <span
+                  className="font-mono text-[11px] uppercase text-accent"
+                  style={{ letterSpacing: "0.18em" }}
+                >
+                  {b.label}
+                </span>
+                <p className="text-[15.5px] leading-[1.65] text-ink-2">
+                  {b.text}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

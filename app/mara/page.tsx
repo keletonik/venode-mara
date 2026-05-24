@@ -3,6 +3,9 @@ import { siteConfig } from "@/site.config";
 import { pageMetadata } from "@/lib/seo";
 import { ArrowRight, MaraWordmark } from "@/components/Icons";
 
+const HUGO_PRICE_PER_SEAT = 30;
+const HUGO_MIN_SEATS = 5;
+
 export const metadata = pageMetadata({
   title: "Mara",
   description:
@@ -171,15 +174,15 @@ export default function MaraPage() {
         </div>
       </section>
 
-      {/* PRICING / PRO */}
+      {/* PRICING */}
       <section id="pricing" className="border-b border-hairline">
         <div className="container-page py-24 sm:py-32">
           <span className="eyebrow">P-01 · Pricing</span>
           <h2 className="display mt-7 max-w-3xl text-[clamp(2rem,4vw,3rem)] leading-[1.08]">
-            One Mara. <em>Free for the curious. Pro for the work.</em>
+            One Mara. <em>Free for the curious. Pro for the work. Hugo for the team.</em>
           </h2>
 
-          <div className="mt-14 grid gap-px bg-hairline md:grid-cols-2">
+          <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
             <div className="bg-bg p-8 sm:p-10">
               <div className="flex items-baseline justify-between">
                 <h3 className="font-display text-[24px] font-extrabold tracking-display text-ink">
@@ -223,7 +226,7 @@ export default function MaraPage() {
                 </span>
               </div>
               <p className="mt-2 text-[15px] text-ink-2">
-                For teams who do this for a living.
+                For practitioners who do this for a living.
               </p>
               <ul className="mt-8 space-y-3">
                 {[
@@ -246,6 +249,50 @@ export default function MaraPage() {
               <a href={siteConfig.appUrl} className="btn-primary mt-10">
                 Start Pro <ArrowRight className="h-3 w-3" />
               </a>
+            </div>
+
+            <div className="relative bg-bg p-8 sm:p-10">
+              <span
+                className="absolute right-6 top-6 inline-flex items-center border border-accent/60 px-2.5 py-1 font-mono text-[10px] uppercase text-accent"
+                style={{ letterSpacing: "0.18em" }}
+              >
+                Enterprise
+              </span>
+              <div className="flex items-baseline justify-between gap-3 pr-24">
+                <h3 className="font-display text-[24px] font-extrabold tracking-display text-ink">
+                  Mara + Hugo
+                </h3>
+                <span className="font-mono text-[13px] text-ink-2 whitespace-nowrap">
+                  ${HUGO_PRICE_PER_SEAT} / seat / mo
+                </span>
+              </div>
+              <p className="mt-2 text-[15px] text-ink-2">
+                For security teams. Per-seat, minimum {HUGO_MIN_SEATS} seats.
+              </p>
+              <ul className="mt-8 space-y-3">
+                {[
+                  "Everything in Pro, for every seat.",
+                  `Per-seat licensing, ${HUGO_MIN_SEATS}-seat organisation minimum.`,
+                  "SSO / SAML, RBAC and audit logs.",
+                  "Tenant-isolated deployment, your data stays put.",
+                  "Compliance pack: SOC 2, ISO 27001, DPA on request.",
+                  "Priority support and a named contact.",
+                ].map((x) => (
+                  <li
+                    key={x}
+                    className="flex items-baseline gap-3 text-[15px] leading-[1.55] text-ink"
+                  >
+                    <span className="font-mono text-[11px] text-accent">—</span>
+                    <span>{x}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/join" className="btn-primary mt-10">
+                Apply for the preview <ArrowRight className="h-3 w-3" />
+              </Link>
+              <p className="mt-4 font-mono text-[11px] uppercase text-ink-2/60" style={{ letterSpacing: "0.18em" }}>
+                From ${HUGO_PRICE_PER_SEAT * HUGO_MIN_SEATS} / month
+              </p>
             </div>
           </div>
 

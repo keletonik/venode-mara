@@ -7,7 +7,7 @@ const columns = [
     title: "Mara",
     links: [
       { href: "/mara", label: "Product" },
-      { href: siteConfig.appUrl, label: "Join preview", external: true },
+      { href: "/join", label: "Join preview" },
       { href: "/safety", label: "Safety" },
     ],
   },

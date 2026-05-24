@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { siteConfig } from "@/site.config";
 import { MaraWordmark, ArrowRight } from "./Icons";
 
 /**
@@ -62,13 +61,13 @@ export default function Header() {
           ))}
         </nav>
 
-        <a
-          href={siteConfig.appUrl}
+        <Link
+          href="/join"
           className="hidden btn-primary fade-up md:inline-flex"
           style={{ animationDelay: "260ms" }}
         >
           Join preview <ArrowRight className="h-3 w-3" />
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -98,13 +97,13 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={siteConfig.appUrl}
+            <Link
+              href="/join"
               className="btn-primary mt-6 self-start"
               onClick={() => setOpen(false)}
             >
               Join preview <ArrowRight className="h-3 w-3" />
-            </a>
+            </Link>
           </div>
         </div>
       )}

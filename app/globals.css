@@ -173,6 +173,89 @@
     backdrop-filter: saturate(140%) blur(14px);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
   }
+
+  /* ── Warm-surface inversion ──────────────────────────────────────── */
+  /* Scopes that sit on the cream/beige surface (e.g. the Custom builds
+     band). Inverts the dark-mode ink palette so headings, body copy
+     and buttons remain legible on a light background. */
+  .on-warm { color: #1a1612; }
+  .on-warm h1, .on-warm h2, .on-warm h3, .on-warm h4,
+  .on-warm .display { color: #08070a; }
+  .on-warm .display em,
+  .on-warm em { color: var(--accent); font-style: normal; }
+  .on-warm .text-ink { color: #08070a; }
+  .on-warm .text-ink-2 { color: #4a463f; }
+  .on-warm .eyebrow { color: #6e675b; }
+  .on-warm .btn-primary {
+    background: #08070a;
+    color: var(--ink);
+  }
+  .on-warm .btn-primary:hover {
+    background: var(--accent);
+    color: var(--ink);
+  }
+  .on-warm .btn-ghost {
+    color: #08070a;
+    border-bottom-color: #8a8278;
+  }
+  .on-warm .btn-ghost:hover { border-bottom-color: #08070a; }
+  .on-warm .border-hairline,
+  .on-warm.border-hairline { border-color: rgba(8, 7, 10, 0.14); }
+
+  /* ── Form controls (used on /join) ──────────────────────────────── */
+  .field-label {
+    @apply font-mono uppercase text-ink-3;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+  }
+  .field-input,
+  .field-select,
+  .field-textarea {
+    @apply w-full bg-transparent text-ink;
+    border: 0;
+    border-bottom: 1px solid var(--hair-2);
+    padding: 10px 0 12px;
+    font-size: 15.5px;
+    line-height: 1.5;
+    font-family: inherit;
+    transition: border-color 200ms var(--ease);
+  }
+  .field-input:hover,
+  .field-select:hover,
+  .field-textarea:hover { border-bottom-color: rgba(242, 239, 231, 0.28); }
+  .field-input:focus,
+  .field-select:focus,
+  .field-textarea:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+  }
+  .field-input::placeholder,
+  .field-textarea::placeholder { color: var(--ink-3); }
+  .field-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink-2) 50%),
+                      linear-gradient(135deg, var(--ink-2) 50%, transparent 50%);
+    background-position: calc(100% - 16px) 22px, calc(100% - 10px) 22px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 28px;
+  }
+  .field-select option { background: var(--bg-2); color: var(--ink); }
+  .field-textarea { min-height: 116px; resize: vertical; }
+  .field-radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .field-radio {
+    @apply inline-flex cursor-pointer items-center gap-2 border border-hair2 px-3.5 py-2 font-mono text-[11px] uppercase text-ink-2 transition;
+    letter-spacing: 0.14em;
+  }
+  .field-radio input { position: absolute; opacity: 0; pointer-events: none; }
+  .field-radio:hover { color: var(--ink); border-color: rgba(242, 239, 231, 0.28); }
+  .field-radio.is-on {
+    color: var(--ink);
+    border-color: var(--accent);
+    background: rgba(179, 51, 71, 0.08);
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────
