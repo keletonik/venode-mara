@@ -2,83 +2,71 @@
  * Brand marks and minimal icon set.
  *
  * Mara identity system
- *  - <MaraMark />     : the symbol — a custom geometric "M" glyph with
- *                       an oxblood diamond locked into the V valley.
- *                       Reads as: two peaks (vantage), a valley, an
- *                       anomaly observed.
- *  - <MaraWordmark /> : "mara" in Bricolage Grotesque 700, tight
- *                       tracking. Pairs with the mark in a lockup
- *                       (mark + wordmark) by default; pass
- *                       `markless` to render the wordmark alone.
+ *  - <MaraWordmark /> : the full "Mara" wordmark — a thin-stroke
+ *                       geometric M paired with lowercase "ara".
+ *                       Source asset: /public/logo/mara-wordmark.png
+ *                       (cream on transparent; aspect ratio 836:232).
+ *                       Size with Tailwind h-* classes on `className`.
+ *                       Width is `auto` from the source aspect ratio.
+ *  - <MaraMark />     : the M alone, for favicon-scale / square uses.
+ *                       Source asset: /public/logo/mara-mark.png.
  *  - <MaraGlyph />    : the constellation glyph — kept as a secondary
- *                       mark for surfaces where the M-glyph is too
- *                       graphic (e.g. inline content).
+ *                       inline mark for content where the wordmark
+ *                       would feel too brand-loud.
  *  - <VenodeMark />   : parent lab wordmark.
  *  - <ArrowRight />   : the one navigation glyph used everywhere.
  */
 
-export function MaraMark({
-  className = "h-5 w-5",
-  accent = "#B33347",
-}: {
-  className?: string;
-  accent?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className={className}
-      aria-hidden="true"
-    >
-      {/* Custom geometric M — two asymmetric peaks meeting at a sharp
-          V. Stroke set in currentColor so the mark inherits text
-          colour from its container. */}
-      <path
-        d="M 3 20.5 L 3 5 L 12 14.5 L 21 5 L 21 20.5"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      {/* The anomaly: a small oxblood diamond hanging below the V
-          apex. Single accent moment, single meaning. */}
-      <path
-        d="M 12 18.4 L 13.7 16.7 L 12 15 L 10.3 16.7 Z"
-        fill={accent}
-      />
-    </svg>
-  );
-}
+const WORDMARK = "/logo/mara-wordmark.png";
+const MARK = "/logo/mara-mark.png";
+
+/** Native pixel dimensions of /public/logo/mara-wordmark.png. */
+const WORDMARK_W = 836;
+const WORDMARK_H = 232;
 
 export function MaraWordmark({
-  className = "text-[28px] leading-none",
+  className = "h-7",
   markless = false,
   animated = false,
 }: {
+  /**
+   * Size with Tailwind height utilities (h-6, h-10, h-[clamp(...)]).
+   * The image keeps its native aspect ratio; width auto-computes.
+   */
   className?: string;
-  /** Render the wordmark without the leading <MaraMark /> lockup. */
+  /** Reserved — present for API parity with previous Bricolage version. */
   markless?: boolean;
-  /** Reserved — entry animation handled by parent or .mara-reveal. */
+  /** Reserved — entry animation handled by parent (.fade-up / .mara-reveal). */
   animated?: boolean;
 }) {
   void animated;
-  if (markless) {
-    return (
-      <span className={`wordmark ${className}`} aria-label="mara">
-        mara
-      </span>
-    );
-  }
+  void markless;
   return (
-    <span
-      className={`inline-flex items-center gap-2.5 ${className}`}
-      aria-label="mara"
-    >
-      <MaraMark className="h-[0.9em] w-[0.9em] text-ink" />
-      <span className="wordmark leading-none">mara</span>
-    </span>
+    <img
+      src={WORDMARK}
+      alt="Mara"
+      width={WORDMARK_W}
+      height={WORDMARK_H}
+      className={`block w-auto select-none ${className}`}
+      draggable={false}
+    />
+  );
+}
+
+export function MaraMark({
+  className = "h-6 w-6",
+}: {
+  className?: string;
+}) {
+  return (
+    <img
+      src={MARK}
+      alt="Mara"
+      width={326}
+      height={326}
+      className={`block select-none ${className}`}
+      draggable={false}
+    />
   );
 }
 

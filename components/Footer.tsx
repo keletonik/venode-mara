@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <Link href="/" aria-label="mara">
-              <MaraWordmark className="text-[34px]" />
+              <MaraWordmark className="h-9" />
             </Link>
             <p className="mt-6 max-w-xs text-[14.5px] leading-[1.6] text-ink-2">
               A cyber defence and threat intelligence model by venode.

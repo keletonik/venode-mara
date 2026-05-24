@@ -1,9 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="mara mark">
-  <g transform="translate(4 4)">
-    <path d="M 1.5 21 L 1.5 4 L 12 14 L 22.5 4 L 22.5 21"
-          stroke="currentColor" stroke-width="2.4"
-          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <path d="M 12 19 L 13.9 17 L 12 15 L 10.1 17 Z"
-          fill="#B33347"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 326 326" role="img" aria-label="Mara mark">
+  <image href="./mara-mark.png" width="326" height="326"/>
 </svg>

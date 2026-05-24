@@ -43,7 +43,7 @@ export default function Header() {
           style={{ animationDelay: "100ms" }}
           onClick={() => setOpen(false)}
         >
-          <MaraWordmark className="text-[22px] sm:text-[26px]" />
+          <MaraWordmark className="h-6 sm:h-7" />
         </Link>
 
         <nav

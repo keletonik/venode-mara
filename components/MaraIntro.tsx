@@ -35,7 +35,7 @@ export default function MaraIntro() {
           <div className="mt-14 flex justify-center">
             <MaraWordmark
               animated
-              className="text-[clamp(4.5rem,13vw,11rem)] text-ink"
+              className="h-[clamp(3.5rem,11vw,8rem)]"
             />
           </div>
 
