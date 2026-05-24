@@ -1,29 +1,83 @@
 /**
  * Brand marks and minimal icon set.
  *
- *  - <MaraWordmark />  : the word "mara" set in Bricolage Grotesque
- *                        700, single cream tone, tight tracking. No
- *                        coloured letter, no cursor underscore.
- *                        Matches the SVG assets in /public/logo/.
- *  - <MaraGlyph />     : the constellation symbol mark — three nodes,
- *                        one accent, faint connecting strokes. Used
- *                        in iconic contexts only (favicon, app icon).
- *  - <VenodeMark />    : parent lab wordmark.
- *  - <ArrowRight />    : the one navigation glyph used everywhere.
+ * Mara identity system
+ *  - <MaraMark />     : the symbol — a custom geometric "M" glyph with
+ *                       an oxblood diamond locked into the V valley.
+ *                       Reads as: two peaks (vantage), a valley, an
+ *                       anomaly observed.
+ *  - <MaraWordmark /> : "mara" in Bricolage Grotesque 700, tight
+ *                       tracking. Pairs with the mark in a lockup
+ *                       (mark + wordmark) by default; pass
+ *                       `markless` to render the wordmark alone.
+ *  - <MaraGlyph />    : the constellation glyph — kept as a secondary
+ *                       mark for surfaces where the M-glyph is too
+ *                       graphic (e.g. inline content).
+ *  - <VenodeMark />   : parent lab wordmark.
+ *  - <ArrowRight />   : the one navigation glyph used everywhere.
  */
+
+export function MaraMark({
+  className = "h-5 w-5",
+  accent = "#B33347",
+}: {
+  className?: string;
+  accent?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      {/* Custom geometric M — two asymmetric peaks meeting at a sharp
+          V. Stroke set in currentColor so the mark inherits text
+          colour from its container. */}
+      <path
+        d="M 3 20.5 L 3 5 L 12 14.5 L 21 5 L 21 20.5"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      {/* The anomaly: a small oxblood diamond hanging below the V
+          apex. Single accent moment, single meaning. */}
+      <path
+        d="M 12 18.4 L 13.7 16.7 L 12 15 L 10.3 16.7 Z"
+        fill={accent}
+      />
+    </svg>
+  );
+}
 
 export function MaraWordmark({
   className = "text-[28px] leading-none",
+  markless = false,
   animated = false,
 }: {
   className?: string;
-  /** Reserved — entry animation handled by parent or .mara-reveal/.fade-up. */
+  /** Render the wordmark without the leading <MaraMark /> lockup. */
+  markless?: boolean;
+  /** Reserved — entry animation handled by parent or .mara-reveal. */
   animated?: boolean;
 }) {
   void animated;
+  if (markless) {
+    return (
+      <span className={`wordmark ${className}`} aria-label="mara">
+        mara
+      </span>
+    );
+  }
   return (
-    <span className={`wordmark ${className}`} aria-label="mara">
-      mara
+    <span
+      className={`inline-flex items-center gap-2.5 ${className}`}
+      aria-label="mara"
+    >
+      <MaraMark className="h-[0.9em] w-[0.9em] text-ink" />
+      <span className="wordmark leading-none">mara</span>
     </span>
   );
 }
