@@ -203,6 +203,28 @@
   100% { transform: translate(-50%, -50%) scale(4.5); opacity: 0;    }
 }
 
+/* MaraIntro centerpiece reveals (used by /components/MaraIntro.tsx) */
+@keyframes mara-reveal-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes mara-rule-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.mara-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: mara-reveal-in 0.7s var(--ease) forwards;
+  will-change: transform, opacity;
+}
+.mara-rule {
+  transform-origin: center;
+  transform: scaleX(0);
+  animation: mara-rule-in 0.8s var(--ease) forwards;
+  will-change: transform;
+}
+
 /* Cursor blink anywhere (kept for the demo typewriter) */
 @keyframes cursor-blink-fast {
   0%, 100% { opacity: 1; }
@@ -212,4 +234,5 @@
 @media (prefers-reduced-motion: reduce) {
   .fade-up { animation: none; opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .mara-reveal, .mara-rule { opacity: 1; transform: none; animation: none; }
 }

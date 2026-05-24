@@ -6,12 +6,21 @@ import { siteConfig } from "@/site.config";
 import { MaraWordmark, ArrowRight } from "./Icons";
 
 /**
- * Sticky glassmorphism nav. Wordmark on the left; one primary CTA on
- * the right. Border-bottom appears only after a few pixels of scroll
- * to keep the hero clean at top.
+ * Sticky glassmorphism nav. Wordmark left, primary nav centre/right,
+ * one CTA at the end. Border-bottom appears only after a few pixels
+ * of scroll so the hero stays clean at the top.
  */
+
+const NAV = [
+  { href: "/mara", label: "Mara" },
+  { href: "/research", label: "Research" },
+  { href: "/safety", label: "Safety" },
+  { href: "/about", label: "Lab" },
+];
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -26,32 +35,79 @@ export default function Header() {
         scrolled ? "border-b border-hairline" : "border-b border-transparent"
       }`}
     >
-      <div className="container-page flex h-[68px] items-center">
+      <div className="container-page flex h-[68px] items-center gap-6">
         <Link
           href="/"
           aria-label="mara"
           className="fade-up"
           style={{ animationDelay: "100ms" }}
+          onClick={() => setOpen(false)}
         >
           <MaraWordmark className="text-[22px] sm:text-[26px]" />
         </Link>
 
-        <nav className="ml-auto flex items-center gap-6">
-          <span
-            className="hidden font-mono text-[11px] uppercase text-ink-3 sm:inline"
-            style={{ letterSpacing: "0.22em" }}
-          >
-            a venode product
-          </span>
-          <a
-            href={siteConfig.appUrl}
-            className="btn-primary fade-up"
-            style={{ animationDelay: "260ms" }}
-          >
-            Join preview <ArrowRight className="h-3 w-3" />
-          </a>
+        <nav
+          aria-label="Primary"
+          className="ml-auto hidden items-center gap-7 md:flex"
+        >
+          {NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="font-mono text-[12px] font-medium uppercase text-ink-2 transition hover:text-ink"
+              style={{ letterSpacing: "0.10em" }}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+
+        <a
+          href={siteConfig.appUrl}
+          className="hidden btn-primary fade-up md:inline-flex"
+          style={{ animationDelay: "260ms" }}
+        >
+          Join preview <ArrowRight className="h-3 w-3" />
+        </a>
+
+        <button
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center border border-hair2 text-ink md:hidden"
+        >
+          <div className="flex flex-col gap-1">
+            <span className="block h-[2px] w-[16px] bg-current" />
+            <span className="block h-[2px] w-[16px] bg-current" />
+            <span className="block h-[2px] w-[16px] bg-current" />
+          </div>
+        </button>
       </div>
+
+      {open && (
+        <div className="border-t border-hairline bg-bg md:hidden">
+          <div className="container-page flex flex-col py-6">
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="border-b border-hairline py-4 font-display text-[24px] font-semibold leading-none tracking-tight text-ink"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <a
+              href={siteConfig.appUrl}
+              className="btn-primary mt-6 self-start"
+              onClick={() => setOpen(false)}
+            >
+              Join preview <ArrowRight className="h-3 w-3" />
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

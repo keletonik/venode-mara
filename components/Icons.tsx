@@ -14,9 +14,13 @@
 
 export function MaraWordmark({
   className = "text-[28px] leading-none",
+  animated = false,
 }: {
   className?: string;
+  /** Reserved — entry animation handled by parent or .mara-reveal/.fade-up. */
+  animated?: boolean;
 }) {
+  void animated;
   return (
     <span className={`wordmark ${className}`} aria-label="mara">
       mara
