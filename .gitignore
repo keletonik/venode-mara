@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environments
+mara_venv/
+venv/
+.venv/
+env/
+ENV/
+
+# Local state
+.env
+.env.local
+*.local
+
+# Runtime data
+malware_db.json
+*.db
+*.sqlite
+*.sqlite3
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
