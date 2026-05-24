@@ -3,22 +3,27 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/site.config";
-import { VenodeWordmark } from "./Icons";
+import { MaraWordmark, ArrowRight } from "./Icons";
 
-const nav = [
-  { href: "/", label: "Home" },
+/**
+ * Sticky glassmorphism nav. Wordmark left, primary nav centre/right,
+ * one CTA at the end. Border-bottom appears only after a few pixels
+ * of scroll so the hero stays clean at the top.
+ */
+
+const NAV = [
   { href: "/mara", label: "Mara" },
-  { href: "/lab", label: "Lab" },
-  { href: "/journal", label: "Journal" },
   { href: "/research", label: "Research" },
+  { href: "/safety", label: "Safety" },
+  { href: "/about", label: "Lab" },
 ];
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -26,29 +31,31 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-bg ${
+      className={`sticky top-0 z-40 glass-nav transition-colors ${
         scrolled ? "border-b border-hairline" : "border-b border-transparent"
-      } transition-colors`}
+      }`}
     >
-      <div className="container-page flex h-[76px] items-center gap-6">
+      <div className="container-page flex h-[68px] items-center gap-6">
         <Link
           href="/"
-          className="text-[26px] sm:text-[30px]"
+          aria-label="mara"
+          className="fade-up"
+          style={{ animationDelay: "100ms" }}
           onClick={() => setOpen(false)}
         >
-          <VenodeWordmark className="text-[26px] sm:text-[30px]" />
+          <MaraWordmark className="text-[22px] sm:text-[26px]" />
         </Link>
 
         <nav
           aria-label="Primary"
-          className="ml-auto hidden items-center gap-7 sm:flex"
+          className="ml-auto hidden items-center gap-7 md:flex"
         >
-          {nav.map((item) => (
+          {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="font-mono text-[13px] font-medium text-ink-2 transition hover:text-ink"
-              style={{ letterSpacing: "0.04em" }}
+              className="font-mono text-[12px] font-medium uppercase text-ink-2 transition hover:text-ink"
+              style={{ letterSpacing: "0.10em" }}
             >
               {item.label}
             </Link>
@@ -57,9 +64,10 @@ export default function Header() {
 
         <a
           href={siteConfig.appUrl}
-          className="hidden sm:inline-flex btn-primary"
+          className="hidden btn-primary fade-up md:inline-flex"
+          style={{ animationDelay: "260ms" }}
         >
-          Sign up
+          Join preview <ArrowRight className="h-3 w-3" />
         </a>
 
         <button
@@ -67,24 +75,24 @@ export default function Header() {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="ml-auto inline-flex h-11 w-11 items-center justify-center border border-hair2 text-ink sm:hidden"
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center border border-hair2 text-ink md:hidden"
         >
           <div className="flex flex-col gap-1">
-            <span className="block h-[2px] w-[18px] bg-current" />
-            <span className="block h-[2px] w-[18px] bg-current" />
-            <span className="block h-[2px] w-[18px] bg-current" />
+            <span className="block h-[2px] w-[16px] bg-current" />
+            <span className="block h-[2px] w-[16px] bg-current" />
+            <span className="block h-[2px] w-[16px] bg-current" />
           </div>
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-hairline bg-bg sm:hidden">
+        <div className="border-t border-hairline bg-bg md:hidden">
           <div className="container-page flex flex-col py-6">
-            {nav.map((item) => (
+            {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="border-b border-hairline py-4 font-display text-[26px] font-extrabold leading-none tracking-display text-ink"
+                className="border-b border-hairline py-4 font-display text-[24px] font-semibold leading-none tracking-tight text-ink"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -95,7 +103,7 @@ export default function Header() {
               className="btn-primary mt-6 self-start"
               onClick={() => setOpen(false)}
             >
-              Sign up
+              Join preview <ArrowRight className="h-3 w-3" />
             </a>
           </div>
         </div>

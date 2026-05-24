@@ -13,12 +13,9 @@ export function pageMetadata(opts: {
 }): Metadata {
   const url = canonical(opts.path);
   const isHome = opts.path === "/";
-  const dedupe = opts.title.toLowerCase() === siteConfig.displayName.toLowerCase();
   const fullTitle = isHome
     ? `${siteConfig.displayName} · ${siteConfig.tagline}`
-    : dedupe
-      ? `${siteConfig.displayName} · ${siteConfig.tagline}`
-      : `${opts.title} · ${siteConfig.displayName}`;
+    : `${opts.title} · ${siteConfig.displayName}`;
 
   return {
     title: { absolute: fullTitle },

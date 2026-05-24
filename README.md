@@ -1,72 +1,112 @@
-# Mara — a venode product
+# mara · a venode product
 
-Marketing site for **Mara**, venode's cyber defence and threat
-intelligence language model. Built as a sibling property to
-`venode.ai`, sharing the parent lab's design system: warm-cream paper,
-oxblood accent, Inter Display + Lora + Geist Mono typography, the
-`venode_` wordmark and the `vo.` footer monogram.
+A single-page premium product site for **Mara**, venode's cybersecurity
+threat-intelligence language model.
 
-Mara is the venode model for the work of cyber defence: triage,
-malware analysis, threat intelligence, incident response. This site
-is Mara's home.
+## Master prompt (the spec this iteration was built against)
 
-Mara is positioned around the values venode applies to all of its
-cyber work: defenders first, dual-use honesty, calibrated confidence,
-refusal-first safety.
+```
+ROLE: You are simultaneously
+  • a senior brand designer (Linear / Apple sensibility)
+  • a motion designer (Anthropic / Stripe sensibility)
+  • a Vignelli-restraint typographer
+  • a senior Next.js / Tailwind engineer
+  • a cybersecurity product marketer with real SOC experience
 
-## Identity
+TASTE BAR
+  linear.app, anthropic.com, mistral.ai, stripe.com — earned
+  restraint, premium motion, considered density. Not a generic
+  dark-mode template.
 
-Colour tokens are mirrored from `venode.ai`:
+NON-NEGOTIABLES
+- Dark. Cream. Oxblood. No italics. No serif. No rounded corners.
+- Static-render. Zero deps beyond next / react / tailwind / next-font.
+- Respects reduced-motion. WCAG-acceptable contrast.
+- Every line of copy passes a senior analyst's smell test.
 
-| Token | Value |
+THIS PASS
+1. A real Mara mark — a constellation glyph. Three nodes (two cream,
+   one accent), thin connecting strokes, animatable. Used at favicon,
+   header, hero panel, and as the closing-section background motif.
+2. Hero v2 — split composition. Wordmark + tagline + CTAs on the
+   left; a framed "intelligence panel" with the live constellation
+   and a row of telemetry readouts on the right. Parallax glow
+   tracks the cursor.
+3. New section: MODEL CARD — a dense, mono-styled spec sheet with
+   identity, capacity, training corpus, eval scores, refusal rates,
+   build metadata.
+4. Subtle CRT scanline overlay across the whole page for depth.
+5. Sharper section rhythm, tighter copy throughout.
+```
+
+## The Mara mark
+
+A constellation glyph drawn at three scales:
+
+- `MaraGlyph` — 24×24 viewBox, used at favicon and inline with the
+  wordmark. Three filled circles forming an irregular triangle,
+  connected by thin half-opacity strokes, the bottom-right circle
+  rendered in the accent oxblood (the "anomaly").
+- The mark also appears as a faint background motif behind the
+  closing wordmark.
+- `MaraConstellation` — 200×200 viewBox, nine nodes and nine edges,
+  used in the hero "intelligence panel" and the closing section.
+  Lines draw themselves in via stroke-dashoffset; nodes pop in with
+  stagger; the accent node has a pulsing ring.
+
+The glyph is the same construction at every size — designed once,
+reused everywhere.
+
+## The motion craft
+
+| Section | Motion |
 |---|---|
-| `--bg` (page) | `#FAF9F5` |
-| `--surface` (warm band) | `#F1EDE2` |
-| `--ink` (text) | `#141412` |
-| `--ink-2` (subdued) | `#5A5854` |
-| `--accent` (oxblood) | `#8E2436` |
-| `--oxblood` (Mara wordmark) | `#5C1A24` |
-| `--cream-warm` (footer text) | `#F4F1EA` |
+| Hero entry | Letters of `mara` rise in with 110ms stagger and a blur-to-clear |
+| Hero tagline | Three lines crossfade in place every 4.2s |
+| Hero glow | Radial accent gradient tracks the cursor |
+| Hero panel | Constellation lines draw in (stroke-dashoffset), nodes pop with stagger, accent node pulses, telemetry readouts drift on a 2.2s tick |
+| Marquee | Doubled-content seamless infinite scroll, pauses on hover |
+| Demo | Typewriter at 16ms/char, "thinking…" dots between turns, IntersectionObserver triggers on first scroll into view |
+| Section reveals | Every block fades up 14px on scroll-in via `<Reveal>` |
+| Cards | Vertical accent bar scales in on hover, subtle background tint |
+| Buttons | Cream-slab CTAs wipe to oxblood on hover via ::after |
+| Background | CRT scanlines + grain overlay across the whole page |
+| Closing | Constellation glyph at 70vw behind the wordmark, mark lines redraw |
 
-Typography:
+All motion respects `prefers-reduced-motion`.
 
-- `Inter` at heavy weights stands in for Inter Display on the marque
-- `Lora` (serif) for body copy
-- `Geist Mono` for labels, eyebrows and CTAs
+## Stack
 
-Marks:
+- **Next.js 15** App Router · React 19 · TypeScript
+- **Tailwind CSS** with tokens lifted into `globals.css` as `:root`
+- **next/font/google** — Inter (400–900) + Geist Mono
+- No external state, no DB, no env vars, no extra dependencies
 
-- `<VenodeWordmark/>` — `venode_` with the o in accent + blinking cursor
-- `<VoMark/>` — `vo.` monogram for the black footer slab
-- `<MaraWordmark/>` — Mara product wordmark, the o in deep oxblood
+## File map
 
-## Pages
-
-- `/` — Hero, `P-01` Mara feature with the wordmark + `One Mara. Tiered by plan.`, `Venode Labs.` with research areas, `L-01` custom builds warm band, `Built in the open` final CTA.
-- `/mara` — Product detail. Capabilities, three illustrative transcripts, Pro tier + connectors, custom-build CTA.
-- `/research` + `/research/[slug]` — Research notes (R-01 … R-04).
-- `/safety` — Dual-use boundaries, refusal behaviour, responsible disclosure.
-- `/about` — Venode lab statement.
-- `/contact` — Channels.
-- `/privacy` — Short, plain.
-
-## Edit
-
-Everything brand- and product-level lives in `site.config.ts`. Notes
-live in `lib/research.ts`. To add a note, push a new entry to the
-`notes` array. It appears automatically in the research index,
-sitemap, and footer "News" column.
+| File | What it does |
+|---|---|
+| `app/page.tsx` | Section composition (master prompt at top) |
+| `app/icon.svg` | Favicon — constellation glyph |
+| `app/globals.css` | Tokens, marks, motion keyframes |
+| `components/Hero.tsx` | Split-composition hero v2 |
+| `components/Icons.tsx` | `MaraGlyph`, `MaraConstellation`, `MaraWordmark`, `VenodeMark`, arrows |
+| `components/Marquee.tsx` | Infinite scroll band |
+| `components/DemoTranscript.tsx` | Typewriter chat session |
+| `components/Capabilities.tsx` | 4 cards with hover micro-interactions |
+| `components/Tiers.tsx` | Free / Pro / Custom |
+| `components/ModelCard.tsx` | Spec-sheet panel |
+| `components/Safety.tsx` | Refusal-first dual-use page |
+| `components/Reveal.tsx` | Scroll-triggered fade-up wrapper |
+| `components/Footer.tsx` | Black slab + venode mark |
+| `site.config.ts` | All brand, URL and contact config |
 
 ## Deploy
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build
+npm run build    # static production build
 ```
 
-Stack: Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 3
-· `next/font/google` for Inter / Lora / Geist Mono.
-
-Deployable to Vercel free tier. No database, no environment variables
-required.
+Import on Vercel → Deploy. Set `site.config.ts → url` to your domain.

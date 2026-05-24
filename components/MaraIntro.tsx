@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { ArrowRight, MaraWordmark, VenodeWordmark } from "./Icons";
+import { ArrowRight, MaraWordmark, VenodeMark } from "./Icons";
 
 const sectors = [
   "Financial services",
@@ -35,7 +35,7 @@ export default function MaraIntro() {
           <div className="mt-14 flex justify-center">
             <MaraWordmark
               animated
-              className="h-24 w-auto text-ink sm:h-32"
+              className="text-[clamp(4.5rem,13vw,11rem)] text-ink"
             />
           </div>
 
@@ -49,7 +49,7 @@ export default function MaraIntro() {
             >
               By
             </span>
-            <VenodeWordmark className="text-[20px] sm:text-[22px]" />
+            <VenodeMark className="text-[20px] sm:text-[22px]" />
           </div>
 
           <div

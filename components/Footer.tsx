@@ -1,82 +1,75 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
-import { VoMark } from "./Icons";
-import { notes } from "@/lib/research";
+import { MaraWordmark, VenodeMark } from "./Icons";
 
 const columns = [
   {
-    title: "Products",
+    title: "Mara",
     links: [
-      { href: "/mara", label: "Mara" },
-      { href: siteConfig.appUrl, label: "Mara Cloud" },
-      { href: "/mara#pricing", label: "Pricing" },
-    ],
-  },
-  {
-    title: "Research",
-    links: [
-      { href: "/research", label: "Post-training" },
-      { href: "/research", label: "Long context" },
-      { href: "/research", label: "Editorial alignment" },
-      { href: "/research", label: "Inference economics" },
-    ],
-  },
-  {
-    title: "Lab",
-    links: [
-      { href: "/lab", label: "Lab" },
-      { href: "/about", label: "About" },
+      { href: "/mara", label: "Product" },
+      { href: siteConfig.appUrl, label: "Join preview", external: true },
       { href: "/safety", label: "Safety" },
     ],
   },
   {
-    title: "Connect",
+    title: "Research",
+    links: [{ href: "/research", label: "All notes" }],
+  },
+  {
+    title: "Venode",
     links: [
-      { href: `mailto:${siteConfig.contactEmail}`, label: siteConfig.contactEmail },
+      { href: "/about", label: "Lab" },
       { href: "/contact", label: "Contact" },
-      ...(siteConfig.github
-        ? [{ href: siteConfig.github, label: "GitHub" }]
-        : []),
+      { href: siteConfig.labUrl, label: "venode.ai", external: true },
     ],
+  },
+  {
+    title: "Legal",
+    links: [{ href: "/privacy", label: "Privacy" }],
   },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const recent = [...notes]
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 4);
-
   return (
-    <footer className="mt-32 bg-black text-cream-warm">
-      <div className="container-page py-20">
-        <div className="grid items-start gap-12 md:grid-cols-[auto_1fr]">
-          <Link href="/" aria-label="venode home" className="self-start">
-            <VoMark className="text-[64px]" />
-          </Link>
+    <footer className="mt-16 border-t border-hairline">
+      <div className="container-page py-14">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Link href="/" aria-label="mara">
+              <MaraWordmark className="text-[34px]" />
+            </Link>
+            <p className="mt-6 max-w-xs text-[14.5px] leading-[1.6] text-ink-2">
+              A cyber defence and threat intelligence model by venode.
+              Built for the people defending things.
+            </p>
+          </div>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-10 md:col-span-8 md:grid-cols-4">
             {columns.map((c) => (
               <div key={c.title}>
-                <h4 className="font-mono text-[11px] font-bold uppercase text-cream-warm/70" style={{ letterSpacing: "0.22em" }}>
+                <h3
+                  className="font-mono text-[10.5px] uppercase text-ink-3"
+                  style={{ letterSpacing: "0.18em" }}
+                >
                   {c.title}
-                </h4>
+                </h3>
                 <ul className="mt-4 space-y-2.5">
                   {c.links.map((l) => (
                     <li key={l.label}>
-                      {l.href.startsWith("http") || l.href.startsWith("mailto:") ? (
+                      {l.external ? (
                         <a
                           href={l.href}
-                          target={l.href.startsWith("http") ? "_blank" : undefined}
-                          rel={l.href.startsWith("http") ? "noopener" : undefined}
-                          className="font-serif text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
+                          target="_blank"
+                          rel="noopener"
+                          className="text-[14px] text-ink-2 transition hover:text-ink"
                         >
                           {l.label}
                         </a>
                       ) : (
                         <Link
                           href={l.href}
-                          className="font-serif text-[14.5px] text-cream-warm/80 transition hover:text-cream-warm"
+                          className="text-[14px] text-ink-2 transition hover:text-ink"
                         >
                           {l.label}
                         </Link>
@@ -86,37 +79,25 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
-
-            <div>
-              <h4 className="font-mono text-[11px] font-bold uppercase text-cream-warm/70" style={{ letterSpacing: "0.22em" }}>
-                News
-              </h4>
-              <ul className="mt-4 space-y-4">
-                {recent.map((n) => (
-                  <li key={n.slug}>
-                    <Link
-                      href={`/research/${n.slug}`}
-                      className="block font-serif text-[14px] leading-snug text-cream-warm/80 transition hover:text-cream-warm"
-                    >
-                      {n.title}
-                    </Link>
-                    <span className="mt-1 block font-mono text-[10px] uppercase text-cream-warm/40" style={{ letterSpacing: "0.18em" }}>
-                      {new Date(n.date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-cream-warm/15 pt-6 font-mono text-[12px] text-cream-warm/55" style={{ letterSpacing: "0.06em" }}>
-          <span>© {year} venode</span>
-          <span>{siteConfig.url.replace(/^https?:\/\//, "")}</span>
+        <div className="mt-14 flex flex-wrap items-end justify-between gap-4 border-t border-hairline pt-6">
+          <div className="flex items-center gap-3">
+            <VenodeMark className="text-[14px]" />
+            <span
+              className="font-mono text-[11px] uppercase text-ink-3"
+              style={{ letterSpacing: "0.18em" }}
+            >
+              · a research lab
+            </span>
+          </div>
+          <span
+            className="font-mono text-[11px] uppercase text-ink-3"
+            style={{ letterSpacing: "0.10em" }}
+          >
+            © {year} venode · all rights reserved
+          </span>
         </div>
       </div>
     </footer>

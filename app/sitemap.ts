@@ -5,27 +5,27 @@ import { notes } from "@/lib/research";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const staticPaths = [
-    "/",
-    "/mara",
-    "/research",
-    "/safety",
-    "/about",
-    "/contact",
-    "/privacy",
+    { path: "/", priority: 1 },
+    { path: "/mara", priority: 0.9 },
+    { path: "/research", priority: 0.7 },
+    { path: "/about", priority: 0.5 },
+    { path: "/safety", priority: 0.5 },
+    { path: "/contact", priority: 0.5 },
+    { path: "/privacy", priority: 0.3 },
   ];
 
   return [
     ...staticPaths.map((p) => ({
-      url: canonical(p),
+      url: canonical(p.path),
       lastModified: now,
       changeFrequency: "monthly" as const,
-      priority: p === "/" ? 1 : 0.7,
+      priority: p.priority,
     })),
     ...notes.map((n) => ({
       url: canonical(`/research/${n.slug}`),
       lastModified: new Date(n.date),
       changeFrequency: "monthly" as const,
-      priority: 0.7,
+      priority: 0.6,
     })),
   ];
 }

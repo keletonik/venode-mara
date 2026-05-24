@@ -1,9 +1,5 @@
 import type { Config } from "tailwindcss";
 
-/**
- * Design tokens mirror venode.ai's CSS custom properties. Refer to
- * app/globals.css for the source-of-truth mapping.
- */
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -13,63 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#FAF9F5",
-        surface: "#F1EDE2",
+        bg: "#08070a",
+        "bg-2": "#0d0d10",
+        surface: "#14141a",
         ink: {
-          DEFAULT: "#141412",
-          2: "#5A5854",
-          warm: "#1A1816",
-        },
-        cream: {
-          DEFAULT: "#FAF9F5",
-          warm: "#F4F1EA",
+          DEFAULT: "#F2EFE7",
+          2: "#9C968B",
+          3: "#5d574e",
+          4: "#38332d",
         },
         accent: {
-          DEFAULT: "#8E2436",
-          deep: "#5C1A24",
-          lift: "#C8334B",
+          DEFAULT: "#B33347",
+          quiet: "#6E2330",
         },
-        hairline: "rgba(20,20,18,0.10)",
-        hair2: "rgba(20,20,18,0.18)",
+        hairline: "rgba(242,239,231,0.08)",
+        hair2: "rgba(242,239,231,0.14)",
       },
       fontFamily: {
-        display: [
-          "var(--font-display)",
-          "Inter",
-          "ui-sans-serif",
-          "-apple-system",
-          "Segoe UI",
-          "sans-serif",
-        ],
-        sans: [
-          "var(--font-display)",
-          "Inter",
-          "ui-sans-serif",
-          "-apple-system",
-          "sans-serif",
-        ],
-        serif: [
-          "var(--font-serif)",
-          "Lora",
-          "Georgia",
-          "Cambria",
-          "serif",
-        ],
-        mono: [
-          "var(--font-mono)",
-          "Geist Mono",
-          "ui-monospace",
-          "SFMono-Regular",
-          "monospace",
-        ],
+        display: ["var(--font-display)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "Geist Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       letterSpacing: {
-        display: "-0.04em",
-        widewide: "0.10em",
-        widerwide: "0.22em",
+        display: "-0.025em",
+        wordmark: "-0.045em",
+        widewide: "0.18em",
       },
       maxWidth: {
-        page: "1200px",
+        page: "1280px",
         prose: "42rem",
       },
       borderRadius: {
