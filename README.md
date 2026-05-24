@@ -18,7 +18,7 @@
 
 ```bash
 git clone https://github.com/keletonik/venode-mara
-cd mara-cli
+cd venode-mara
 pip install -e .
 ```
 
